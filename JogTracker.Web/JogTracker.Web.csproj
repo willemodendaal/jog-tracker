@@ -118,6 +118,7 @@
     </Compile>
     <Compile Include="Models\JogBindingModel.cs" />
     <Compile Include="Models\JogFilterBindingModel.cs" />
+    <Compile Include="Models\Validators\JogFilterBindingValidator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

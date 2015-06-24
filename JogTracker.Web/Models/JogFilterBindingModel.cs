@@ -16,6 +16,8 @@ namespace JogTracker.Web.Models
 
         public DateTime? FromDate { get; set; }
         public DateTime? ToDate { get; set; }
+        public int? PageIndex { get; set; }
+        public int? PageSize { get; set; }
 
         public JogFilterBindingModel()
         {
@@ -28,12 +30,5 @@ namespace JogTracker.Web.Models
         }
     }
 
-    internal class JogFilterBindingValidator : AbstractValidator<JogFilterBindingModel>
-    {
-        public JogFilterBindingValidator()
-        {
-            RuleFor(jog => jog.FromDate).NotEmpty();
-            RuleFor(jog => jog.ToDate).NotEmpty();
-        }
-    }
+   
 }
