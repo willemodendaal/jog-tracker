@@ -1,4 +1,5 @@
-﻿using JogTracker.Web.Models;
+﻿using JogTracker.Web.Filters;
+using JogTracker.Web.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +14,8 @@ namespace JogTracker.Web.Controllers
     /// </summary>
     public class JogController : ApiController
     {
-        public IHttpActionResult GetJogs(JogFilterBindingModel filter)
+        [Validate]
+        public IHttpActionResult GetJogs([FromUri]JogFilterBindingModel filter)
         {
             return Ok(GetMockJogs());
         }
