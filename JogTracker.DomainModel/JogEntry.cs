@@ -12,6 +12,8 @@ namespace JogTracker.DomainModel
     /// </summary>
     public class JogEntry
     {
+        public Guid ID { get; set; }
+
         [Required]
         public DateTime DateTime { get; set; }
 

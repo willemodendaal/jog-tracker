@@ -51,6 +51,7 @@
     <Compile Include="Init\JogTrackerDbInitializer.cs" />
     <Compile Include="JogDbContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\JogEntryRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

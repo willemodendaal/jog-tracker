@@ -164,6 +164,16 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\JogTracker.Data\JogTracker.Data.csproj">
+      <Project>{759e56fc-ee86-4fc8-8699-24cf28d1eaa9}</Project>
+      <Name>JogTracker.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\JogTracker.DomainModel\JogTracker.DomainModel.csproj">
+      <Project>{d7dc5d2c-1611-4fa4-a1ba-04ebf0398b37}</Project>
+      <Name>JogTracker.DomainModel</Name>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

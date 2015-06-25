@@ -1,4 +1,6 @@
-﻿using JogTracker.Web.Filters;
+﻿using JogTracker.Data.Repositories;
+using JogTracker.DomainModel;
+using JogTracker.Web.Filters;
 using JogTracker.Web.Models;
 using System;
 using System.Collections.Generic;
@@ -14,20 +16,20 @@ namespace JogTracker.Web.Controllers
     /// </summary>
     public class JogController : ApiController
     {
+        IJogEntryRepository _repo;
+
+        public JogController(IJogEntryRepository repo)
+        {
+            _repo = repo;
+        }
+
+
         [Validate]
         public IHttpActionResult GetJogs([FromUri]JogFilterBindingModel filter)
         {
-            return Ok(GetMockJogs());
+            IEnumerable<JogEntry> allJogs = _repo.All();
+            return Ok(allJogs);
         }
 
-        private List<JogBindingModel> GetMockJogs()
-        {
-            return new List<JogBindingModel>()
-            {
-                new JogBindingModel() { DateTime = new DateTime(1992, 05, 20, 15,0,0), DistanceKM = 5.4F },
-                new JogBindingModel() { DateTime = new DateTime(1992, 05, 21, 15,0,0), DistanceKM = 5.3F }
-
-            }; 
-        }
     }
 }
