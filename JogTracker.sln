@@ -7,6 +7,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JogTracker.Web", "JogTracke
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JogTracker.Web.Tests", "JogTracker.Web.Tests\JogTracker.Web.Tests.csproj", "{E8BD8FE3-BB7C-489E-B869-4A498C3EFC53}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JogTracker.Data", "JogTracker.Data\JogTracker.Data.csproj", "{759E56FC-EE86-4FC8-8699-24CF28D1EAA9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JogTracker.DomainModel", "JogTracker.DomainModel\JogTracker.DomainModel.csproj", "{D7DC5D2C-1611-4FA4-A1BA-04EBF0398B37}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +25,14 @@ Global
 		{E8BD8FE3-BB7C-489E-B869-4A498C3EFC53}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E8BD8FE3-BB7C-489E-B869-4A498C3EFC53}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E8BD8FE3-BB7C-489E-B869-4A498C3EFC53}.Release|Any CPU.Build.0 = Release|Any CPU
+		{759E56FC-EE86-4FC8-8699-24CF28D1EAA9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{759E56FC-EE86-4FC8-8699-24CF28D1EAA9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{759E56FC-EE86-4FC8-8699-24CF28D1EAA9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{759E56FC-EE86-4FC8-8699-24CF28D1EAA9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D7DC5D2C-1611-4FA4-A1BA-04EBF0398B37}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D7DC5D2C-1611-4FA4-A1BA-04EBF0398B37}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D7DC5D2C-1611-4FA4-A1BA-04EBF0398B37}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D7DC5D2C-1611-4FA4-A1BA-04EBF0398B37}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
