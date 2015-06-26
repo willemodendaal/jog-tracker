@@ -9,7 +9,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 
-namespace JogTracker.Web.Controllers
+namespace JogTracker.Web.ApiControllers
 {
     /// <summary>
     /// Represents the "Jog" resource. A job stores details about a person's jogging session.

@@ -140,7 +140,9 @@
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="App_Start\UnityWebApiActivator.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="Controllers\JogController.cs" />
+    <Compile Include="ApiControllers\JogController.cs">
+      <ItemGuid>c0ae4486-2c84-4e05-ace6-3d37fbd53c4e</ItemGuid>
+    </Compile>
     <Compile Include="Extensions\FluidValidationExtensions.cs" />
     <Compile Include="Filters\ValidateAttribute.cs" />
     <Compile Include="Global.asax.cs">
@@ -163,6 +165,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Controllers\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\JogTracker.Data\JogTracker.Data.csproj">
