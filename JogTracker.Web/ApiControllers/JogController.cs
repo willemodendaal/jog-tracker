@@ -14,6 +14,8 @@ namespace JogTracker.Web.ApiControllers
     /// <summary>
     /// Represents the "Jog" resource. A job stores details about a person's jogging session.
     /// </summary>
+    [Authorize]
+    [RoutePrefix("api/v1/jog")]
     public class JogController : ApiController
     {
         IJogEntryRepository _repo;
@@ -23,7 +25,7 @@ namespace JogTracker.Web.ApiControllers
             _repo = repo;
         }
 
-
+        [Route("")]
         [Validate]
         public IHttpActionResult GetJogs([FromUri]JogFilterBindingModel filter)
         {
