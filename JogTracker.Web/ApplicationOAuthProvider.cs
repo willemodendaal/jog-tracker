@@ -9,7 +9,7 @@ using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.OAuth;
 
-namespace JogTracker.Web.Providers
+namespace JogTracker.Web.Api.Providers
 {
     public class ApplicationOAuthProvider : OAuthAuthorizationServerProvider
     {

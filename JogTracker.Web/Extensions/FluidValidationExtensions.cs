@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
-namespace JogTracker.Web.Extensions
+namespace JogTracker.Web.Api.Extensions
 {
     /// <summary>
     /// Extension to the Fluent Validation Types.

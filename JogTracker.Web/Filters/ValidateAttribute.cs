@@ -7,7 +7,7 @@ using System.Web.Http.Controllers;
 using System.Web.Http.Filters;
 using System.Net.Http;
 
-namespace JogTracker.Web.Filters
+namespace JogTracker.Web.Api.Filters
 {
     /// <summary>
     /// Apply attribute to actions where we need to validate the modelState and return 

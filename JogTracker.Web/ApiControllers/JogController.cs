@@ -1,7 +1,7 @@
 ﻿using JogTracker.Data.Repositories;
 using JogTracker.DomainModel;
-using JogTracker.Web.Filters;
-using JogTracker.Web.Models;
+using JogTracker.Web.Api.Filters;
+using JogTracker.Web.Api.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +9,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 
-namespace JogTracker.Web.ApiControllers
+namespace JogTracker.Web.Api.ApiControllers
 {
     /// <summary>
     /// Represents the "Jog" resource. A job stores details about a person's jogging session.

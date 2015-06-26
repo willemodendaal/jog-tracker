@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 
-namespace JogTracker.Web
+namespace JogTracker.Web.Api
 {
     public class RouteConfig
     {

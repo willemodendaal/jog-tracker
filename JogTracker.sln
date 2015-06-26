@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JogTracker.Web", "JogTracker.Web\JogTracker.Web.csproj", "{8604EAA2-D36E-4FF9-BD24-ED32CBAB4288}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JogTracker.Web.Api", "JogTracker.Web\JogTracker.Web.Api.csproj", "{8604EAA2-D36E-4FF9-BD24-ED32CBAB4288}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JogTracker.Web.Tests", "JogTracker.Web.Tests\JogTracker.Web.Tests.csproj", "{E8BD8FE3-BB7C-489E-B869-4A498C3EFC53}"
 EndProject

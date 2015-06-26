@@ -8,6 +8,7 @@ using System.Web.Security;
 using System.Web.SessionState;
 using System.Web.Http;
 using System.Data.Entity;
+using JogTracker.Web.Api;
 
 namespace JogTracker.Web
 {

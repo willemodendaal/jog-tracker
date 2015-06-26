@@ -5,7 +5,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 
-namespace JogTracker.Web.ApiControllers
+namespace JogTracker.Web.Api.ApiControllers
 {
     [RoutePrefix("api/v1")]
     public class AccountController : ApiController

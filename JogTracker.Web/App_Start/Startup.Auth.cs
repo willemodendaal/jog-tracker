@@ -6,9 +6,9 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Owin;
 using Microsoft.Owin.Security.OAuth;
 using Owin;
-using JogTracker.Web.Providers;
+using JogTracker.Web.Api.Providers;
 
-namespace JogTracker.Web
+namespace JogTracker.Web.Api
 {
     public partial class Startup
     {
