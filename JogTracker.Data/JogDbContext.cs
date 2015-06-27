@@ -1,4 +1,5 @@
 ﻿using JogTracker.DomainModel;
+using Microsoft.AspNet.Identity.EntityFramework;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -9,8 +10,13 @@ using System.Threading.Tasks;
 
 namespace JogTracker.Data
 {
-    public class JogDbContext : DbContext
+    /// <summary>
+    /// Inherit from IdentityDbContext (.AspNet.Identity.EntityFramework) to indicate we
+    /// want to make use of ASP.NET Identity security.
+    /// </summary>
+    public class JogDbContext : IdentityDbContext<IdentityUser>
     {
+        
         public JogDbContext() : base("JobDbContextConnection")
         {
         }

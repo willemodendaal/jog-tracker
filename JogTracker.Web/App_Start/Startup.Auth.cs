@@ -7,6 +7,7 @@ using Microsoft.Owin;
 using Microsoft.Owin.Security.OAuth;
 using Owin;
 using JogTracker.Web.Api.Providers;
+using JogTracker.Data;
 
 namespace JogTracker.Web.Api
 {
@@ -21,7 +22,7 @@ namespace JogTracker.Web.Api
             OAuthOptions = new OAuthAuthorizationServerOptions
             {
                 TokenEndpointPath = new PathString("/Token"),
-                Provider = new ApplicationOAuthProvider(PublicClientId, UserManagerFactory),
+                Provider = new JogTrackerOAuthProvider(PublicClientId, UserManagerFactory),
                 AuthorizeEndpointPath = new PathString("/api/Account/ExternalLogin"),
                 AccessTokenExpireTimeSpan = TimeSpan.FromDays(14),
                 AllowInsecureHttp = true
@@ -36,6 +37,7 @@ namespace JogTracker.Web.Api
 
         public void ConfigureAuth(IAppBuilder app)
         {
+        
             // This is what allows our front-end to submit tokens instead of userName/password with every request.
             app.UseOAuthBearerTokens(OAuthOptions);
         }

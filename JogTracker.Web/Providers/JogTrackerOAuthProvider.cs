@@ -11,12 +11,12 @@ using Microsoft.Owin.Security.OAuth;
 
 namespace JogTracker.Web.Api.Providers
 {
-    public class ApplicationOAuthProvider : OAuthAuthorizationServerProvider
+    public class JogTrackerOAuthProvider : OAuthAuthorizationServerProvider
     {
         private readonly string _publicClientId;
         private readonly Func<UserManager<IdentityUser>> _userManagerFactory;
 
-        public ApplicationOAuthProvider(string publicClientId, Func<UserManager<IdentityUser>> userManagerFactory)
+        public JogTrackerOAuthProvider(string publicClientId, Func<UserManager<IdentityUser>> userManagerFactory)
         {
             if (publicClientId == null)
             {
@@ -36,6 +36,7 @@ namespace JogTracker.Web.Api.Providers
         {
             using (UserManager<IdentityUser> userManager = _userManagerFactory())
             {
+                //Authentication happens here. ASP.NET identity verifies against database.
                 IdentityUser user = await userManager.FindAsync(context.UserName, context.Password);
 
                 if (user == null)
@@ -44,14 +45,11 @@ namespace JogTracker.Web.Api.Providers
                     return;
                 }
 
-                ClaimsIdentity oAuthIdentity = await userManager.CreateIdentityAsync(user,
-                    context.Options.AuthenticationType);
-                ClaimsIdentity cookiesIdentity = await userManager.CreateIdentityAsync(user,
-                    CookieAuthenticationDefaults.AuthenticationType);
+                ClaimsIdentity oAuthIdentity = await userManager.CreateIdentityAsync(user, context.Options.AuthenticationType);
+
                 AuthenticationProperties properties = CreateProperties(user.UserName);
                 AuthenticationTicket ticket = new AuthenticationTicket(oAuthIdentity, properties);
                 context.Validated(ticket);
-                context.Request.Context.Authentication.SignIn(cookiesIdentity);
             }
         }
 
