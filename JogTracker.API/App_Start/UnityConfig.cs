@@ -2,6 +2,7 @@ using System;
 using Microsoft.Practices.Unity;
 using Microsoft.Practices.Unity.Configuration;
 using JogTracker.Data.Repositories;
+using JogTracker.Services;
 
 namespace JogTracker.Api.App_Start
 {
@@ -34,6 +35,7 @@ namespace JogTracker.Api.App_Start
         public static void RegisterTypes(IUnityContainer container)
         {
             container.RegisterType<IJogEntryRepository, JogEntryRepository>();
+            container.RegisterType<IRegistrationService, RegistrationService>();
         }
     }
 }

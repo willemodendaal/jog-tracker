@@ -243,6 +243,10 @@
       <Project>{d7dc5d2c-1611-4fa4-a1ba-04ebf0398b37}</Project>
       <Name>JogTracker.DomainModel</Name>
     </ProjectReference>
+    <ProjectReference Include="..\JogTracker.Services\JogTracker.Services.csproj">
+      <Project>{ef5e0fa0-a360-4396-a92d-0aaacba257c1}</Project>
+      <Name>JogTracker.Services</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

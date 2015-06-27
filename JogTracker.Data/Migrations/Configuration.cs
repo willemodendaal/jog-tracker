@@ -1,5 +1,6 @@
 namespace JogTracker.Data.Migrations
 {
+    using JogTracker.Common;
     using Microsoft.AspNet.Identity;
     using Microsoft.AspNet.Identity.EntityFramework;
     using System;
@@ -17,13 +18,12 @@ namespace JogTracker.Data.Migrations
         protected override void Seed(JogDbContext context)
         {
             // Logic here to seed with initial data.
+            CreateDefaultRoles(context);
             AddDefaultAdminUser(context);
         }
 
         bool AddDefaultAdminUser(JogDbContext context)
         {
-            var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
-            IdentityResult identityResult = roleManager.Create(new IdentityRole("administrator"));
             var userManager = new UserManager<IdentityUser>(new UserStore<IdentityUser>(context));
 
             var user = new IdentityUser()
@@ -33,7 +33,7 @@ namespace JogTracker.Data.Migrations
             };
 
             //TODO: store password more securely.
-            identityResult = userManager.Create(user, "runUpYonderHills!");
+            IdentityResult identityResult = userManager.Create(user, "runUpYonderHills!");
 
             if (identityResult.Succeeded == false)
             {
@@ -41,8 +41,15 @@ namespace JogTracker.Data.Migrations
                 return false;
             }
 
-            identityResult = userManager.AddToRole(user.Id, "administrator");
+            identityResult = userManager.AddToRole(user.Id, Config.AdminRole);
             return identityResult.Succeeded;
+        }
+
+        private static void CreateDefaultRoles(JogDbContext context)
+        {
+            var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
+            roleManager.Create(new IdentityRole(Config.AdminRole));
+            roleManager.Create(new IdentityRole(Config.UserRole));
         }
     }
 }
