@@ -9,29 +9,52 @@
         $( function() {
 
             $('#login').click(handleLogin);
-            $('#login').click(handleLogoff);
-            $('#login').click(handleSecureContent);
+            $('#logoff').click(handleLogoff);
+            $('#access-secure').click(handleSecureContent);
             var server = 'https://localhost:44301/';
 
-          
+            var access_token = null;
             function handleLogin() {
                 var loginData = 'grant_type=password&username=willem.odendaal@gmail.com&password=runUpYonderHills!';
 
                 //Get token from server.
                 $.post(server + 'Token', loginData)
                     .done(function(data) {
-                        alert('done: ' + data);
+                        console.log(data);
+                        access_token = data.access_token;
+                        alert('OK');
                     })
                     .fail(function(err,a) {
                         console.log(err,a);
-                        alert('error: ' + err);
+                        alert('error. See console for more info.');
                     });
             }
 
             function handleLogoff() {
+                   access_token = null;
+                   alert('Logged off.');
             }
 
             function handleSecureContent() {
+                $.ajax(server+ 'api/v1/jog',
+                {
+                    headers: {'Authorization': 'bearer ' + access_token},
+                    method: 'GET'
+                })
+                .done(function(data) {
+                    console.log(data);
+                    alert('hapiness. See log');
+                })
+                .fail(function(err,a) {
+                        if (err.status == 401)
+                        {
+                            alert('Please log on again.');
+                            return;
+                        }
+
+                        console.log(err,a);
+                        alert('error. See console for more info.');
+                });
             }
 
 

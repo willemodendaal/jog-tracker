@@ -13,7 +13,6 @@ namespace JogTracker.Api
 {
     public partial class Startup
     {
-        private readonly string[] _allowedOrigins = new[] { "https://localhost:44302" }; //TODO: Make configurable
 
         static Startup()
         {
@@ -55,11 +54,11 @@ namespace JogTracker.Api
                 IOwinRequest req = context.Request;
                 IOwinResponse res = context.Response;
 
-                //Allow requests for authentication to /Token (cannot use normal Cors filters here).
+                //Allow requests for authentication to /Token (because we cannot use normal Cors filters here).
                 if (req.Path.StartsWithSegments(new PathString("/Token")))
                 {
                     var origin = req.Headers.Get("Origin");
-                    if (!string.IsNullOrEmpty(origin) && _allowedOrigins.Any(o => o.Equals(origin, StringComparison.InvariantCultureIgnoreCase)) )
+                    if (!string.IsNullOrEmpty(origin) && WebApiConfig.AllowedCorsOrigins.Any(o => o.Equals(origin, StringComparison.InvariantCultureIgnoreCase)) )
                     {
                         res.Headers.Set("Access-Control-Allow-Origin", origin);
                     }
