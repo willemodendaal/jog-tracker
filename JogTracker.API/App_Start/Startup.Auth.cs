@@ -15,7 +15,7 @@ namespace JogTracker.Api
     {
         static Startup()
         {
-            PublicClientId = "self";
+            PublicClientId = "jogTracker.web";
 
             UserManagerFactory = () => new UserManager<IdentityUser>(new UserStore<IdentityUser>());
 
@@ -25,7 +25,7 @@ namespace JogTracker.Api
                 Provider = new JogTrackerOAuthProvider(PublicClientId, UserManagerFactory),
                 AuthorizeEndpointPath = new PathString("/api/Account/ExternalLogin"),
                 AccessTokenExpireTimeSpan = TimeSpan.FromDays(14),
-                AllowInsecureHttp = true
+                AllowInsecureHttp = false
             };
         }
 
@@ -37,7 +37,6 @@ namespace JogTracker.Api
 
         public void ConfigureAuth(IAppBuilder app)
         {
-        
             // This is what allows our front-end to submit tokens instead of userName/password with every request.
             app.UseOAuthBearerTokens(OAuthOptions);
         }
