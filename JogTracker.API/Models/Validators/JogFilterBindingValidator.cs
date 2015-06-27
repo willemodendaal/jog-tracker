@@ -1,4 +1,5 @@
 ﻿using FluentValidation;
+using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -35,7 +36,6 @@ namespace JogTracker.Api.Models
             {
                 return false;
             }
-
             return true;
         }
     }

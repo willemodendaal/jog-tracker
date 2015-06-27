@@ -28,7 +28,7 @@ namespace JogTracker.Services
             var context = new JogDbContext();
             roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
             userManager = new UserManager<IdentityUser>(new UserStore<IdentityUser>(context));
-
+            userManager.PasswordValidator = Config.PasswordValidator;
         }
 
         public void Register(string userName, string email, string password)

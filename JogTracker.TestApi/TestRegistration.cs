@@ -23,7 +23,7 @@ namespace JogTracker.TestApi
             string id = base.GetUniqueId();
             _userName = "user1" + id;
             _email = "user1" + id + "@email.com";
-            _password = "B@nanas!B@nanas!";
+            _password = "B@nanas!B@nanas!123";
         }
 
         [TestMethod]
@@ -32,7 +32,7 @@ namespace JogTracker.TestApi
             using (var client = new HttpClient())
             {
                 //Register
-                var response = await client.PostAsJsonAsync(Uris.Register,
+                HttpResponseMessage response = await client.PostAsJsonAsync(Uris.Register,
                     new
                     {
                         UserName = _userName,
@@ -40,6 +40,7 @@ namespace JogTracker.TestApi
                         Password = _password,
                     });
 
+                string responseBody = base.GetResponseBody(response);
                 Assert.AreEqual(HttpStatusCode.OK, response.StatusCode, "Register result should have been 200");
 
                 //Login
@@ -52,19 +53,52 @@ namespace JogTracker.TestApi
         [TestMethod]
         public async Task RegisterFailsIfPasswordNotComplexEnough()
         {
-            Assert.Fail();
+            using (var client = new HttpClient())
+            {
+                var response = await client.PostAsJsonAsync(Uris.Register,
+                    new
+                    {
+                        UserName = _userName,
+                        Email = _email,
+                        Password = "1",
+                    });
+
+                Assert.AreEqual(HttpStatusCode.BadRequest, response.StatusCode);
+            }
         }
 
         [TestMethod]
         public async Task RegisterFailsIfEmailInvalid()
         {
-            Assert.Fail();
+            using (var client = new HttpClient())
+            {
+                var response = await client.PostAsJsonAsync(Uris.Register,
+                    new
+                    {
+                        UserName = _userName,
+                        Email = "bananas",
+                        Password = _password,
+                    });
+
+                Assert.AreEqual(HttpStatusCode.BadRequest, response.StatusCode);
+            }
         }
 
         [TestMethod]
         public async Task RegisterFailsIfNotAllFieldsSpecified()
         {
-            Assert.Fail();
+            using (var client = new HttpClient())
+            {
+                var response = await client.PostAsJsonAsync(Uris.Register,
+                    new
+                    {
+                        UserName = _userName,
+                        Email = _email,
+                        Password = "",
+                    });
+
+                Assert.AreEqual(HttpStatusCode.BadRequest, response.StatusCode);
+            }
         }
 
         

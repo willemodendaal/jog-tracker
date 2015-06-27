@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Net.Http.Formatting;
 using System.Net;
+using System.IO;
 
 namespace JogTracker.TestApi
 {
@@ -16,6 +17,10 @@ namespace JogTracker.TestApi
             return Guid.NewGuid().ToString().Replace("-",""); //Used to make info distinct, since we're modifying state with these tests.
         }
 
+        protected string GetResponseBody(HttpResponseMessage response)
+        {
+            return response.Content.ReadAsStringAsync().Result;
+        }
 
         protected async Task<HttpStatusCode> Login(string userName, string password, HttpClient client)
         {
