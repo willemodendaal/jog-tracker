@@ -13,7 +13,7 @@ namespace JogTracker.TestApi
     {
         protected string GetUniqueId()
         {
-            return Guid.NewGuid().ToString(); //Used to make info distinct, since we're modifying state with these tests.
+            return Guid.NewGuid().ToString().Replace("-",""); //Used to make info distinct, since we're modifying state with these tests.
         }
 
 
