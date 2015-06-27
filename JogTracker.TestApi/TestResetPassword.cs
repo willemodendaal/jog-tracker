@@ -19,15 +19,12 @@ namespace JogTracker.TestApi
         [TestMethod]
         public async Task TestResetPasswordSteps()
         {
-            using (var client = new HttpClient())
-            {
-                base.Register(_userName, _email, _password, client);
-            }
-
+            
             /*
              * Uncomment the desired steps below. This has to be done manually
              *  because there is a manual email required to do a password reset.
              */
+            //RegisterUser();
             await RequestResetWithUserName(_userName);
             //await RequestResetWithEmail(_email);
             //await ResetAndLogin(_userName, "***token****", "P@@sswwoorrdd123");
@@ -35,7 +32,15 @@ namespace JogTracker.TestApi
             Assert.IsTrue(true); //Just to give MSTest something to test.
         }
 
-        public static async Task RequestResetWithUserName(string userName)
+        private void RegisterUser()
+        {
+            using (var client = new HttpClient())
+            {
+                base.Register(_userName, _email, _password, client);
+            }
+        }
+
+        private static async Task RequestResetWithUserName(string userName)
         {
             using (var client = new HttpClient())
             {
@@ -46,7 +51,7 @@ namespace JogTracker.TestApi
                         UserName = userName
                     });
 
-                Assert.AreEqual(HttpStatusCode.OK, response);
+                Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);
 
                 //At this point an email would have been sent. Get the code from the email
                 //  and run the resetPassword test.
@@ -54,7 +59,7 @@ namespace JogTracker.TestApi
         }
 
 
-        public async Task RequestResetWithEmail(string email)
+        private static async Task RequestResetWithEmail(string email)
         {
             using (var client = new HttpClient())
             {
@@ -73,7 +78,7 @@ namespace JogTracker.TestApi
         }
 
 
-        public async Task ResetAndLogin(string userName, string resetToken, string newPassword)
+        private async Task ResetAndLogin(string userName, string resetToken, string newPassword)
         {
             
             using (var client = new HttpClient())
@@ -89,7 +94,7 @@ namespace JogTracker.TestApi
                 Assert.AreEqual(HttpStatusCode.OK, response);
 
                 //Log in with new password must succeed.
-                var loginResult = await base.Login(_userName, newPassword, client);
+                var loginResult = await base.Login(userName, newPassword, client);
                 Assert.AreEqual(HttpStatusCode.OK, loginResult, "Login result should have been 200");
             }
         }

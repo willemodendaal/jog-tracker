@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Threading.Tasks;
 using System.Web.Http;
 
 namespace JogTracker.Api.ApiControllers
@@ -13,11 +14,11 @@ namespace JogTracker.Api.ApiControllers
     [RoutePrefix("api/v1/account")]
     public class AccountController : ApiController
     {
-        private IUserAdminService _registrationService;
+        private IUserAdminService _userAdminService;
 
         public AccountController(IUserAdminService regService)
         {
-            _registrationService = regService;
+            _userAdminService = regService;
         }
 
         [Route("register")]
@@ -25,15 +26,17 @@ namespace JogTracker.Api.ApiControllers
         [Validate]
         public IHttpActionResult Register(RegisterBindingModel model)
         {
-            _registrationService.Register(model.UserName, model.Email, model.Password);
+            _userAdminService.Register(model.UserName, model.Email, model.Password);
             return Ok();
         }
 
         [Route("requestResetPwd")]
         [HttpPost]
         [Validate]
-        public IHttpActionResult RequestResetPassword()
+        public async Task<IHttpActionResult> RequestResetPassword(RequestResetPasswordBindingModel model)
         {
+            //Email is sent by the userAdminService. Nothing returned from here.
+            await _userAdminService.RequestResetPassword(model.UserName);
             return Ok();
         }
 

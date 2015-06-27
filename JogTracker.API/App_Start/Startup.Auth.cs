@@ -8,6 +8,8 @@ using Microsoft.Owin.Security.OAuth;
 using Owin;
 using JogTracker.Api.Providers;
 using JogTracker.Data;
+using Microsoft.Owin.Security.DataProtection;
+using JogTracker.Common;
 
 namespace JogTracker.Api
 {
@@ -42,7 +44,7 @@ namespace JogTracker.Api
         {
             // This is what allows our front-end to submit tokens instead of userName/password with every request.
             app.UseOAuthBearerTokens(OAuthOptions);
-
+            SharedSecurity.DataProtectionProvider = app.GetDataProtectionProvider();
             EnableCors(app);
         }
 

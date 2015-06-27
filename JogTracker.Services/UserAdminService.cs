@@ -2,6 +2,8 @@
 using JogTracker.Data;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using Microsoft.AspNet.Identity.Owin;
+using Microsoft.Owin.Security.DataProtection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,6 +18,8 @@ namespace JogTracker.Services
     public interface IUserAdminService
     {
         void Register(string userName, string email, string password);
+        Task RequestResetPassword(string userName);
+        void ResetPassword(string userName, string token, string newPassword);
     }
 
     public class UserAdminService : IUserAdminService
@@ -31,6 +35,14 @@ namespace JogTracker.Services
             _userManager = new UserManager<IdentityUser>(new UserStore<IdentityUser>(context));
             _userManager.PasswordValidator = Config.PasswordValidator;
             _emailService = emailService;
+
+            //Assign token provider used to generate Reset password tokens.
+            var dataProtectorProvider = SharedSecurity.DataProtectionProvider; //Use the same provider we used when auth was initialized.
+            var dataProtector = dataProtectorProvider.Create("My Asp.Net Identity");
+            _userManager.UserTokenProvider = new DataProtectorTokenProvider<IdentityUser, string>(dataProtector)
+            {
+                TokenLifespan = TimeSpan.FromHours(24), //Reset token lifespan.
+            };
         }
 
         public void Register(string userName, string email, string password)
@@ -64,6 +76,7 @@ namespace JogTracker.Services
 
         public void ResetPassword(string userName, string token, string newPassword)
         {
+            throw new NotImplementedException();
         }
 
     }

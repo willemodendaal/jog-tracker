@@ -31,7 +31,8 @@ namespace JogTracker.Services
 
         public string GetResetPasswordEmailBody(string userId, string resetToken, string userName)
         {
-            return string.Format("Dear {0}\n\nPlease click on this link to reset your password:\n{1}\n\nIf you did not request this email, please ignore it.\n\nRegards,\nThe Jogging Tracker team");
+            return string.Format("Dear {0}\n\nPlease click on this link to reset your password:\n{1}\n\nIf you did not request this email, please ignore it.\n\nRegards,\nThe Jogging Tracker team",
+                userName, resetToken);
         }
 
     }
