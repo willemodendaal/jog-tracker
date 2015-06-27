@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Net.Http.Formatting;
 using System.Net;
 using System.IO;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace JogTracker.TestApi
 {
@@ -35,6 +36,22 @@ namespace JogTracker.TestApi
             var result = await client.PostAsync(Uris.Login, formData);
 
             return result.StatusCode;
+        }
+
+        internal void Register(string userName, string email, string password, HttpClient client)
+        {
+            //Register
+            HttpResponseMessage response = client.PostAsJsonAsync(Uris.Register,
+                new
+                {
+                    UserName = userName,
+                    Email = email,
+                    Password = password,
+                }).Result;
+
+            string responseBody = GetResponseBody(response);
+            Assert.AreEqual(HttpStatusCode.OK, response.StatusCode, "Register result should have been 200");
+
         }
     }
 }

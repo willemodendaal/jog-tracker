@@ -33,7 +33,7 @@ namespace JogTracker.Services
 
         public void Register(string userName, string email, string password)
         {
-
+           
             var user = new IdentityUser()
             {
                 UserName = userName,

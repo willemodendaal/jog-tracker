@@ -31,17 +31,7 @@ namespace JogTracker.TestApi
         {
             using (var client = new HttpClient())
             {
-                //Register
-                HttpResponseMessage response = await client.PostAsJsonAsync(Uris.Register,
-                    new
-                    {
-                        UserName = _userName,
-                        Email = _email,
-                        Password = _password,
-                    });
-
-                string responseBody = base.GetResponseBody(response);
-                Assert.AreEqual(HttpStatusCode.OK, response.StatusCode, "Register result should have been 200");
+                base.Register(_userName, _email, _password, client);
 
                 //Login
                 var loginResult = await base.Login(_userName, _password, client);
