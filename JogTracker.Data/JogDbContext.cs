@@ -27,6 +27,7 @@ namespace JogTracker.Data
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             //So that table names are singular, not plural. More predictable.
+            base.OnModelCreating(modelBuilder);
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
         }
     }
