@@ -52,9 +52,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\JogTracker.Web\JogTracker.Web.Api.csproj">
+    <ProjectReference Include="..\JogTracker.Web\JogTracker.Api.csproj">
       <Project>{8604EAA2-D36E-4FF9-BD24-ED32CBAB4288}</Project>
-      <Name>JogTracker.Web.Api</Name>
+      <Name>JogTracker.Api</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

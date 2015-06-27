@@ -3,7 +3,7 @@ using Microsoft.Practices.Unity;
 using Microsoft.Practices.Unity.Configuration;
 using JogTracker.Data.Repositories;
 
-namespace JogTracker.Web.Api.App_Start
+namespace JogTracker.Api.App_Start
 {
     /// <summary>
     /// Specifies the Unity configuration for the main container.

@@ -4,11 +4,11 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
-using JogTracker.Web.Api.Extensions;
+using JogTracker.Api.Extensions;
 using ValidationContext = System.ComponentModel.DataAnnotations.ValidationContext;
 
 
-namespace JogTracker.Web.Api.Models
+namespace JogTracker.Api.Models
 {
     public class JogFilterBindingModel : IValidatableObject
     {

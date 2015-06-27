@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace JogTracker.Web.Api.Models
+namespace JogTracker.Api.Models
 {
     public class JogBindingModel
     {

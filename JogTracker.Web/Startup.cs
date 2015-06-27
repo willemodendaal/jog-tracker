@@ -4,9 +4,9 @@ using System.Linq;
 using Microsoft.Owin;
 using Owin;
 
-[assembly: OwinStartup(typeof(JogTracker.Web.Api.Startup))]
+[assembly: OwinStartup(typeof(JogTracker.Api.Startup))]
 
-namespace JogTracker.Web.Api
+namespace JogTracker.Api
 {
     public partial class Startup
     {
