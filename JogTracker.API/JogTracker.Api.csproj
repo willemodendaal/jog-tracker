@@ -149,6 +149,10 @@
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Cors.5.2.3\lib\net45\System.Web.Http.Cors.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.Web.Http.Tracing, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Tracing.5.2.3\lib\net45\System.Web.Http.Tracing.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Web.Mvc, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
       <Private>True</Private>
@@ -194,6 +198,7 @@
     <Compile Include="ApiControllers\AccountController.cs">
       <ItemGuid>beb8eeb0-1754-4bd2-b37a-a46bd4e558df</ItemGuid>
     </Compile>
+    <Compile Include="Filters\HandleErrorFilter.cs" />
     <Compile Include="Models\RegisterBindingModel.cs" />
     <Compile Include="Providers\JogTrackerOAuthProvider.cs">
       <ItemGuid>b26ed03d-3837-4ce6-800d-b80368dec154</ItemGuid>
@@ -235,6 +240,10 @@
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\JogTracker.Common\JogTracker.Common.csproj">
+      <Project>{d0f3f38f-3d2e-4b9b-b3b2-7b16658febbe}</Project>
+      <Name>JogTracker.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\JogTracker.Data\JogTracker.Data.csproj">
       <Project>{759e56fc-ee86-4fc8-8699-24cf28d1eaa9}</Project>
       <Name>JogTracker.Data</Name>

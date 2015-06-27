@@ -1,4 +1,5 @@
-﻿using System;
+﻿using JogTracker.Api.Filters;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
@@ -12,6 +13,9 @@ namespace JogTracker.Api
 
         public static void Register(HttpConfiguration config)
         {
+            config.Filters.Add(new HandleErrorFilter());
+            config.EnableSystemDiagnosticsTracing();
+
             // Enable CORS on all our controllers.
             var corsConfig = new EnableCorsAttribute(string.Join(",", AllowedCorsOrigins), "*", "*");
             config.EnableCors(corsConfig);
