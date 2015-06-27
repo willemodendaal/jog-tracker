@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JogTracker.Api", "JogTracke
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JogTracker.Web", "JogTracker.Web\JogTracker.Web.csproj", "{9306128A-4CCE-4353-8438-D8CD6DE259FB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JogTracker.TestApi", "JogTracker.TestApi\JogTracker.TestApi.csproj", "{6C41BEB4-EB30-4132-9587-F5E0C9D68AF6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{9306128A-4CCE-4353-8438-D8CD6DE259FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9306128A-4CCE-4353-8438-D8CD6DE259FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9306128A-4CCE-4353-8438-D8CD6DE259FB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6C41BEB4-EB30-4132-9587-F5E0C9D68AF6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6C41BEB4-EB30-4132-9587-F5E0C9D68AF6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6C41BEB4-EB30-4132-9587-F5E0C9D68AF6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6C41BEB4-EB30-4132-9587-F5E0C9D68AF6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
