@@ -13,9 +13,9 @@ namespace JogTracker.Api.ApiControllers
     [RoutePrefix("api/v1/account")]
     public class AccountController : ApiController
     {
-        private IRegistrationService _registrationService;
+        private IUserAdminService _registrationService;
 
-        public AccountController(IRegistrationService regService)
+        public AccountController(IUserAdminService regService)
         {
             _registrationService = regService;
         }
@@ -29,6 +29,22 @@ namespace JogTracker.Api.ApiControllers
             return Ok();
         }
 
+        [Route("requestResetPwd")]
+        [HttpPost]
+        [Validate]
+        public IHttpActionResult RequestResetPassword()
+        {
+            return Ok();
+        }
+
+
+        [Route("resetPwd")]
+        [HttpPost]
+        [Validate]
+        public IHttpActionResult ResetPassword()
+        {
+            return Ok();
+        }
 
     }
 }

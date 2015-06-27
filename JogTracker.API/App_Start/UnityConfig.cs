@@ -35,7 +35,8 @@ namespace JogTracker.Api.App_Start
         public static void RegisterTypes(IUnityContainer container)
         {
             container.RegisterType<IJogEntryRepository, JogEntryRepository>();
-            container.RegisterType<IRegistrationService, RegistrationService>();
+            container.RegisterType<IUserAdminService, UserAdminService>();
+            container.RegisterType<IEmailService, EmailService>();
         }
     }
 }

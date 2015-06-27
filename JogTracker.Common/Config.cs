@@ -30,5 +30,10 @@ namespace JogTracker.Common
                 return _passwordValidator;
             }
         }
+
+        public static readonly string JogTrackerEmail = "willem.odendaal@gmail.com"; //Email "From" address.
+        public static readonly string SendGridUser = "azure_1cff9262a99ca75208395921384dd3c1@azure.com"; //TODO: Store in config.
+        public static readonly string SendGridSmtpServer = "smtp.sendgrid.net"; 
+        public static readonly string SendGridPassword = "kq9fAqOu4OFQxRa";
     }
 }

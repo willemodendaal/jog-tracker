@@ -12,7 +12,7 @@ namespace JogTracker.TestApi
     [TestClass]
     public class TestResetPassword : TestBase
     {
-        string _userName = "test1"; //Must not exist in the db yet.
+        string _userName = "test2"; //Must not exist in the db yet.
         string _email = "willem.odendaal@gmail.com"; //Must be a real email.
         string _password = "test1@34Bana";
 
