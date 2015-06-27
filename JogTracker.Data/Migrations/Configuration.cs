@@ -28,7 +28,8 @@ namespace JogTracker.Data.Migrations
 
             var user = new IdentityUser()
             {
-                UserName = "jogSuperUser",
+                UserName = "willem.odendaal@gmail.com",
+                Email = "willem.odendaal@gmail.com"
             };
 
             //TODO: store password more securely.
@@ -36,6 +37,7 @@ namespace JogTracker.Data.Migrations
 
             if (identityResult.Succeeded == false)
             {
+                throw new Exception("Seed failed.");
                 return false;
             }
 

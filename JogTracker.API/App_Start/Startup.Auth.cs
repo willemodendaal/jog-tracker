@@ -19,7 +19,7 @@ namespace JogTracker.Api
         {
             PublicClientId = "jogTracker.web";
 
-            UserManagerFactory = () => new UserManager<IdentityUser>(new UserStore<IdentityUser>());
+            UserManagerFactory = () => new UserManager<IdentityUser>(new UserStore<IdentityUser>(new JogDbContext()));
 
             OAuthOptions = new OAuthAuthorizationServerOptions
             {

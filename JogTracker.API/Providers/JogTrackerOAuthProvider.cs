@@ -8,6 +8,7 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.OAuth;
+using JogTracker.Data;
 
 namespace JogTracker.Api.Providers
 {
@@ -40,7 +41,7 @@ namespace JogTracker.Api.Providers
             {
                 //Authentication happens here. ASP.NET identity verifies against database.
                 IdentityUser user = await userManager.FindAsync(context.UserName, context.Password);
-
+    
                 if (user == null)
                 {
                     context.SetError("invalid_grant", "The user name or password is incorrect.");
