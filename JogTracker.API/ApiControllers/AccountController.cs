@@ -1,4 +1,5 @@
-﻿using System;
+﻿using JogTracker.Api.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -7,20 +8,16 @@ using System.Web.Http;
 
 namespace JogTracker.Api.ApiControllers
 {
-    [RoutePrefix("api/v1")]
+    [RoutePrefix("api/v1/account")]
     public class AccountController : ApiController
     {
-        [Route("login")]
+        [Route("register")]
         [HttpPost]
-        public void Login()
+        public IHttpActionResult Register(RegisterBindingModel model)
         {
+            return Ok();
         }
 
-        [Route("logout")]
-        [HttpPost]
-        public void Logout()
-        {
-        }
 
     }
 }

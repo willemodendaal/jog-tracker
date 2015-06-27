@@ -40,11 +40,11 @@ namespace JogTracker.TestApi
                         Password = _password,
                     });
 
-                Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);
+                Assert.AreEqual(HttpStatusCode.OK, response.StatusCode, "Register result should have been 200");
 
                 //Login
-                var loginResult = base.Login(_userName, _password, client);
-                Assert.AreEqual(HttpStatusCode.OK, loginResult);
+                var loginResult = await base.Login(_userName, _password, client);
+                Assert.AreEqual(HttpStatusCode.OK, loginResult, "Login result should have been 200");
   
             }
         }
@@ -52,6 +52,19 @@ namespace JogTracker.TestApi
         [TestMethod]
         public async Task RegisterFailsIfPasswordNotComplexEnough()
         {
+            Assert.Fail();
+        }
+
+        [TestMethod]
+        public async Task RegisterFailsIfEmailInvalid()
+        {
+            Assert.Fail();
+        }
+
+        [TestMethod]
+        public async Task RegisterFailsIfNotAllFieldsSpecified()
+        {
+            Assert.Fail();
         }
 
         

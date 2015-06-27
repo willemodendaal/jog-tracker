@@ -194,6 +194,7 @@
     <Compile Include="ApiControllers\AccountController.cs">
       <ItemGuid>beb8eeb0-1754-4bd2-b37a-a46bd4e558df</ItemGuid>
     </Compile>
+    <Compile Include="Models\RegisterBindingModel.cs" />
     <Compile Include="Providers\JogTrackerOAuthProvider.cs">
       <ItemGuid>b26ed03d-3837-4ce6-800d-b80368dec154</ItemGuid>
     </Compile>
@@ -222,6 +223,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
+    <None Include="Properties\PublishProfiles\LocalIIS.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
