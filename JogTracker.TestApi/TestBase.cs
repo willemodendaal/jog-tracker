@@ -23,12 +23,12 @@ namespace JogTracker.TestApi
             return response.Content.ReadAsStringAsync().Result;
         }
 
-        protected async Task<HttpStatusCode> Login(string userName, string password, HttpClient client)
+        protected async Task<HttpStatusCode> Login(string email, string password, HttpClient client)
         {
             var data = new Dictionary<string, string>()
             {
                 { "grant_type", "password"},
-                { "username", userName },
+                { "username", email },
                 { "password", password }
             };
 

@@ -24,13 +24,15 @@ namespace JogTracker.Api.ApiControllers
         [Route("register")]
         [HttpPost]
         [Validate]
-        public IHttpActionResult Register(RegisterBindingModel model)
+        [AllowAnonymous]
+        public async Task<IHttpActionResult> Register(RegisterBindingModel model)
         {
-            string errorResult = _userAdminService.Register(model.Email, model.Password);
+            string errorResult = await _userAdminService.RegisterAsync(model.Email, model.Password);
 
             if (errorResult != null)
             {
                 //Return info about why request failed. (i.e. password not complex enough)
+                //  Should be picked up by validation layer in most cases.
                 return BadRequest(errorResult);
             }
 
@@ -40,10 +42,11 @@ namespace JogTracker.Api.ApiControllers
         [Route("requestResetPwd")]
         [HttpPost]
         [Validate]
+        [AllowAnonymous]
         public async Task<IHttpActionResult> RequestResetPassword(RequestResetPasswordBindingModel model)
         {
             //Email is sent by the userAdminService. Nothing returned from here.
-            await _userAdminService.RequestResetPassword(model.Email);
+            await _userAdminService.RequestResetPasswordAsync(model.Email);
             return Ok();
         }
 
@@ -51,8 +54,18 @@ namespace JogTracker.Api.ApiControllers
         [Route("resetPwd")]
         [HttpPost]
         [Validate]
-        public IHttpActionResult ResetPassword()
+        [AllowAnonymous]
+        public async Task<IHttpActionResult> ResetPassword(ResetPasswordBindingModel model)
         {
+            string errorResult = await _userAdminService.ResetPasswordAsync(model.UserId, model.Token, model.NewPassword);
+
+            if (errorResult != null)
+            {
+                //Return info about why request failed. (i.e. password not complex enough)
+                //  Should be picked up by validation layer in most cases.
+                return BadRequest(errorResult);
+            }
+
             return Ok();
         }
 

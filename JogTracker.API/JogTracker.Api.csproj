@@ -201,8 +201,10 @@
     <Compile Include="Filters\HandleErrorFilter.cs" />
     <Compile Include="Models\RegisterBindingModel.cs" />
     <Compile Include="Models\RequestResetPasswordBindingModel.cs" />
+    <Compile Include="Models\ResetPasswordBindingModel.cs" />
     <Compile Include="Models\Validators\RegisterBindingModelValidator.cs" />
     <Compile Include="Models\Validators\RequestResetPasswordModelValidator.cs" />
+    <Compile Include="Models\Validators\ResetPasswordModelValidator.cs" />
     <Compile Include="Providers\JogTrackerOAuthProvider.cs">
       <ItemGuid>b26ed03d-3837-4ce6-800d-b80368dec154</ItemGuid>
     </Compile>

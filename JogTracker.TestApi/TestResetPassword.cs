@@ -24,8 +24,12 @@ namespace JogTracker.TestApi
              *  because there is a manual email required to do a password reset.
              */
             //RegisterUser(_email, _password);
-            await RequestResetWithEmail(_email);
-            //await ResetAndLogin(_userName, "***token****", "P@@sswwoorrdd123");
+            //await RequestResetWithEmail(_email);
+            await ResetAndLogin(
+                _email,
+                "6466dcab-a54a-4ccb-b6c0-991dbbafbf8e",
+                "s/9Al0phGjlttuhVoJR/JUeMC4XSgeyDYzNfgvZDq4KYtJAMdo4qjyiqokK7w7dYvG0t6RH1WRQRNnc3VixJhkBubSuywOzTE464UHN/dLO7a38IUNm/n846YSyS5H1BZAH2uLP8Lw/wYAKRRqBMQwEwl9WMQzzWyiySKmnvwkxGNXX8fql9UG8VRjl+sAeA/502ezs4fujuXXf4ylWmoQ==",
+                "P@@sswwoorrdd123");
 
             Assert.IsTrue(true); //Just to give MSTest something to test.
         }
@@ -57,7 +61,7 @@ namespace JogTracker.TestApi
         }
 
 
-        private async Task ResetAndLogin(string userName, string resetToken, string newPassword)
+        private async Task ResetAndLogin(string email, string userId, string resetToken, string newPassword)
         {
             
             using (var client = new HttpClient())
@@ -66,14 +70,14 @@ namespace JogTracker.TestApi
                         new
                         {
                             Token = resetToken,
-                            UserName = userName,
+                            UserId = userId,
                             NewPassword = newPassword
                         });
 
-                Assert.AreEqual(HttpStatusCode.OK, response);
+                Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);
 
-                //Log in with new password must succeed.
-                var loginResult = await base.Login(userName, newPassword, client);
+                //Log in with *new password* must succeed.
+                var loginResult = await base.Login(email, newPassword, client);
                 Assert.AreEqual(HttpStatusCode.OK, loginResult, "Login result should have been 200");
             }
         }

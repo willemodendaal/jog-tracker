@@ -18,11 +18,15 @@ namespace JogTracker.Services
     public interface IUserAdminService
     {
         /// <summary>
-        /// Register, or return error string.
+        /// Register, or return user-friendly error string.
         /// </summary>
-        string Register(string email, string password);
-        Task RequestResetPassword(string email);
-        void ResetPassword(string userId, string token, string newPassword);
+        Task<string> RegisterAsync(string email, string password);
+        Task RequestResetPasswordAsync(string email);
+
+        /// <summary>
+        /// Reset password, or return user-friendly error string.
+        /// </summary>
+        Task<string> ResetPasswordAsync(string userId, string token, string newPassword);
     }
 
     public class UserAdminService : IUserAdminService
@@ -51,7 +55,7 @@ namespace JogTracker.Services
         /// <summary>
         /// Register, or return errors.
         /// </summary>
-        public string Register(string email, string password)
+        public async Task<string> RegisterAsync(string email, string password)
         {
             var user = new IdentityUser()
             {
@@ -60,19 +64,19 @@ namespace JogTracker.Services
             };
 
             //TODO: store password more securely.
-            var identityResult = _userManager.Create(user, password);
+            var identityResult = await _userManager.CreateAsync(user, password);
 
             if (identityResult.Succeeded == false)
             {
                 return(string.Concat("Seed failed. ", String.Join(";", identityResult.Errors) ));
             }
 
-            _userManager.AddToRole(user.Id, GlobalConfig.UserRole);
+            await _userManager.AddToRoleAsync(user.Id, GlobalConfig.UserRole);
             return null;
         }
 
 
-        public async Task RequestResetPassword(string email)
+        public async Task RequestResetPasswordAsync(string email)
         {
             IdentityUser user = _userManager.FindByEmail(email);
             string token = _userManager.GeneratePasswordResetToken(user.Id);
@@ -81,9 +85,20 @@ namespace JogTracker.Services
             await _emailService.SendEmailTo(user.Email, "Password reset request", emailBody);
         }
 
-        public void ResetPassword(string userId, string token, string newPassword)
+        /// <summary>
+        /// Reset password, or return user-friendly error string.
+        /// </summary>
+        public async Task<string> ResetPasswordAsync(string userId, string token, string newPassword)
         {
-            throw new NotImplementedException();
+            IdentityUser user = await _userManager.FindByIdAsync(userId);
+            IdentityResult resetResult = await _userManager.ResetPasswordAsync(userId, token, newPassword);
+
+            if (resetResult.Succeeded == false)
+            {
+                return (string.Concat("Reset password failed. ", String.Join(";", resetResult.Errors)));
+            }
+
+            return null; //Success.
         }
 
     }
