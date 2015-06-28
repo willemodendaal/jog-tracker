@@ -10,6 +10,7 @@ using JogTracker.Api.Providers;
 using JogTracker.Data;
 using Microsoft.Owin.Security.DataProtection;
 using JogTracker.Common;
+using JogTracker.DomainModel;
 
 namespace JogTracker.Api
 {
@@ -20,7 +21,7 @@ namespace JogTracker.Api
         {
             PublicClientId = "jogTracker.web";
 
-            UserManagerFactory = () => new UserManager<IdentityUser>(new UserStore<IdentityUser>(new JogDbContext()));
+            UserManagerFactory = () => new UserManager<JogEntryUser>(new UserStore<JogEntryUser>(new JogDbContext()));
 
             OAuthOptions = new OAuthAuthorizationServerOptions
             {
@@ -36,7 +37,7 @@ namespace JogTracker.Api
 
         public static OAuthAuthorizationServerOptions OAuthOptions { get; private set; }
 
-        public static Func<UserManager<IdentityUser>> UserManagerFactory { get; set; }
+        public static Func<UserManager<JogEntryUser>> UserManagerFactory { get; set; }
 
         public static string PublicClientId { get; private set; }
 

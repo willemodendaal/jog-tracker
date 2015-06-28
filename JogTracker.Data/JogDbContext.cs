@@ -14,7 +14,7 @@ namespace JogTracker.Data
     /// Inherit from IdentityDbContext (.AspNet.Identity.EntityFramework) to indicate we
     /// want to make use of ASP.NET Identity security.
     /// </summary>
-    public class JogDbContext : IdentityDbContext<IdentityUser>
+    public class JogDbContext : IdentityDbContext<JogEntryUser>
     {
         
         public JogDbContext() : base("JobDbContextConnection")

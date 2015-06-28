@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using JogTracker.DomainModel;
 
 namespace JogTracker.Services
 {
@@ -32,21 +33,21 @@ namespace JogTracker.Services
     public class UserAdminService : IUserAdminService
     {
         private RoleManager<IdentityRole> _roleManager;
-        private UserManager<IdentityUser> _userManager;
+        private UserManager<JogEntryUser> _userManager;
         private IEmailService _emailService;
 
         public UserAdminService(IEmailService emailService)
         {
             var context = new JogDbContext();
             _roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
-            _userManager = new UserManager<IdentityUser>(new UserStore<IdentityUser>(context));
+            _userManager = new UserManager<JogEntryUser>(new UserStore<JogEntryUser>(context));
             _userManager.PasswordValidator = GlobalConfig.PasswordValidator;
             _emailService = emailService;
 
             //Assign token provider used to generate Reset password tokens.
             var dataProtectorProvider = GlobalSharedSecurity.DataProtectionProvider; //Use the same provider we used when auth was initialized.
             var dataProtector = dataProtectorProvider.Create("My Asp.Net Identity");
-            _userManager.UserTokenProvider = new DataProtectorTokenProvider<IdentityUser, string>(dataProtector)
+            _userManager.UserTokenProvider = new DataProtectorTokenProvider<JogEntryUser, string>(dataProtector)
             {
                 TokenLifespan = TimeSpan.FromHours(24), //Reset token lifespan.
             };
@@ -57,7 +58,7 @@ namespace JogTracker.Services
         /// </summary>
         public async Task<string> RegisterAsync(string email, string password)
         {
-            var user = new IdentityUser()
+            var user = new JogEntryUser()
             {
                 UserName = email,
                 Email = email
@@ -78,7 +79,7 @@ namespace JogTracker.Services
 
         public async Task RequestResetPasswordAsync(string email)
         {
-            IdentityUser user = _userManager.FindByEmail(email);
+            JogEntryUser user = _userManager.FindByEmail(email);
             string token = _userManager.GeneratePasswordResetToken(user.Id);
 
             string emailBody = _emailService.GetResetPasswordEmailBody(user.Id, token, user.UserName);
@@ -90,7 +91,7 @@ namespace JogTracker.Services
         /// </summary>
         public async Task<string> ResetPasswordAsync(string userId, string token, string newPassword)
         {
-            IdentityUser user = await _userManager.FindByIdAsync(userId);
+            JogEntryUser user = await _userManager.FindByIdAsync(userId);
             IdentityResult resetResult = await _userManager.ResetPasswordAsync(userId, token, newPassword);
 
             if (resetResult.Succeeded == false)

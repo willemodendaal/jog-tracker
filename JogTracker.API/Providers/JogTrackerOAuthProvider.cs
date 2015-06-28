@@ -9,15 +9,16 @@ using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.OAuth;
 using JogTracker.Data;
+using JogTracker.DomainModel;
 
 namespace JogTracker.Api.Providers
 {
     public class JogTrackerOAuthProvider : OAuthAuthorizationServerProvider
     {
         private readonly string _publicClientId;
-        private readonly Func<UserManager<IdentityUser>> _userManagerFactory;
+        private readonly Func<UserManager<JogEntryUser>> _userManagerFactory;
 
-        public JogTrackerOAuthProvider(string publicClientId, Func<UserManager<IdentityUser>> userManagerFactory)
+        public JogTrackerOAuthProvider(string publicClientId, Func<UserManager<JogEntryUser>> userManagerFactory)
         {
             if (publicClientId == null)
             {
@@ -37,10 +38,10 @@ namespace JogTracker.Api.Providers
         {
             context.OwinContext.Response.Headers.Add("Access-Control-Allow-Origin", new[] { "*" });
 
-            using (UserManager<IdentityUser> userManager = _userManagerFactory())
+            using (UserManager<JogEntryUser> userManager = _userManagerFactory())
             {
                 //Authentication happens here. ASP.NET identity verifies against database.
-                IdentityUser user = await userManager.FindAsync(context.UserName, context.Password);
+                JogEntryUser user = await userManager.FindAsync(context.UserName, context.Password);
     
                 if (user == null)
                 {

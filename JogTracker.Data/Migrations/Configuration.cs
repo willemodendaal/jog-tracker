@@ -1,3 +1,5 @@
+using JogTracker.DomainModel;
+
 namespace JogTracker.Data.Migrations
 {
     using JogTracker.Common;
@@ -24,9 +26,9 @@ namespace JogTracker.Data.Migrations
 
         bool AddDefaultAdminUser(JogDbContext context)
         {
-            var userManager = new UserManager<IdentityUser>(new UserStore<IdentityUser>(context));
+            var userManager = new UserManager<JogEntryUser>(new UserStore<JogEntryUser>(context));
 
-            var user = new IdentityUser()
+            var user = new JogEntryUser()
             {
                 UserName = "willem.odendaal@gmail.com",
                 Email = "willem.odendaal@gmail.com"
