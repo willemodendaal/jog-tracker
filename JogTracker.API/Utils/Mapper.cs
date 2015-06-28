@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Collections.Generic;
 
 namespace JogTracker.Api.Utils
 {
-/// <summary>
+    /// <summary>
     /// Interface to be implemented by classes supporting simple mapping.
     /// </summary>
     public interface IMappable<TSource, TTarget>
@@ -17,7 +14,7 @@ namespace JogTracker.Api.Utils
     /// <summary>
     /// Class that can map domain models to json models.
     /// </summary>
-    internal class Mapper<TSource, TTarget> where TTarget: IMappable<TSource, TTarget>, new()
+    internal class Mapper<TSource, TTarget> where TTarget : IMappable<TSource, TTarget>, new()
     {
         public ICollection<TTarget> Map(ICollection<TSource> sourceCollection)
         {
@@ -31,6 +28,4 @@ namespace JogTracker.Api.Utils
             return result;
         }
     }
-
-   
 }

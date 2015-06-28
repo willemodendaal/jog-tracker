@@ -21,7 +21,7 @@ namespace JogTracker.Api
         {
             PublicClientId = "jogTracker.web";
 
-            UserManagerFactory = () => new UserManager<JogEntryUser>(new UserStore<JogEntryUser>(new JogDbContext()));
+            UserManagerFactory = () => new UserManager<JogTrackerUser>(new UserStore<JogTrackerUser>(new JogDbContext()));
 
             OAuthOptions = new OAuthAuthorizationServerOptions
             {
@@ -37,7 +37,7 @@ namespace JogTracker.Api
 
         public static OAuthAuthorizationServerOptions OAuthOptions { get; private set; }
 
-        public static Func<UserManager<JogEntryUser>> UserManagerFactory { get; set; }
+        public static Func<UserManager<JogTrackerUser>> UserManagerFactory { get; set; }
 
         public static string PublicClientId { get; private set; }
 

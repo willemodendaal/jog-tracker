@@ -7,7 +7,7 @@ using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace JogTracker.DomainModel
 {
-    public class JogEntryUser : IdentityUser
+    public class JogTrackerUser : IdentityUser
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }

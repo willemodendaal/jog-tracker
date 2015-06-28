@@ -1,13 +1,12 @@
-﻿using System.Collections;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Web.Http;
 using JogTracker.Api.Filters;
 using JogTracker.Api.Models;
-using JogTracker.DomainModel;
-using JogTracker.Services;
-using System.Collections.Generic;
-using System.Linq;
 using JogTracker.Api.Models.JsonResults;
 using JogTracker.Api.Utils;
+using JogTracker.DomainModel;
+using JogTracker.Services;
 
 namespace JogTracker.Api.ApiControllers
 {
@@ -27,12 +26,10 @@ namespace JogTracker.Api.ApiControllers
         [HttpGet]
         public IHttpActionResult Users([FromUri] UserFilterBindingModel model)
         {
-            List<JogEntryUser> users = _userService.GetUsers(model.PageIndex.Value, model.PageSize.Value);
-            List<UserJsonResult> jsonUsers = new Mapper<JogEntryUser, UserJsonResult>().Map(users).ToList();
+            List<JogTrackerUser> users = _userService.GetUsers(model.PageIndex.Value, model.PageSize.Value);
+            List<UserJsonResult> jsonUsers = new Mapper<JogTrackerUser, UserJsonResult>().Map(users).ToList();
 
             return Ok(jsonUsers);
         }
-
-
     }
 }

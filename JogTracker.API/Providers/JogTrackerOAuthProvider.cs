@@ -16,9 +16,9 @@ namespace JogTracker.Api.Providers
     public class JogTrackerOAuthProvider : OAuthAuthorizationServerProvider
     {
         private readonly string _publicClientId;
-        private readonly Func<UserManager<JogEntryUser>> _userManagerFactory;
+        private readonly Func<UserManager<JogTrackerUser>> _userManagerFactory;
 
-        public JogTrackerOAuthProvider(string publicClientId, Func<UserManager<JogEntryUser>> userManagerFactory)
+        public JogTrackerOAuthProvider(string publicClientId, Func<UserManager<JogTrackerUser>> userManagerFactory)
         {
             if (publicClientId == null)
             {
@@ -38,10 +38,10 @@ namespace JogTracker.Api.Providers
         {
             context.OwinContext.Response.Headers.Add("Access-Control-Allow-Origin", new[] { "*" });
 
-            using (UserManager<JogEntryUser> userManager = _userManagerFactory())
+            using (UserManager<JogTrackerUser> userManager = _userManagerFactory())
             {
                 //Authentication happens here. ASP.NET identity verifies against database.
-                JogEntryUser user = await userManager.FindAsync(context.UserName, context.Password);
+                JogTrackerUser user = await userManager.FindAsync(context.UserName, context.Password);
     
                 if (user == null)
                 {

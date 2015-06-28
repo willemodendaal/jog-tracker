@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using FluentValidation;
-using FluentValidation.Results;
+﻿using FluentValidation;
 
 namespace JogTracker.Api.Models.Validators
 {
@@ -12,14 +7,12 @@ namespace JogTracker.Api.Models.Validators
         public UserFilterBindingValidator()
         {
             RuleFor(jog => jog.PageSize)
-               .NotEmpty()
-               .InclusiveBetween(1, 100); //To protect against misuse.
+                .NotEmpty()
+                .InclusiveBetween(1, 100); //To protect against misuse.
 
             RuleFor(jog => jog.PageIndex)
                 .NotEmpty()
                 .GreaterThanOrEqualTo(0);
-
         }
-
     }
 }

@@ -28,7 +28,7 @@ namespace JogTracker.Services
         /// </summary>
         Task<string> ResetPasswordAsync(string userId, string token, string newPassword);
 
-        List<JogEntryUser> GetUsers(int pageIndex, int pageSize);
+        List<JogTrackerUser> GetUsers(int pageIndex, int pageSize);
     }
 
     public class UserAdminService : IUserAdminService
@@ -36,22 +36,22 @@ namespace JogTracker.Services
         private readonly JogDbContext _dbContext;
         private readonly IEmailService _emailService;
         private readonly RoleManager<IdentityRole> _roleManager;
-        private readonly UserManager<JogEntryUser> _userManager;
+        private readonly UserManager<JogTrackerUser> _userManager;
 
         public UserAdminService(IEmailService emailService, JogDbContext dbContext)
         {
             var context = new JogDbContext();
             _roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
-            _userManager = new UserManager<JogEntryUser>(new UserStore<JogEntryUser>(context));
+            _userManager = new UserManager<JogTrackerUser>(new UserStore<JogTrackerUser>(context));
             _userManager.PasswordValidator = GlobalConfig.PasswordValidator;
             _emailService = emailService;
             _dbContext = dbContext;
 
             //Assign token provider used to generate Reset password tokens.
             var dataProtectorProvider = GlobalSharedSecurity.DataProtectionProvider;
-                //Use the same provider we used when auth was initialized.
+            //Use the same provider we used when auth was initialized.
             var dataProtector = dataProtectorProvider.Create("My Asp.Net Identity");
-            _userManager.UserTokenProvider = new DataProtectorTokenProvider<JogEntryUser, string>(dataProtector)
+            _userManager.UserTokenProvider = new DataProtectorTokenProvider<JogTrackerUser, string>(dataProtector)
             {
                 TokenLifespan = TimeSpan.FromHours(24), //Reset token lifespan.
             };
@@ -62,7 +62,7 @@ namespace JogTracker.Services
         /// </summary>
         public async Task<string> RegisterAsync(string email, string password, string firstName, string lastName)
         {
-            var user = new JogEntryUser()
+            var user = new JogTrackerUser()
             {
                 UserName = email,
                 Email = email,
@@ -84,7 +84,7 @@ namespace JogTracker.Services
 
         public async Task RequestResetPasswordAsync(string email)
         {
-            JogEntryUser user = _userManager.FindByEmail(email);
+            JogTrackerUser user = _userManager.FindByEmail(email);
             string token = _userManager.GeneratePasswordResetToken(user.Id);
 
             string emailBody = _emailService.GetResetPasswordEmailBody(user.Id, token, user.UserName);
@@ -96,7 +96,7 @@ namespace JogTracker.Services
         /// </summary>
         public async Task<string> ResetPasswordAsync(string userId, string token, string newPassword)
         {
-            JogEntryUser user = await _userManager.FindByIdAsync(userId);
+            JogTrackerUser user = await _userManager.FindByIdAsync(userId);
             IdentityResult resetResult = await _userManager.ResetPasswordAsync(userId, token, newPassword);
 
             if (resetResult.Succeeded == false)
@@ -107,11 +107,11 @@ namespace JogTracker.Services
             return null; //Success.
         }
 
-        public List<JogEntryUser> GetUsers(int pageIndex, int pageSize)
+        public List<JogTrackerUser> GetUsers(int pageIndex, int pageSize)
         {
             return _dbContext.Users
                 .OrderBy(u => u.UserName)
-                .Skip(pageIndex * pageSize)
+                .Skip(pageIndex*pageSize)
                 .Take(pageSize)
                 .ToList();
         }

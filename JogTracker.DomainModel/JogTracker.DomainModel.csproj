@@ -59,7 +59,7 @@
     <Compile Include="JogEntry.cs">
       <ItemGuid>07a96a8b-2003-4950-9723-8e95cf2852d0</ItemGuid>
     </Compile>
-    <Compile Include="JogEntryUser.cs" />
+    <Compile Include="JogTrackerUser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
