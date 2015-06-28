@@ -29,6 +29,8 @@ namespace JogTracker.Services
         Task<string> ResetPasswordAsync(string userId, string token, string newPassword);
 
         PagedModel<JogTrackerUser> GetUsers(int pageIndex, int pageSize);
+
+        JogTrackerUser GetUser(string userId);
     }
 
     public class UserAdminService : IUserAdminService
@@ -118,6 +120,11 @@ namespace JogTracker.Services
                 .ToList();
 
             return new PagedModel<JogTrackerUser>(pageIndex, pageSize, totalCount, resultList);
+        }
+
+        public JogTrackerUser GetUser(string userId)
+        {
+            return _dbContext.Users.Find(userId);
         }
     }
 }

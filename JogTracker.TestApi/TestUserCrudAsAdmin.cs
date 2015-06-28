@@ -1,29 +1,27 @@
-﻿using System;
-using System.Net;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace JogTracker.TestApi
 {
     [TestClass]
     public class TestUserCrudAsAdmin : TestBase
     {
-        string _email;
-        string _password;
-        string _firstName;
-        string _lastName;
+        private string _email;
+        private string _firstName;
+        private string _lastName;
+        private string _password;
 
         [TestInitialize]
         public void Init()
         {
-            string id = base.GetUniqueId();
+            string id = GetUniqueId();
             _email = "user1" + id + "@email.com";
             _password = "B@nanas!B@nanas!123";
             _firstName = "fn_" + id;
             _lastName = "ln_" + id;
-
         }
 
         [TestMethod]
@@ -35,7 +33,7 @@ namespace JogTracker.TestApi
                 RegisterAsAdmin(_email, _password, _firstName, _lastName, client);
 
                 //Login as the user should succeed.
-                var loginResult = await base.Login(_email, _password, client);
+                var loginResult = await Login(_email, _password, client);
                 Assert.AreEqual(HttpStatusCode.OK, loginResult, "Login result should have been 200");
             }
         }
@@ -46,31 +44,62 @@ namespace JogTracker.TestApi
             using (var client = new HttpClient())
             {
                 var result = RegisterAsAdmin(_email, _password, _firstName, _lastName, client);
-                Assert.AreEqual(HttpStatusCode.Unauthorized, result);
+                Assert.AreEqual(HttpStatusCode.Unauthorized, result.StatusCode);
             }
         }
-
 
         [TestMethod]
         public async Task TestUnableToCreateIfNotAdmin_OtherUser()
         {
             using (var client = new HttpClient())
             {
-                base.Register(_email, _password, _firstName, _lastName, client);
-                await base.Login(_email, _password, client);
+                Register(_email, _password, _firstName, _lastName, client);
+                await Login(_email, _password, client);
 
-
-                var result = RegisterAsAdmin(_email+"cc", _password, _firstName+"cc", _lastName+"cc", client);
-                Assert.AreEqual(HttpStatusCode.Unauthorized, result);
-            
+                var result = RegisterAsAdmin(_email + "cc", _password, _firstName + "cc", _lastName + "cc", client);
+                Assert.AreEqual(HttpStatusCode.Unauthorized, result.StatusCode);
             }
         }
 
         [TestMethod]
-        public void TestUpdateUserEmailFirstNameAndLastName()
+        public async Task TestGetSingleUser()
         {
+            using (var client = new HttpClient())
+            {
+                await LoginAsAdmin(client);
+                var registerResult = RegisterAsAdmin(_email, _password, _firstName, _lastName, client);
+                string newUserId = GetJson(registerResult).userId.Value;
+
+                var userResponse = await client.GetAsync(string.Format(Uris.GetUser, newUserId));
+                dynamic newUserJson = GetJson(userResponse);
+
+                Assert.AreEqual(newUserId, newUserJson.id.Value);
+                Assert.AreEqual(_email, newUserJson.email.Value);
+                Assert.AreEqual(_firstName, newUserJson.firstName.Value);
+                Assert.AreEqual(_lastName, newUserJson.lastName.Value);
+
+            }
         }
 
+        /*
+        [TestMethod]
+        public async Task TestUpdateUserEmailFirstNameAndLastName()
+        {
+            using (var client = new HttpClient())
+            {
+                await LoginAsAdmin(client);
+
+                HttpResponseMessage response = client.PostAsJsonAsync(Uris.UpdateUser,
+                new
+                {
+                    Email = email,
+                    Password = password,
+                    FirstName = firstName,
+                    LastName = lastName
+                }).Result;
+
+            }
+        }*/
 
         [TestMethod]
         public async Task TestListUsers_PageOneAndTwo()
@@ -82,15 +111,15 @@ namespace JogTracker.TestApi
                 var query = HttpUtility.ParseQueryString(string.Empty);
                 query["pageSize"] = "1";
                 query["pageIndex"] = "0";
-                var page1 = await client.GetAsync(Uris.ListUsers + "?" + query.ToString());
+                var page1 = await client.GetAsync(Uris.ListUsers + "?" + query);
 
                 query["pageSize"] = "1";
                 query["pageIndex"] = "1";
-                var page2 = await client.GetAsync(Uris.ListUsers + "?" + query.ToString());
+                var page2 = await client.GetAsync(Uris.ListUsers + "?" + query);
 
                 query["pageSize"] = "1";
                 query["pageIndex"] = "0";
-                var page1Again = await client.GetAsync(Uris.ListUsers + "?" + query.ToString());
+                var page1Again = await client.GetAsync(Uris.ListUsers + "?" + query);
 
                 //Assertions...
                 // - Ensure both responses are successful.
@@ -101,7 +130,7 @@ namespace JogTracker.TestApi
 
                 dynamic json1 = GetJson(page1).Items[0]; //Get first user from json array.
                 dynamic json2 = GetJson(page2).Items[0];
-                dynamic json1Again = GetJson(page1Again).Items[0]; 
+                dynamic json1Again = GetJson(page1Again).Items[0];
 
                 Assert.IsTrue(!string.IsNullOrWhiteSpace(json1.firstName.Value));
                 Assert.IsTrue(!string.IsNullOrWhiteSpace(json1.id.Value));
@@ -110,18 +139,28 @@ namespace JogTracker.TestApi
 
                 Assert.AreNotEqual(json1.id.Value, json2.id.Value);
                 Assert.AreEqual(json1.id.Value, json1Again.id.Value);
-
             }
         }
-
 
         [TestMethod]
         public async Task TestListUsers_FailsIfNotAdmin()
         {
+            using (var client = new HttpClient())
+            {
+                Register(_email, _password, _firstName, _lastName, client);
+                await Login(_email, _password, client);
 
+                var query = HttpUtility.ParseQueryString(string.Empty);
+                query["pageSize"] = "1";
+                query["pageIndex"] = "0";
+                var page1 = await client.GetAsync(Uris.ListUsers + "?" + query);
+
+                Assert.AreEqual(HttpStatusCode.Unauthorized, page1.StatusCode);
+            }
         }
 
-        private HttpStatusCode RegisterAsAdmin(string email, string password, string firstName, string lastName, HttpClient client)
+        private HttpResponseMessage RegisterAsAdmin(string email, string password, string firstName, string lastName,
+            HttpClient client)
         {
             //Register
             HttpResponseMessage response = client.PostAsJsonAsync(Uris.RegisterAsAdmin,
@@ -133,7 +172,7 @@ namespace JogTracker.TestApi
                     LastName = lastName
                 }).Result;
 
-            return response.StatusCode;
+            return response;
         }
     }
 }

@@ -27,5 +27,10 @@ namespace JogTracker.Api.Utils
 
             return result;
         }
+
+        public TTarget Map(TSource source)
+        {
+            return new TTarget().Map(source);
+        }
     }
 }

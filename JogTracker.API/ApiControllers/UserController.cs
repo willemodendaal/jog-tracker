@@ -31,5 +31,16 @@ namespace JogTracker.Api.ApiControllers
 
             return Ok(new PagingResults(model.PageIndex.Value, model.PageSize.Value, users.TotalResults, jsonUsers));
         }
+
+        [Route("{userId}")]
+        [Validate]
+        [HttpGet]
+        public IHttpActionResult User(string userId)
+        {
+            JogTrackerUser user = _userService.GetUser(userId);
+            UserJsonResult jsonUser = new Mapper<JogTrackerUser, UserJsonResult>().Map(user);
+
+            return Ok(jsonUser);
+        }
     }
 }
