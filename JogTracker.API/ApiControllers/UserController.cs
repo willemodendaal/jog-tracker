@@ -26,10 +26,10 @@ namespace JogTracker.Api.ApiControllers
         [HttpGet]
         public IHttpActionResult Users([FromUri] UserFilterBindingModel model)
         {
-            List<JogTrackerUser> users = _userService.GetUsers(model.PageIndex.Value, model.PageSize.Value);
-            List<UserJsonResult> jsonUsers = new Mapper<JogTrackerUser, UserJsonResult>().Map(users).ToList();
+            PagedModel<JogTrackerUser> users = _userService.GetUsers(model.PageIndex.Value, model.PageSize.Value);
+            List<UserJsonResult> jsonUsers = new Mapper<JogTrackerUser, UserJsonResult>().Map(users.Items).ToList();
 
-            return Ok(jsonUsers);
+            return Ok(new PagingResults(model.PageIndex.Value, model.PageSize.Value, users.TotalResults, jsonUsers));
         }
     }
 }

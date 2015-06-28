@@ -88,6 +88,10 @@ namespace JogTracker.TestApi
                 query["pageIndex"] = "1";
                 var page2 = await client.GetAsync(Uris.ListUsers + "?" + query.ToString());
 
+                query["pageSize"] = "1";
+                query["pageIndex"] = "0";
+                var page1Again = await client.GetAsync(Uris.ListUsers + "?" + query.ToString());
+
                 //Assertions...
                 // - Ensure both responses are successful.
                 // - Ensure they are not the same.
@@ -95,8 +99,9 @@ namespace JogTracker.TestApi
                 Assert.AreEqual(HttpStatusCode.OK, page1.StatusCode);
                 Assert.AreEqual(HttpStatusCode.OK, page2.StatusCode);
 
-                dynamic json1 = GetJsonArray(page1)[0]; //Get first user from json array.
-                dynamic json2 = GetJsonArray(page2)[0]; 
+                dynamic json1 = GetJson(page1).Items[0]; //Get first user from json array.
+                dynamic json2 = GetJson(page2).Items[0];
+                dynamic json1Again = GetJson(page1Again).Items[0]; 
 
                 Assert.IsTrue(!string.IsNullOrWhiteSpace(json1.firstName.Value));
                 Assert.IsTrue(!string.IsNullOrWhiteSpace(json1.id.Value));
@@ -104,6 +109,7 @@ namespace JogTracker.TestApi
                 Assert.IsTrue(!string.IsNullOrWhiteSpace(json1.email.Value));
 
                 Assert.AreNotEqual(json1.id.Value, json2.id.Value);
+                Assert.AreEqual(json1.id.Value, json1Again.id.Value);
 
             }
         }

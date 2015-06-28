@@ -28,7 +28,7 @@ namespace JogTracker.Services
         /// </summary>
         Task<string> ResetPasswordAsync(string userId, string token, string newPassword);
 
-        List<JogTrackerUser> GetUsers(int pageIndex, int pageSize);
+        PagedModel<JogTrackerUser> GetUsers(int pageIndex, int pageSize);
     }
 
     public class UserAdminService : IUserAdminService
@@ -107,13 +107,17 @@ namespace JogTracker.Services
             return null; //Success.
         }
 
-        public List<JogTrackerUser> GetUsers(int pageIndex, int pageSize)
+        public PagedModel<JogTrackerUser> GetUsers(int pageIndex, int pageSize)
         {
-            return _dbContext.Users
+            int totalCount = _dbContext.Users.Count();
+                
+            var resultList = _dbContext.Users
                 .OrderBy(u => u.UserName)
                 .Skip(pageIndex*pageSize)
                 .Take(pageSize)
                 .ToList();
+
+            return new PagedModel<JogTrackerUser>(pageIndex, pageSize, totalCount, resultList);
         }
     }
 }

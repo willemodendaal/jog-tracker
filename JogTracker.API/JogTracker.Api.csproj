@@ -200,6 +200,7 @@
     </Compile>
     <Compile Include="ApiControllers\UserController.cs" />
     <Compile Include="Filters\HandleErrorFilter.cs" />
+    <Compile Include="Models\JsonResults\IPagingResults.cs" />
     <Compile Include="Models\JsonResults\UserJsonResult.cs" />
     <Compile Include="Models\RegisterBindingModel.cs" />
     <Compile Include="Models\RequestResetPasswordBindingModel.cs" />
