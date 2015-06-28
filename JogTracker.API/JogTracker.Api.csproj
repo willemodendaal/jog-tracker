@@ -198,13 +198,17 @@
     <Compile Include="ApiControllers\AccountController.cs">
       <ItemGuid>beb8eeb0-1754-4bd2-b37a-a46bd4e558df</ItemGuid>
     </Compile>
+    <Compile Include="ApiControllers\UserController.cs" />
     <Compile Include="Filters\HandleErrorFilter.cs" />
+    <Compile Include="Models\JsonResults\UserJsonResult.cs" />
     <Compile Include="Models\RegisterBindingModel.cs" />
     <Compile Include="Models\RequestResetPasswordBindingModel.cs" />
     <Compile Include="Models\ResetPasswordBindingModel.cs" />
+    <Compile Include="Models\UserFilterBindingModel.cs" />
     <Compile Include="Models\Validators\RegisterBindingModelValidator.cs" />
     <Compile Include="Models\Validators\RequestResetPasswordModelValidator.cs" />
     <Compile Include="Models\Validators\ResetPasswordModelValidator.cs" />
+    <Compile Include="Models\Validators\UserFilterBindingValidator.cs" />
     <Compile Include="Providers\JogTrackerOAuthProvider.cs">
       <ItemGuid>b26ed03d-3837-4ce6-800d-b80368dec154</ItemGuid>
     </Compile>
@@ -230,6 +234,7 @@
     <Compile Include="Startup.cs">
       <ItemGuid>e7f2dd36-bc4c-437c-bb4a-9e6d805e2a44</ItemGuid>
     </Compile>
+    <Compile Include="Utils\Mapper.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

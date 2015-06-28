@@ -84,11 +84,17 @@ namespace JogTracker.TestApi
 
         }
 
-        private dynamic GetJson(HttpResponseMessage response)
+        protected dynamic GetJson(HttpResponseMessage response)
         {
             string bodyText = GetResponseBody(response);
-            JObject json = JObject.Parse(bodyText);
-            return json;
+            return JObject.Parse(bodyText);
+        }
+
+
+        protected dynamic GetJsonArray(HttpResponseMessage response)
+        {
+            string bodyText = GetResponseBody(response);
+            return JArray.Parse(bodyText);
         }
     }
 }

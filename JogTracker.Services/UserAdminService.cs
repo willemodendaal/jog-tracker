@@ -1,15 +1,13 @@
-﻿using JogTracker.Common;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using JogTracker.Common;
 using JogTracker.Data;
+using JogTracker.DomainModel;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
-using Microsoft.Owin.Security.DataProtection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using JogTracker.DomainModel;
 
 namespace JogTracker.Services
 {
@@ -22,30 +20,36 @@ namespace JogTracker.Services
         /// Register, or return user-friendly error string.
         /// </summary>
         Task<string> RegisterAsync(string email, string password, string firstName, string lastName);
+
         Task RequestResetPasswordAsync(string email);
 
         /// <summary>
         /// Reset password, or return user-friendly error string.
         /// </summary>
         Task<string> ResetPasswordAsync(string userId, string token, string newPassword);
+
+        List<JogEntryUser> GetUsers(int pageIndex, int pageSize);
     }
 
     public class UserAdminService : IUserAdminService
     {
-        private RoleManager<IdentityRole> _roleManager;
-        private UserManager<JogEntryUser> _userManager;
-        private IEmailService _emailService;
+        private readonly JogDbContext _dbContext;
+        private readonly IEmailService _emailService;
+        private readonly RoleManager<IdentityRole> _roleManager;
+        private readonly UserManager<JogEntryUser> _userManager;
 
-        public UserAdminService(IEmailService emailService)
+        public UserAdminService(IEmailService emailService, JogDbContext dbContext)
         {
             var context = new JogDbContext();
             _roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
             _userManager = new UserManager<JogEntryUser>(new UserStore<JogEntryUser>(context));
             _userManager.PasswordValidator = GlobalConfig.PasswordValidator;
             _emailService = emailService;
+            _dbContext = dbContext;
 
             //Assign token provider used to generate Reset password tokens.
-            var dataProtectorProvider = GlobalSharedSecurity.DataProtectionProvider; //Use the same provider we used when auth was initialized.
+            var dataProtectorProvider = GlobalSharedSecurity.DataProtectionProvider;
+                //Use the same provider we used when auth was initialized.
             var dataProtector = dataProtectorProvider.Create("My Asp.Net Identity");
             _userManager.UserTokenProvider = new DataProtectorTokenProvider<JogEntryUser, string>(dataProtector)
             {
@@ -71,13 +75,12 @@ namespace JogTracker.Services
 
             if (identityResult.Succeeded == false)
             {
-                return(string.Concat("Seed failed. ", String.Join(";", identityResult.Errors) ));
+                return (string.Concat("Seed failed. ", String.Join(";", identityResult.Errors)));
             }
 
             await _userManager.AddToRoleAsync(user.Id, GlobalConfig.UserRole);
             return null;
         }
-
 
         public async Task RequestResetPasswordAsync(string email)
         {
@@ -104,5 +107,13 @@ namespace JogTracker.Services
             return null; //Success.
         }
 
+        public List<JogEntryUser> GetUsers(int pageIndex, int pageSize)
+        {
+            return _dbContext.Users
+                .OrderBy(u => u.UserName)
+                .Skip(pageIndex * pageSize)
+                .Take(pageSize)
+                .ToList();
+        }
     }
 }

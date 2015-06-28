@@ -41,7 +41,7 @@ namespace JogTracker.Api.ApiControllers
         }
 
         [Route("registerAsAdmin")]
-        [Authorize(Roles = "administrator")] //Only admin role can do this. Will skip email validation once that is added.
+        [Authorize(Roles = "administrator")] //Only admin role can do this. Will skip email validation (once that is added).
         [HttpPost]
         [Validate]
         public async Task<IHttpActionResult> RegisterAsAdmin(RegisterBindingModel model)

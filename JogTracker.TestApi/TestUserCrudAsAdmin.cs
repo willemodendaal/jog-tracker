@@ -3,6 +3,7 @@ using System.Net;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Net.Http;
 using System.Threading.Tasks;
+using System.Web;
 
 namespace JogTracker.TestApi
 {
@@ -66,25 +67,53 @@ namespace JogTracker.TestApi
         }
 
         [TestMethod]
-        public void TestUpdateUserEmail()
+        public void TestUpdateUserEmailFirstNameAndLastName()
         {
         }
+
 
         [TestMethod]
-        public void TestUpdateUserFirstName()
+        public async Task TestListUsers_PageOneAndTwo()
         {
+            using (var client = new HttpClient())
+            {
+                await LoginAsAdmin(client);
+
+                var query = HttpUtility.ParseQueryString(string.Empty);
+                query["pageSize"] = "1";
+                query["pageIndex"] = "0";
+                var page1 = await client.GetAsync(Uris.ListUsers + "?" + query.ToString());
+
+                query["pageSize"] = "1";
+                query["pageIndex"] = "1";
+                var page2 = await client.GetAsync(Uris.ListUsers + "?" + query.ToString());
+
+                //Assertions...
+                // - Ensure both responses are successful.
+                // - Ensure they are not the same.
+                // - Ensure the basic data is there (like firstName and lastName).
+                Assert.AreEqual(HttpStatusCode.OK, page1.StatusCode);
+                Assert.AreEqual(HttpStatusCode.OK, page2.StatusCode);
+
+                dynamic json1 = GetJsonArray(page1)[0]; //Get first user from json array.
+                dynamic json2 = GetJsonArray(page2)[0]; 
+
+                Assert.IsTrue(!string.IsNullOrWhiteSpace(json1.firstName.Value));
+                Assert.IsTrue(!string.IsNullOrWhiteSpace(json1.id.Value));
+                Assert.IsTrue(!string.IsNullOrWhiteSpace(json1.lastName.Value));
+                Assert.IsTrue(!string.IsNullOrWhiteSpace(json1.email.Value));
+
+                Assert.AreNotEqual(json1.id.Value, json2.id.Value);
+
+            }
         }
+
 
         [TestMethod]
-        public void TestUpdateUserLastName()
+        public async Task TestListUsers_FailsIfNotAdmin()
         {
-        }
 
-        [TestMethod]
-        public void TestListAllUsers_PageOne()
-        {
         }
-
 
         private HttpStatusCode RegisterAsAdmin(string email, string password, string firstName, string lastName, HttpClient client)
         {
