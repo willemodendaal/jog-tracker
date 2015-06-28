@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Net.Http.Formatting;
 using System.Net;
 using System.IO;
+using System.Net.Http.Headers;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -39,6 +40,9 @@ namespace JogTracker.TestApi
 
             var formData = new FormUrlEncodedContent(data);
             var result = await client.PostAsync(Uris.Login, formData);
+
+            dynamic jsonResult = GetJson(result);
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", jsonResult.access_token.Value);
 
             return result.StatusCode;
         }
@@ -76,7 +80,7 @@ namespace JogTracker.TestApi
             var result = await client.PostAsync(Uris.Login, formData);
 
             dynamic jsonResult = GetJson(result);
-            client.DefaultRequestHeaders.Add("Authorization", "bearer " + jsonResult.access_token);
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", jsonResult.access_token.Value);
 
         }
 

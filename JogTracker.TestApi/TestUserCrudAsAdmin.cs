@@ -40,9 +40,29 @@ namespace JogTracker.TestApi
         }
 
         [TestMethod]
-        public void TestUnableToCreateIfNotAdmin()
+        public void TestUnableToCreateIfNotAdmin_Anonymous()
         {
-            Assert.Fail();
+            using (var client = new HttpClient())
+            {
+                var result = RegisterAsAdmin(_email, _password, _firstName, _lastName, client);
+                Assert.AreEqual(HttpStatusCode.Unauthorized, result);
+            }
+        }
+
+
+        [TestMethod]
+        public async Task TestUnableToCreateIfNotAdmin_OtherUser()
+        {
+            using (var client = new HttpClient())
+            {
+                base.Register(_email, _password, _firstName, _lastName, client);
+                await base.Login(_email, _password, client);
+
+
+                var result = RegisterAsAdmin(_email+"cc", _password, _firstName+"cc", _lastName+"cc", client);
+                Assert.AreEqual(HttpStatusCode.Unauthorized, result);
+            
+            }
         }
 
         [TestMethod]
@@ -66,10 +86,10 @@ namespace JogTracker.TestApi
         }
 
 
-        private void RegisterAsAdmin(string email, string password, string firstName, string lastName, HttpClient client)
+        private HttpStatusCode RegisterAsAdmin(string email, string password, string firstName, string lastName, HttpClient client)
         {
             //Register
-            HttpResponseMessage response = client.PostAsJsonAsync(Uris.Register,
+            HttpResponseMessage response = client.PostAsJsonAsync(Uris.RegisterAsAdmin,
                 new
                 {
                     Email = email,
@@ -78,8 +98,7 @@ namespace JogTracker.TestApi
                     LastName = lastName
                 }).Result;
 
-            Assert.AreEqual(HttpStatusCode.OK, response.StatusCode, "Register result should have been 200");
-
+            return response.StatusCode;
         }
     }
 }
