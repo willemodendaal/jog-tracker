@@ -13,7 +13,6 @@ namespace JogTracker.TestApi
     [TestClass]
     public class TestRegistration : TestBase
     {
-        string _userName;
         string _email;
         string _password;
 
@@ -21,7 +20,6 @@ namespace JogTracker.TestApi
         public void Init()
         {
             string id = base.GetUniqueId();
-            _userName = "user1" + id;
             _email = "user1" + id + "@email.com";
             _password = "B@nanas!B@nanas!123";
         }
@@ -31,10 +29,10 @@ namespace JogTracker.TestApi
         {
             using (var client = new HttpClient())
             {
-                base.Register(_userName, _email, _password, client);
+                base.Register(_email, _password, client);
 
                 //Login
-                var loginResult = await base.Login(_userName, _password, client);
+                var loginResult = await base.Login(_email, _password, client);
                 Assert.AreEqual(HttpStatusCode.OK, loginResult, "Login result should have been 200");
   
             }
@@ -48,7 +46,6 @@ namespace JogTracker.TestApi
                 var response = await client.PostAsJsonAsync(Uris.Register,
                     new
                     {
-                        UserName = _userName,
                         Email = _email,
                         Password = "1",
                     });
@@ -65,7 +62,6 @@ namespace JogTracker.TestApi
                 var response = await client.PostAsJsonAsync(Uris.Register,
                     new
                     {
-                        UserName = _userName,
                         Email = "bananas",
                         Password = _password,
                     });
@@ -82,7 +78,6 @@ namespace JogTracker.TestApi
                 var response = await client.PostAsJsonAsync(Uris.Register,
                     new
                     {
-                        UserName = _userName,
                         Email = _email,
                         Password = "",
                     });

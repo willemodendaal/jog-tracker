@@ -38,13 +38,12 @@ namespace JogTracker.TestApi
             return result.StatusCode;
         }
 
-        internal void Register(string userName, string email, string password, HttpClient client)
+        internal void Register(string email, string password, HttpClient client)
         {
             //Register
             HttpResponseMessage response = client.PostAsJsonAsync(Uris.Register,
                 new
                 {
-                    UserName = userName,
                     Email = email,
                     Password = password,
                 }).Result;

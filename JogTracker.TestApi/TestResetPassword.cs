@@ -12,7 +12,6 @@ namespace JogTracker.TestApi
     [TestClass]
     public class TestResetPassword : TestBase
     {
-        string _userName = "test2"; //Must not exist in the db yet.
         string _email = "willem.odendaal@gmail.com"; //Must be a real email.
         string _password = "test1@34Bana";
 
@@ -25,7 +24,6 @@ namespace JogTracker.TestApi
              *  because there is a manual email required to do a password reset.
              */
             //RegisterUser();
-            await RequestResetWithUserName(_userName);
             //await RequestResetWithEmail(_email);
             //await ResetAndLogin(_userName, "***token****", "P@@sswwoorrdd123");
 
@@ -36,7 +34,7 @@ namespace JogTracker.TestApi
         {
             using (var client = new HttpClient())
             {
-                base.Register(_userName, _email, _password, client);
+                base.Register(_email, _password, client);
             }
         }
 

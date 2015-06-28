@@ -26,7 +26,7 @@ namespace JogTracker.Api.ApiControllers
         [Validate]
         public IHttpActionResult Register(RegisterBindingModel model)
         {
-            _userAdminService.Register(model.UserName, model.Email, model.Password);
+            _userAdminService.Register(model.Email, model.Password);
             return Ok();
         }
 

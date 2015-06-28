@@ -17,9 +17,9 @@ namespace JogTracker.Services
     /// </summary>
     public interface IUserAdminService
     {
-        void Register(string userName, string email, string password);
-        Task RequestResetPassword(string userName);
-        void ResetPassword(string userName, string token, string newPassword);
+        void Register(string email, string password);
+        Task RequestResetPassword(string email);
+        void ResetPassword(string userId, string token, string newPassword);
     }
 
     public class UserAdminService : IUserAdminService
@@ -45,11 +45,11 @@ namespace JogTracker.Services
             };
         }
 
-        public void Register(string userName, string email, string password)
+        public void Register(string email, string password)
         {
             var user = new IdentityUser()
             {
-                UserName = userName,
+                UserName = email,
                 Email = email
             };
 
@@ -61,20 +61,20 @@ namespace JogTracker.Services
                 throw new Exception("Seed failed.");
             }
 
-            identityResult = _userManager.AddToRole(user.Id, GlobalConfig.UserRole);
+            _userManager.AddToRole(user.Id, GlobalConfig.UserRole);
         }
 
 
-        public async Task RequestResetPassword(string userName)
+        public async Task RequestResetPassword(string email)
         {
-            IdentityUser user = _userManager.FindByName(userName);
+            IdentityUser user = _userManager.FindByEmail(email);
             string token = _userManager.GeneratePasswordResetToken(user.Id);
 
             string emailBody = _emailService.GetResetPasswordEmailBody(user.Id, token, user.UserName);
             await _emailService.SendEmailTo(user.Email, "Password reset request", emailBody);
         }
 
-        public void ResetPassword(string userName, string token, string newPassword)
+        public void ResetPassword(string userId, string token, string newPassword)
         {
             throw new NotImplementedException();
         }
