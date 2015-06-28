@@ -1,16 +1,9 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using FluentValidation;
-using JogTracker.Api.Extensions;
-using JogTracker.Api.Models.Validators;
-using ValidationContext = System.ComponentModel.DataAnnotations.ValidationContext;
+﻿using JogTracker.Api.Models.Validators;
 
 namespace JogTracker.Api.Models
 {
-    public class UserFilterBindingModel : IValidatableObject
+    public class UserFilterBindingModel : BindingModelBase
     {
-        private readonly IValidator _validator;
-
         public UserFilterBindingModel()
         {
             _validator = new UserFilterBindingValidator();
@@ -18,12 +11,5 @@ namespace JogTracker.Api.Models
 
         public int? PageIndex { get; set; }
         public int? PageSize { get; set; }
-
-        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
-        {
-            var result = _validator.Validate(this).ToValidationResult();
-
-            return result;
-        }
     }
 }

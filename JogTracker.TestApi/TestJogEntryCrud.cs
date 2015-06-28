@@ -11,13 +11,13 @@ namespace JogTracker.TestApi
     public class TestJogEntryCrud : TestBase
     {
         private HttpClient _client;
+        private string _dateTimeFormat = "yyyy-MM-ddThh:mm:ss.fffZ";
         private string _email;
         private string _firstName;
         private string _lastName;
         private string _password;
         private string _queryFrom;
         private string _queryTo;
-        private string _dateTimeFormat = "yyyy-MM-ddThh:mm:ss.fffZ";
 
         [TestInitialize]
         public void Init()
@@ -58,7 +58,7 @@ namespace JogTracker.TestApi
             Assert.IsFalse(string.IsNullOrWhiteSpace(json3.id.Value));
 
             DateTime jsonDate = json1.date.Value;
-            Assert.AreEqual(firstDate.ToString(), jsonDate.ToString() );
+            Assert.AreEqual(firstDate.ToString(), jsonDate.ToString());
             Assert.AreEqual("02:00:02", json1.duration.Value);
             Assert.AreEqual(15.50, json1.distanceKm.Value);
         }
@@ -108,7 +108,8 @@ namespace JogTracker.TestApi
         [TestMethod]
         public async Task TestListJogs_NoResults_BecauseOfDateFilters()
         {
-            string queryFrom = DateTime.Now.AddYears(-10).ToString(_dateTimeFormat); //*** Ten years in the past should not have any data.
+            string queryFrom = DateTime.Now.AddYears(-10).ToString(_dateTimeFormat);
+            //*** Ten years in the past should not have any data.
             string queryTo = DateTime.Now.AddYears(-10).AddMonths(1).ToString(_dateTimeFormat);
 
             await CreateJogEntry(DateTime.Now.AddMonths(-2), new TimeSpan(2, 0, 2), 15.5f);
@@ -124,19 +125,41 @@ namespace JogTracker.TestApi
 
             //Assertions...
             Assert.AreEqual(HttpStatusCode.OK, page1.StatusCode);
-            
+
             long totalCount = GetJson(page1).TotalResults.Value;
             Assert.AreEqual(0, totalCount);
         }
 
         [TestMethod]
-        public void TestEditEntry()
+        public async Task TestUpdateEntry()
+        {
+            var entryJson = await CreateJogEntry(DateTime.Now.AddMonths(-2), new TimeSpan(2, 0, 2), 15.5f);
+            string id = entryJson.id.Value;
+
+            //Edit...
+            DateTime newDate = DateTime.Now.AddMonths(-3);
+            var response = await UpdateJogEntry(id, newDate, new TimeSpan(3, 0, 3), 10.5f);
+            Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);
+
+            //Fetch again and compare
+            var singleResponse = await GetJogEntry(id);
+            var updatedJson = GetJson(singleResponse);
+            Assert.AreEqual(HttpStatusCode.OK, singleResponse.StatusCode);
+
+            Assert.AreEqual(id, updatedJson.id.Value);
+            Assert.AreEqual("03:00:03", updatedJson.duration.Value);
+            Assert.AreEqual(10.5f, updatedJson.distanceKm.Value);
+            Assert.AreEqual(newDate, updatedJson.date.Value);
+        }
+
+        [TestMethod]
+        public void TestDeleteEntry()
         {
             Assert.Fail();
         }
 
         [TestMethod]
-        public void TestDeleteEntry()
+        public void TestGettingEntryForAnotherUserFails()
         {
             Assert.Fail();
         }
@@ -148,19 +171,39 @@ namespace JogTracker.TestApi
             Assert.Fail();
         }
 
+        private async Task<HttpResponseMessage> UpdateJogEntry(string id, DateTime dateTime, TimeSpan duration,
+            float distance)
+        {
+            string uri = string.Format(Uris.UpdateJogEntry, id);
+            var response = await _client.PutAsJsonAsync(uri,
+                new
+                {
+                    DateTime = dateTime,
+                    Duration = duration,
+                    DistanceKM = distance
+                });
+
+            return response;
+        }
 
         private async Task<dynamic> CreateJogEntry(DateTime dateTime, TimeSpan duration, float distance)
         {
             var response = await _client.PostAsJsonAsync(Uris.CreateJogEntry,
-                    new
-                    {
-                        DateTime = dateTime,
-                        Duration = duration,
-                        DistanceKM = distance
-                    });
+                new
+                {
+                    DateTime = dateTime,
+                    Duration = duration,
+                    DistanceKM = distance
+                });
             var json = GetJson(response);
             Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);
             return json;
+        }
+
+        private async Task<HttpResponseMessage> GetJogEntry(string entryId)
+        {
+            var response = await _client.GetAsync(string.Format(Uris.GetJogEntry, entryId));
+            return response;
         }
     }
 }

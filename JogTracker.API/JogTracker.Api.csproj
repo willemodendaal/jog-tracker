@@ -201,6 +201,7 @@
     <Compile Include="ApiControllers\JogApiControllerBase.cs" />
     <Compile Include="ApiControllers\UserController.cs" />
     <Compile Include="Filters\HandleErrorFilter.cs" />
+    <Compile Include="Models\BindingModelBase.cs" />
     <Compile Include="Models\JsonResults\IPagingResults.cs" />
     <Compile Include="Models\JsonResults\JogJsonResult.cs" />
     <Compile Include="Models\JsonResults\JsonResultBase.cs" />

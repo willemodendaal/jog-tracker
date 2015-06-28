@@ -20,9 +20,11 @@ namespace JogTracker.TestApi
         public static readonly string ListUsers = Base + "user/";
         public static readonly string UpdateUser = Base + "user/{0}/update/";
         public static readonly string GetUser = Base + "user/{0}";
-        
+
         public static readonly string GetJogs = Base + "jog";
+        public static readonly string GetJogEntry = Base + "jog/{0}";
         public static readonly string CreateJogEntry = Base + "jog/new";
+        public static readonly string UpdateJogEntry = Base + "jog/{0}/update/";
         
         public static readonly string Login = Host + "Token";
     }

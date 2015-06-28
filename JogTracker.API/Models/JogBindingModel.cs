@@ -9,9 +9,8 @@ using ValidationContext = System.ComponentModel.DataAnnotations.ValidationContex
 
 namespace JogTracker.Api.Models
 {
-    public class JogBindingModel : IValidatableObject
+    public class JogBindingModel : BindingModelBase
     {
-        private readonly IValidator _validator;
 
         public JogBindingModel()
         {
@@ -22,9 +21,5 @@ namespace JogTracker.Api.Models
         public float DistanceKM { get; set; }
         public TimeSpan Duration { get; set; }
 
-        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
-        {
-            return _validator.Validate(this).ToValidationResult();
-        }
     }
 }
