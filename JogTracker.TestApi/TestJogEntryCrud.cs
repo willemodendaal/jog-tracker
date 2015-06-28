@@ -149,7 +149,7 @@ namespace JogTracker.TestApi
             Assert.AreEqual(id, updatedJson.id.Value);
             Assert.AreEqual("03:00:03", updatedJson.duration.Value);
             Assert.AreEqual(10.5f, updatedJson.distanceKm.Value);
-            Assert.AreEqual(newDate, updatedJson.date.Value);
+            Assert.AreEqual(newDate.ToString(), updatedJson.date.Value.ToString());
         }
 
         [TestMethod]
@@ -159,9 +159,21 @@ namespace JogTracker.TestApi
         }
 
         [TestMethod]
-        public void TestGettingEntryForAnotherUserFails()
+        public async Task TestGettingEntryForAnotherUserFails()
         {
-            Assert.Fail();
+            //Create a jog entry
+            var jogJson = await CreateJogEntry(DateTime.Now, new TimeSpan(0, 0, 10), 10f);
+            string jogId = jogJson.id.Value;
+
+            //Register and sign in as someone else
+            Register(_email + "AAA", _password, _firstName, _lastName, _client);
+            await Login(_email + "AAA", _password, _client);
+
+            //Attempt to access first user's jog.
+            var response = await GetJogEntry(jogId); 
+            
+            //Expect a "BadRequest" back.
+            Assert.AreEqual(HttpStatusCode.BadRequest, response.StatusCode);
         }
 
         [TestMethod]
