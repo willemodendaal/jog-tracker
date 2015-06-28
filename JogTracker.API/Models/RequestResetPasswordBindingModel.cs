@@ -15,7 +15,6 @@ namespace JogTracker.Api.Models
     {
         private readonly IValidator _validator;
 
-        public string UserName { get; set; }
         public string Email { get; set; }
 
         public RequestResetPasswordBindingModel()

@@ -23,39 +23,20 @@ namespace JogTracker.TestApi
              * Uncomment the desired steps below. This has to be done manually
              *  because there is a manual email required to do a password reset.
              */
-            //RegisterUser();
-            //await RequestResetWithEmail(_email);
+            //RegisterUser(_email, _password);
+            await RequestResetWithEmail(_email);
             //await ResetAndLogin(_userName, "***token****", "P@@sswwoorrdd123");
 
             Assert.IsTrue(true); //Just to give MSTest something to test.
         }
 
-        private void RegisterUser()
+        private void RegisterUser(string email, string password)
         {
             using (var client = new HttpClient())
             {
-                base.Register(_email, _password, client);
+                base.Register(email, password, client);
             }
         }
-
-        private static async Task RequestResetWithUserName(string userName)
-        {
-            using (var client = new HttpClient())
-            {
-
-                var response = await client.PostAsJsonAsync(Uris.RequestResetPassword,
-                    new
-                    {
-                        UserName = userName
-                    });
-
-                Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);
-
-                //At this point an email would have been sent. Get the code from the email
-                //  and run the resetPassword test.
-            }
-        }
-
 
         private static async Task RequestResetWithEmail(string email)
         {
@@ -68,7 +49,7 @@ namespace JogTracker.TestApi
                         Email = email
                     });
 
-                Assert.AreEqual(HttpStatusCode.OK, response);
+                Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);
 
                 //At this point an email would have been sent. Get the code from the email
                 //  and run the resetPassword test.

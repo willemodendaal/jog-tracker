@@ -26,7 +26,14 @@ namespace JogTracker.Api.ApiControllers
         [Validate]
         public IHttpActionResult Register(RegisterBindingModel model)
         {
-            _userAdminService.Register(model.Email, model.Password);
+            string errorResult = _userAdminService.Register(model.Email, model.Password);
+
+            if (errorResult != null)
+            {
+                //Return info about why request failed. (i.e. password not complex enough)
+                return BadRequest(errorResult);
+            }
+
             return Ok();
         }
 
@@ -36,7 +43,7 @@ namespace JogTracker.Api.ApiControllers
         public async Task<IHttpActionResult> RequestResetPassword(RequestResetPasswordBindingModel model)
         {
             //Email is sent by the userAdminService. Nothing returned from here.
-            await _userAdminService.RequestResetPassword(model.UserName);
+            await _userAdminService.RequestResetPassword(model.Email);
             return Ok();
         }
 

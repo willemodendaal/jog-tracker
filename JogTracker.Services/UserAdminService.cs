@@ -17,7 +17,10 @@ namespace JogTracker.Services
     /// </summary>
     public interface IUserAdminService
     {
-        void Register(string email, string password);
+        /// <summary>
+        /// Register, or return error string.
+        /// </summary>
+        string Register(string email, string password);
         Task RequestResetPassword(string email);
         void ResetPassword(string userId, string token, string newPassword);
     }
@@ -45,7 +48,10 @@ namespace JogTracker.Services
             };
         }
 
-        public void Register(string email, string password)
+        /// <summary>
+        /// Register, or return errors.
+        /// </summary>
+        public string Register(string email, string password)
         {
             var user = new IdentityUser()
             {
@@ -58,10 +64,11 @@ namespace JogTracker.Services
 
             if (identityResult.Succeeded == false)
             {
-                throw new Exception("Seed failed.");
+                return(string.Concat("Seed failed. ", String.Join(";", identityResult.Errors) ));
             }
 
             _userManager.AddToRole(user.Id, GlobalConfig.UserRole);
+            return null;
         }
 
 
