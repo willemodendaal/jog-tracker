@@ -21,7 +21,7 @@ namespace JogTracker.Services
         /// <summary>
         /// Register, or return user-friendly error string.
         /// </summary>
-        Task<string> RegisterAsync(string email, string password);
+        Task<string> RegisterAsync(string email, string password, string firstName, string lastName);
         Task RequestResetPasswordAsync(string email);
 
         /// <summary>
@@ -56,12 +56,14 @@ namespace JogTracker.Services
         /// <summary>
         /// Register, or return errors.
         /// </summary>
-        public async Task<string> RegisterAsync(string email, string password)
+        public async Task<string> RegisterAsync(string email, string password, string firstName, string lastName)
         {
             var user = new JogEntryUser()
             {
                 UserName = email,
-                Email = email
+                Email = email,
+                FirstName = firstName,
+                LastName = lastName
             };
 
             //TODO: store password more securely.

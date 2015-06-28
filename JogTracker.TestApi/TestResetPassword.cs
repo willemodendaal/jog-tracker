@@ -14,6 +14,8 @@ namespace JogTracker.TestApi
     {
         string _email = "willem.odendaal@gmail.com"; //Must be a real email.
         string _password = "test1@34Bana";
+        string _firstName = "Willem";
+        string _lastName = "Odendaal";
 
         [TestMethod]
         public async Task TestResetPasswordSteps()
@@ -23,22 +25,22 @@ namespace JogTracker.TestApi
              * Uncomment the desired steps below. This has to be done manually
              *  because there is a manual email required to do a password reset.
              */
-            //RegisterUser(_email, _password);
+            //RegisterUser(_email, _password, _firstName, _lastName);
             //await RequestResetWithEmail(_email);
-            await ResetAndLogin(
-                _email,
-                "6466dcab-a54a-4ccb-b6c0-991dbbafbf8e",
-                "s/9Al0phGjlttuhVoJR/JUeMC4XSgeyDYzNfgvZDq4KYtJAMdo4qjyiqokK7w7dYvG0t6RH1WRQRNnc3VixJhkBubSuywOzTE464UHN/dLO7a38IUNm/n846YSyS5H1BZAH2uLP8Lw/wYAKRRqBMQwEwl9WMQzzWyiySKmnvwkxGNXX8fql9UG8VRjl+sAeA/502ezs4fujuXXf4ylWmoQ==",
-                "P@@sswwoorrdd123");
+            //await ResetAndLogin(
+            //    _email,
+            //    "6466dcab-a54a-4ccb-b6c0-991dbbafbf8e",
+            //    "s/9Al0phGjlttuhVoJR/JUeMC4XSgeyDYzNfgvZDq4KYtJAMdo4qjyiqokK7w7dYvG0t6RH1WRQRNnc3VixJhkBubSuywOzTE464UHN/dLO7a38IUNm/n846YSyS5H1BZAH2uLP8Lw/wYAKRRqBMQwEwl9WMQzzWyiySKmnvwkxGNXX8fql9UG8VRjl+sAeA/502ezs4fujuXXf4ylWmoQ==",
+            //    "P@@sswwoorrdd123");
 
             Assert.IsTrue(true); //Just to give MSTest something to test.
         }
 
-        private void RegisterUser(string email, string password)
+        private void RegisterUser(string email, string password, string firstName, string lastName)
         {
             using (var client = new HttpClient())
             {
-                base.Register(email, password, client);
+                base.Register(email, password, firstName, lastName, client);
             }
         }
 

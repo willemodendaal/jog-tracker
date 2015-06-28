@@ -27,7 +27,7 @@ namespace JogTracker.Api.ApiControllers
         [AllowAnonymous]
         public async Task<IHttpActionResult> Register(RegisterBindingModel model)
         {
-            string errorResult = await _userAdminService.RegisterAsync(model.Email, model.Password);
+            string errorResult = await _userAdminService.RegisterAsync(model.Email, model.Password, model.FirstName, model.LastName);
 
             if (errorResult != null)
             {

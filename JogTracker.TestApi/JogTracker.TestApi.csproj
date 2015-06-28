@@ -65,7 +65,7 @@
     <Compile Include="TestJogEntryCrud.cs" />
     <Compile Include="TestListingAndReporting.cs" />
     <Compile Include="TestResetPassword.cs" />
-    <Compile Include="TestUserCrud.cs" />
+    <Compile Include="TestUserCrudAsAdmin.cs" />
     <Compile Include="Uris.cs" />
   </ItemGroup>
   <ItemGroup>

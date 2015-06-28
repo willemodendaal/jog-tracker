@@ -11,6 +11,9 @@ namespace JogTracker.Api.Models.Validators
             RuleFor(r => r.Email).NotEmpty();
             RuleFor(r => r.Email).EmailAddress();
 
+            RuleFor(r => r.FirstName).NotEmpty().Length(1, 100);
+            RuleFor(r => r.LastName).NotEmpty().Length(1, 100);
+
             RuleFor(r => r.Password).NotEmpty();
             RuleFor(r => r.Password).Must(MustBeValidPassword).WithMessage("Password did not meet minimum complexity requirements.");
         }

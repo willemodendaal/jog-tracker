@@ -16,5 +16,11 @@ namespace JogTracker.TestApi
         public void TestUpdateUserEmail()
         {
         }
+
+        [TestMethod]
+        public void TestListAllUsers_PageOne()
+        {
+        }
+
     }
 }

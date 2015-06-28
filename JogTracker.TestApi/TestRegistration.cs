@@ -15,6 +15,8 @@ namespace JogTracker.TestApi
     {
         string _email;
         string _password;
+        string _firstName;
+        string _lastName;
 
         [TestInitialize]
         public void Init()
@@ -22,6 +24,9 @@ namespace JogTracker.TestApi
             string id = base.GetUniqueId();
             _email = "user1" + id + "@email.com";
             _password = "B@nanas!B@nanas!123";
+            _firstName = "fn_" + id;
+            _lastName = "ln_" + id;
+
         }
 
         [TestMethod]
@@ -29,7 +34,7 @@ namespace JogTracker.TestApi
         {
             using (var client = new HttpClient())
             {
-                base.Register(_email, _password, client);
+                base.Register(_email, _password, _firstName, _lastName, client);
 
                 //Login
                 var loginResult = await base.Login(_email, _password, client);
@@ -48,6 +53,8 @@ namespace JogTracker.TestApi
                     {
                         Email = _email,
                         Password = "1",
+                        FirstName = _firstName,
+                        LastName = _lastName
                     });
 
                 Assert.AreEqual(HttpStatusCode.BadRequest, response.StatusCode);
@@ -64,6 +71,8 @@ namespace JogTracker.TestApi
                     {
                         Email = "bananas",
                         Password = _password,
+                        FirstName = _firstName,
+                        LastName = _lastName
                     });
 
                 Assert.AreEqual(HttpStatusCode.BadRequest, response.StatusCode);
@@ -71,15 +80,57 @@ namespace JogTracker.TestApi
         }
 
         [TestMethod]
-        public async Task RegisterFailsIfNotAllFieldsSpecified()
+        public async Task RegisterFailsIfNotAllFieldsSpecified_NoPassword()
         {
             using (var client = new HttpClient())
             {
+                //No password
                 var response = await client.PostAsJsonAsync(Uris.Register,
                     new
                     {
                         Email = _email,
                         Password = "",
+                        FirstName = _firstName,
+                        LastName = _lastName
+                    });
+
+                Assert.AreEqual(HttpStatusCode.BadRequest, response.StatusCode);
+            }
+        }
+
+
+        [TestMethod]
+        public async Task RegisterFailsIfNotAllFieldsSpecified_NoLastName()
+        {
+            using (var client = new HttpClient())
+            {
+                //No password
+                var response = await client.PostAsJsonAsync(Uris.Register,
+                    new
+                    {
+                        Email = _email,
+                        Password = _password,
+                        FirstName = _firstName,
+                        LastName = ""
+                    });
+
+                Assert.AreEqual(HttpStatusCode.BadRequest, response.StatusCode);
+            }
+        }
+
+        [TestMethod]
+        public async Task RegisterFailsIfNotAllFieldsSpecified_NoFirstName()
+        {
+            using (var client = new HttpClient())
+            {
+                //No password
+                var response = await client.PostAsJsonAsync(Uris.Register,
+                    new
+                    {
+                        Email = _email,
+                        Password = _password,
+                        FirstName = "",
+                        LastName = _lastName
                     });
 
                 Assert.AreEqual(HttpStatusCode.BadRequest, response.StatusCode);
