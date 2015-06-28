@@ -27,6 +27,9 @@ namespace JogTracker.DomainModel
         [Range(0.0F, 300F)]
         public float DistanceKM { get; set; }
 
+        [Required]
+        public string UserId { get; set; }
+
         public float AverageSpeedKMH
         {
             get

@@ -15,6 +15,7 @@ namespace JogTracker.Data.Migrations
                         DateTime = c.DateTime(nullable: false),
                         Duration = c.Time(nullable: false, precision: 7),
                         DistanceKM = c.Single(nullable: false),
+                        UserId = c.String(nullable: false),
                     })
                 .PrimaryKey(t => t.ID);
             

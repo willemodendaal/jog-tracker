@@ -57,9 +57,10 @@ namespace JogTracker.TestApi
             Assert.IsFalse(string.IsNullOrWhiteSpace(json2.id.Value));
             Assert.IsFalse(string.IsNullOrWhiteSpace(json3.id.Value));
 
-            Assert.AreEqual(firstDate.ToString(_dateTimeFormat), json1.date.Value);
+            DateTime jsonDate = json1.date.Value;
+            Assert.AreEqual(firstDate.ToString(), jsonDate.ToString() );
             Assert.AreEqual("02:00:02", json1.duration.Value);
-            Assert.AreEqual("15.50", json1.distanceKm.Value);
+            Assert.AreEqual(15.50, json1.distanceKm.Value);
         }
 
         [TestMethod]
@@ -153,13 +154,12 @@ namespace JogTracker.TestApi
             var response = await _client.PostAsJsonAsync(Uris.CreateJogEntry,
                     new
                     {
-                        Date = dateTime,
+                        DateTime = dateTime,
                         Duration = duration,
-                        Distance = distance
+                        DistanceKM = distance
                     });
-
-            Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);
             var json = GetJson(response);
+            Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);
             return json;
         }
     }

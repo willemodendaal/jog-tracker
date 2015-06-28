@@ -198,15 +198,19 @@
     <Compile Include="ApiControllers\AccountController.cs">
       <ItemGuid>beb8eeb0-1754-4bd2-b37a-a46bd4e558df</ItemGuid>
     </Compile>
+    <Compile Include="ApiControllers\JogApiControllerBase.cs" />
     <Compile Include="ApiControllers\UserController.cs" />
     <Compile Include="Filters\HandleErrorFilter.cs" />
     <Compile Include="Models\JsonResults\IPagingResults.cs" />
+    <Compile Include="Models\JsonResults\JogJsonResult.cs" />
+    <Compile Include="Models\JsonResults\JsonResultBase.cs" />
     <Compile Include="Models\JsonResults\UserJsonResult.cs" />
     <Compile Include="Models\RegisterBindingModel.cs" />
     <Compile Include="Models\RequestResetPasswordBindingModel.cs" />
     <Compile Include="Models\ResetPasswordBindingModel.cs" />
     <Compile Include="Models\UserFilterBindingModel.cs" />
     <Compile Include="Models\UserUpdateBindingModel.cs" />
+    <Compile Include="Models\Validators\JogBindingValidator.cs" />
     <Compile Include="Models\Validators\RegisterBindingModelValidator.cs" />
     <Compile Include="Models\Validators\RequestResetPasswordModelValidator.cs" />
     <Compile Include="Models\Validators\ResetPasswordModelValidator.cs" />
@@ -251,6 +255,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\JogApiControllerBase\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\JogTracker.Common\JogTracker.Common.csproj">
