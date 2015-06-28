@@ -32,8 +32,14 @@ namespace JogTracker.Api.ApiControllers
         {
             PagedModel<JogEntry> allJogs =
                 (await
-                    _repo.FindAsync(filter.PageIndex.Value, filter.PageSize.Value, filter.FromDate.Value,
-                        filter.ToDate.Value, GetCurrentUserId()));
+                    _repo.FindAsync(
+                        filter.PageIndex.Value,
+                        filter.PageSize.Value,
+                        filter.FromDate.Value,
+                        filter.ToDate.Value,
+                        GetCurrentUserId(),
+                        UserIsAdmin()));
+
             ICollection<JogJsonResult> jsonResult = new Mapper<JogEntry, JogJsonResult>().Map(allJogs.Items);
             return Ok(new PagingResults(filter.PageIndex.Value, filter.PageSize.Value, allJogs.TotalResults, jsonResult));
         }
@@ -43,7 +49,7 @@ namespace JogTracker.Api.ApiControllers
         [Validate]
         public async Task<IHttpActionResult> GetJog(string jogId)
         {
-            JogEntry jog = await _repo.GetAsync(jogId, GetCurrentUserId());
+            JogEntry jog = await _repo.GetAsync(jogId, GetCurrentUserId(), UserIsAdmin());
 
             if (jog == null)
             {
@@ -61,7 +67,7 @@ namespace JogTracker.Api.ApiControllers
         {
             try
             {
-                await _repo.DeleteAsync(jogId, GetCurrentUserId());
+                await _repo.DeleteAsync(jogId, GetCurrentUserId(), UserIsAdmin());
                 return Ok();
             }
             catch (UnauthorizedAccessException)
@@ -92,7 +98,13 @@ namespace JogTracker.Api.ApiControllers
             try
             {
                 JogEntry updatedEntry =
-                    await _repo.UpdateAsync(jogId, jog.DateTime, jog.DistanceKM, jog.Duration, GetCurrentUserId());
+                    await _repo.UpdateAsync(
+                        jogId,
+                        jog.DateTime,
+                        jog.DistanceKM,
+                        jog.Duration,
+                        GetCurrentUserId(),
+                        UserIsAdmin());
 
                 JogJsonResult jsonJog = new Mapper<JogEntry, JogJsonResult>().Map(updatedEntry);
 
