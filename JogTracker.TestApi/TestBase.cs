@@ -84,6 +84,23 @@ namespace JogTracker.TestApi
 
         }
 
+        protected HttpResponseMessage RegisterAsAdmin(string email, string password, string firstName, string lastName,
+            HttpClient client, bool administrator = false)
+        {
+            //Register
+            HttpResponseMessage response = client.PostAsJsonAsync(Uris.RegisterAsAdmin,
+                new
+                {
+                    Email = email,
+                    Password = password,
+                    FirstName = firstName,
+                    LastName = lastName,
+                    Admin = administrator
+                }).Result;
+
+            return response;
+        }
+
         protected dynamic GetJson(HttpResponseMessage response)
         {
             string bodyText = GetResponseBody(response);

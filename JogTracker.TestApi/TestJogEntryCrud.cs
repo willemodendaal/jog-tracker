@@ -186,10 +186,44 @@ namespace JogTracker.TestApi
         }
 
         [TestMethod]
-        public void TestListEntries_AsAdmin()
+        public async Task TestViewEntry_AsAdmin()
         {
-            //Ensure admin can list other users jog entries.
-            Assert.Fail();
+            //Create entry.
+            var entry1 = await CreateJogEntry(DateTime.Now.AddMonths(-1), new TimeSpan(2, 2, 2), 22f);
+            string jogId = entry1.id.Value;
+
+            //Sign in as admin and access the entry.
+            LoginAsAdmin(_client);
+            var entryFetchResult = await GetJogEntry(jogId);
+            Assert.IsTrue(entryFetchResult.IsSuccessStatusCode);
+        }
+
+        [TestMethod]
+        public async Task TestListEntries_AsAdmin()
+        {
+            //Create new Admin that has no data.
+            await LoginAsAdmin(_client);
+            var registerResponse = base.RegisterAsAdmin(_email + "Adm", _password, _firstName, _lastName, _client, true);
+            var json = GetJson(registerResponse);
+            Assert.IsTrue(registerResponse.IsSuccessStatusCode, "Registration of new admin user failed. " + json);
+            await Login(_email + "Adm", _password, _client);
+
+            //List data and expect some.
+            var query = HttpUtility.ParseQueryString(string.Empty);
+            query["pageSize"] = "10";
+            query["pageIndex"] = "0";
+            query["fromDate"] = DateTime.Now.AddYears(-5).ToString(_dateTimeFormat);
+            query["toDate"] = DateTime.Now.AddMonths(1).ToString(_dateTimeFormat);
+            var page1 = await _client.GetAsync(Uris.GetJogs + "?" + query);
+            var page1Json = GetJson(page1).Items;
+
+            //Assertions...
+
+            Assert.AreEqual(HttpStatusCode.OK, page1.StatusCode);
+
+            long totalCount = GetJson(page1).TotalResults.Value;
+            Assert.IsTrue(page1Json.Count > 0);
+            Assert.IsTrue(totalCount > 2);
         }
 
         private async Task<HttpResponseMessage> UpdateJogEntry(string id, DateTime dateTime, TimeSpan duration,

@@ -32,7 +32,7 @@ namespace JogTracker.Api.ApiControllers
         [AllowAnonymous]
         public async Task<IHttpActionResult> Register(RegisterBindingModel model)
         {
-            RegistrationResult result = await _userAdminService.RegisterAsync(model.Email, model.Password, model.FirstName, model.LastName);
+            RegistrationResult result = await _userAdminService.RegisterAsync(model.Email, model.Password, model.FirstName, model.LastName, false);
 
             if (!result.Succeeded)
             {
@@ -50,7 +50,7 @@ namespace JogTracker.Api.ApiControllers
         [Validate]
         public async Task<IHttpActionResult> RegisterAsAdmin(RegisterBindingModel model)
         {
-            RegistrationResult result = await _userAdminService.RegisterAsync(model.Email, model.Password, model.FirstName, model.LastName);
+            RegistrationResult result = await _userAdminService.RegisterAsync(model.Email, model.Password, model.FirstName, model.LastName, model.Admin);
 
             if (! result.Succeeded)
             {

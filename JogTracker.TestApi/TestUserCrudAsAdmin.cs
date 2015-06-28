@@ -171,20 +171,6 @@ namespace JogTracker.TestApi
             }
         }
 
-        private HttpResponseMessage RegisterAsAdmin(string email, string password, string firstName, string lastName,
-            HttpClient client)
-        {
-            //Register
-            HttpResponseMessage response = client.PostAsJsonAsync(Uris.RegisterAsAdmin,
-                new
-                {
-                    Email = email,
-                    Password = password,
-                    FirstName = firstName,
-                    LastName = lastName
-                }).Result;
-
-            return response;
-        }
+        
     }
 }

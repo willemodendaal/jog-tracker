@@ -21,7 +21,7 @@ namespace JogTracker.Services
         /// <summary>
         /// Register, or return user-friendly error string.
         /// </summary>
-        Task<RegistrationResult> RegisterAsync(string email, string password, string firstName, string lastName);
+        Task<RegistrationResult> RegisterAsync(string email, string password, string firstName, string lastName, bool admin);
 
         Task RequestResetPasswordAsync(string email);
 
@@ -63,7 +63,7 @@ namespace JogTracker.Services
         /// <summary>
         /// Register, or return errors.
         /// </summary>
-        public async Task<RegistrationResult> RegisterAsync(string email, string password, string firstName, string lastName)
+        public async Task<RegistrationResult> RegisterAsync(string email, string password, string firstName, string lastName, bool admin)
         {
             var user = new JogTrackerUser()
             {
@@ -82,6 +82,12 @@ namespace JogTracker.Services
             }
 
             await _userManager.AddToRoleAsync(user.Id, GlobalConfig.UserRole);
+
+            if (admin)
+            {
+                await _userManager.AddToRoleAsync(user.Id, GlobalConfig.AdminRole);
+            }
+
             return RegistrationResult.Success(user);
         }
 
