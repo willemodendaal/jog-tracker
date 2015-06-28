@@ -8,6 +8,7 @@ using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
+using JogTracker.Common;
 
 namespace JogTracker.Api.ApiControllers
 {
@@ -26,6 +27,24 @@ namespace JogTracker.Api.ApiControllers
         [Validate]
         [AllowAnonymous]
         public async Task<IHttpActionResult> Register(RegisterBindingModel model)
+        {
+            string errorResult = await _userAdminService.RegisterAsync(model.Email, model.Password, model.FirstName, model.LastName);
+
+            if (errorResult != null)
+            {
+                //Return info about why request failed. (i.e. password not complex enough)
+                //  Should be picked up by validation layer in most cases.
+                return BadRequest(errorResult);
+            }
+
+            return Ok();
+        }
+
+        [Route("registerAsAdmin")]
+        [Authorize(Roles = "administrator")] //Only admin role can do this. Will skip email validation once that is added.
+        [HttpPost]
+        [Validate]
+        public async Task<IHttpActionResult> RegisterAsAdmin(RegisterBindingModel model)
         {
             string errorResult = await _userAdminService.RegisterAsync(model.Email, model.Password, model.FirstName, model.LastName);
 

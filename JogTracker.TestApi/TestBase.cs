@@ -8,11 +8,16 @@ using System.Net.Http.Formatting;
 using System.Net;
 using System.IO;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace JogTracker.TestApi
 {
     public class TestBase
     {
+        private string _adminEmail = "willem.odendaal@gmail.com";
+        private string _adminPassword = "runUpYonderHills!";
+
         protected string GetUniqueId()
         {
             return Guid.NewGuid().ToString().Replace("-",""); //Used to make info distinct, since we're modifying state with these tests.
@@ -53,6 +58,33 @@ namespace JogTracker.TestApi
             string responseBody = GetResponseBody(response);
             Assert.AreEqual(HttpStatusCode.OK, response.StatusCode, "Register result should have been 200");
 
+        }
+
+        /// <summary>
+        /// Login and set bearer token on the http client.
+        /// </summary>
+        internal async Task LoginAsAdmin(HttpClient client)
+        {
+            var data = new Dictionary<string, string>()
+            {
+                { "grant_type", "password"},
+                { "username", _adminEmail },
+                { "password", _adminPassword }
+            };
+
+            var formData = new FormUrlEncodedContent(data);
+            var result = await client.PostAsync(Uris.Login, formData);
+
+            dynamic jsonResult = GetJson(result);
+            client.DefaultRequestHeaders.Add("Authorization", "bearer " + jsonResult.access_token);
+
+        }
+
+        private dynamic GetJson(HttpResponseMessage response)
+        {
+            string bodyText = GetResponseBody(response);
+            JObject json = JObject.Parse(bodyText);
+            return json;
         }
     }
 }
