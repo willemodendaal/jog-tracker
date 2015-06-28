@@ -33,9 +33,9 @@ namespace JogTracker.Api.ApiControllers
         [Validate]
         public async Task<IHttpActionResult> GetJogs([FromUri]JogFilterBindingModel filter)
         {
-            ICollection<JogEntry> allJogs = (await _repo.AllAsync(base.GetCurrentUserId())).ToList();
-            ICollection<JogJsonResult> jsonResult = new Mapper<JogEntry, JogJsonResult>().Map(allJogs);
-            return Ok(jsonResult);
+            PagedModel<JogEntry> allJogs = (await _repo.AllAsync(filter.PageIndex.Value, filter.PageSize.Value, base.GetCurrentUserId()));
+            ICollection<JogJsonResult> jsonResult = new Mapper<JogEntry, JogJsonResult>().Map(allJogs.Items);
+            return Ok(new PagingResults(filter.PageIndex.Value, filter.PageSize.Value, allJogs.TotalResults, jsonResult));
         }
 
         [Route("new")]

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Linq;
 using System.Threading.Tasks;
 using JogTracker.DomainModel;
 
@@ -8,7 +9,7 @@ namespace JogTracker.Data.Repositories
 {
     public interface IJogEntryRepository
     {
-        Task<ICollection<JogEntry>> AllAsync(string userId);
+        Task<PagedModel<JogEntry>> AllAsync(int pageIndex, int pageSize, string userId);
         Task<JogEntry> CreateNewAsync(DateTime dateTime, float distanceKm, TimeSpan duration, string userId);
     }
 
@@ -21,10 +22,20 @@ namespace JogTracker.Data.Repositories
             _dbContext = dbContext;
         }
 
-        public async Task<ICollection<JogEntry>> AllAsync(string userId)
+        public async Task<PagedModel<JogEntry>> AllAsync(int pageIndex, int pageSize, string userId)
         {
-            //Return all jog entries from the database. No filtering.
-            return await (_dbContext.JogEntries).ToListAsync();
+            int totalResults = await _dbContext.JogEntries
+                .Where(j => j.UserId == userId)
+                .CountAsync();
+
+            var result = await (_dbContext.JogEntries
+                .OrderByDescending(j => j.DateTime)
+                .Where(j => j.UserId == userId)
+                .Skip(pageIndex * pageSize)
+                .Take(pageSize)
+            ).ToListAsync();
+
+            return new PagedModel<JogEntry>(pageIndex, pageSize, totalResults, result);
         }
 
         public async Task<JogEntry> CreateNewAsync(DateTime dateTime, float distanceKm, TimeSpan duration, string userId)

@@ -97,9 +97,9 @@ namespace JogTracker.TestApi
             dynamic json1Again = GetJson(page1Again).Items[0];
 
             Assert.IsFalse(string.IsNullOrWhiteSpace(json1.id.Value));
-            Assert.IsFalse(string.IsNullOrWhiteSpace(json1.date.Value));
+            Assert.IsTrue(json1.date.Value > DateTime.MinValue);
             Assert.IsFalse(string.IsNullOrWhiteSpace(json1.duration.Value));
-            Assert.IsFalse(string.IsNullOrWhiteSpace(json1.distanceKm.Value));
+            Assert.IsTrue(json1.distanceKm.Value > 0);
 
             Assert.AreNotEqual(json1.id.Value, json2.id.Value);
             Assert.AreEqual(json1.id.Value, json1Again.id.Value);
