@@ -68,7 +68,8 @@ namespace JogTracker.TestApi
             {
                 await LoginAsAdmin(client);
                 var registerResult = RegisterAsAdmin(_email, _password, _firstName, _lastName, client);
-                string newUserId = GetJson(registerResult).userId.Value;
+                dynamic registerJson = GetJson(registerResult);
+                string newUserId = registerJson.id.Value;
 
                 var userResponse = await client.GetAsync(string.Format(Uris.GetUser, newUserId));
                 dynamic newUserJson = GetJson(userResponse);

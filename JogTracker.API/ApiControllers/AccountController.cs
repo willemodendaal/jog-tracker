@@ -8,7 +8,11 @@ using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
+using JogTracker.Api.Models.JsonResults;
+using JogTracker.Api.Utils;
 using JogTracker.Common;
+using JogTracker.DomainModel;
+using JogTracker.Services.Responses;
 
 namespace JogTracker.Api.ApiControllers
 {
@@ -28,13 +32,13 @@ namespace JogTracker.Api.ApiControllers
         [AllowAnonymous]
         public async Task<IHttpActionResult> Register(RegisterBindingModel model)
         {
-            string errorResult = await _userAdminService.RegisterAsync(model.Email, model.Password, model.FirstName, model.LastName);
+            RegistrationResult result = await _userAdminService.RegisterAsync(model.Email, model.Password, model.FirstName, model.LastName);
 
-            if (errorResult != null)
+            if (!result.Succeeded)
             {
                 //Return info about why request failed. (i.e. password not complex enough)
                 //  Should be picked up by validation layer in most cases.
-                return BadRequest(errorResult);
+                return BadRequest(result.ErrorMessage);
             }
 
             return Ok();
@@ -46,16 +50,18 @@ namespace JogTracker.Api.ApiControllers
         [Validate]
         public async Task<IHttpActionResult> RegisterAsAdmin(RegisterBindingModel model)
         {
-            string errorResult = await _userAdminService.RegisterAsync(model.Email, model.Password, model.FirstName, model.LastName);
+            RegistrationResult result = await _userAdminService.RegisterAsync(model.Email, model.Password, model.FirstName, model.LastName);
 
-            if (errorResult != null)
+            if (! result.Succeeded)
             {
                 //Return info about why request failed. (i.e. password not complex enough)
                 //  Should be picked up by validation layer in most cases.
-                return BadRequest(errorResult);
+                return BadRequest(result.ErrorMessage);
             }
 
-            return Ok();
+            //This action returns the user as well, so that the administrator has the new user Id.
+            var jsonUser = new Mapper<JogTrackerUser, UserJsonResult>().Map(result.User);
+            return Ok(jsonUser);
         }
 
         [Route("requestResetPwd")]

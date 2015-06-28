@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using JogTracker.Common;
 using JogTracker.Data;
 using JogTracker.DomainModel;
+using JogTracker.Services.Responses;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
@@ -19,7 +20,7 @@ namespace JogTracker.Services
         /// <summary>
         /// Register, or return user-friendly error string.
         /// </summary>
-        Task<string> RegisterAsync(string email, string password, string firstName, string lastName);
+        Task<RegistrationResult> RegisterAsync(string email, string password, string firstName, string lastName);
 
         Task RequestResetPasswordAsync(string email);
 
@@ -62,7 +63,7 @@ namespace JogTracker.Services
         /// <summary>
         /// Register, or return errors.
         /// </summary>
-        public async Task<string> RegisterAsync(string email, string password, string firstName, string lastName)
+        public async Task<RegistrationResult> RegisterAsync(string email, string password, string firstName, string lastName)
         {
             var user = new JogTrackerUser()
             {
@@ -72,16 +73,16 @@ namespace JogTracker.Services
                 LastName = lastName
             };
 
-            //TODO: store password more securely.
             var identityResult = await _userManager.CreateAsync(user, password);
 
             if (identityResult.Succeeded == false)
             {
-                return (string.Concat("Seed failed. ", String.Join(";", identityResult.Errors)));
+                string errorMessage = (string.Concat("Seed failed. ", String.Join(";", identityResult.Errors)));
+                return RegistrationResult.Failure(errorMessage, user);
             }
 
             await _userManager.AddToRoleAsync(user.Id, GlobalConfig.UserRole);
-            return null;
+            return RegistrationResult.Success(user);
         }
 
         public async Task RequestResetPasswordAsync(string email)
