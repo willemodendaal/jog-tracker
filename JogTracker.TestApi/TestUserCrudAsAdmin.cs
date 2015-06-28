@@ -82,25 +82,36 @@ namespace JogTracker.TestApi
             }
         }
 
-        /*
+        
         [TestMethod]
         public async Task TestUpdateUserEmailFirstNameAndLastName()
         {
             using (var client = new HttpClient())
             {
                 await LoginAsAdmin(client);
+                var registerResult = RegisterAsAdmin(_email, _password, _firstName, _lastName, client);
+                dynamic registerJson = GetJson(registerResult);
+                string newUserId = registerJson.id.Value;
 
-                HttpResponseMessage response = client.PostAsJsonAsync(Uris.UpdateUser,
+                HttpResponseMessage updateResponse = client.PutAsJsonAsync(string.Format(Uris.UpdateUser, newUserId),
                 new
                 {
-                    Email = email,
-                    Password = password,
-                    FirstName = firstName,
-                    LastName = lastName
+                    Email = _email + "cc", //Add "cc" at the end of everything, to see if values changed.
+                    FirstName = _firstName + "cc",
+                    LastName = _lastName + "cc"
                 }).Result;
 
+                Assert.AreEqual(HttpStatusCode.OK, updateResponse.StatusCode);
+
+                //Fetch user and check if values are as expected (with "cc"s at the end)
+                var userResponse = await client.GetAsync(string.Format(Uris.GetUser, newUserId));
+                dynamic newUserJson = GetJson(userResponse);
+                Assert.AreEqual(newUserId, newUserJson.id.Value);
+                Assert.AreEqual(_email + "cc", newUserJson.email.Value);
+                Assert.AreEqual(_firstName + "cc", newUserJson.firstName.Value);
+                Assert.AreEqual(_lastName + "cc", newUserJson.lastName.Value);
             }
-        }*/
+        }
 
         [TestMethod]
         public async Task TestListUsers_PageOneAndTwo()

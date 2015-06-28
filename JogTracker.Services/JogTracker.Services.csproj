@@ -88,6 +88,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ResetEmailBodyGenerator.cs" />
     <Compile Include="Responses\RegistrationResult.cs" />
+    <Compile Include="Responses\UpdateResult.cs" />
     <Compile Include="UserAdminService.cs" />
   </ItemGroup>
   <ItemGroup>

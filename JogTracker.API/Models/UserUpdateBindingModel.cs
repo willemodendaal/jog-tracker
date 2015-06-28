@@ -1,32 +1,31 @@
-﻿using FluentValidation;
-using JogTracker.Api.Models.Validators;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
-using ValidationContext = System.ComponentModel.DataAnnotations.ValidationContext;
+using System.Web.Http;
+using FluentValidation;
 using JogTracker.Api.Extensions;
+using JogTracker.Api.Models.Validators;
+using ValidationContext = System.ComponentModel.DataAnnotations.ValidationContext;
 
 namespace JogTracker.Api.Models
 {
-    public class RegisterBindingModel : IValidatableObject
+    public class UserUpdateBindingModel : IValidatableObject
     {
         private readonly IValidator _validator;
 
         public string Email { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public string Password { get; set; }
 
-        public RegisterBindingModel()
+        public UserUpdateBindingModel()
         {
-            _validator = new RegisterBindingModelValidator();
+            _validator = new UserUpdateBindingValidator();
         }
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             return _validator.Validate(this).ToValidationResult();
         }
+
     }
 }

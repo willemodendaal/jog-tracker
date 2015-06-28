@@ -206,10 +206,12 @@
     <Compile Include="Models\RequestResetPasswordBindingModel.cs" />
     <Compile Include="Models\ResetPasswordBindingModel.cs" />
     <Compile Include="Models\UserFilterBindingModel.cs" />
+    <Compile Include="Models\UserUpdateBindingModel.cs" />
     <Compile Include="Models\Validators\RegisterBindingModelValidator.cs" />
     <Compile Include="Models\Validators\RequestResetPasswordModelValidator.cs" />
     <Compile Include="Models\Validators\ResetPasswordModelValidator.cs" />
     <Compile Include="Models\Validators\UserFilterBindingValidator.cs" />
+    <Compile Include="Models\Validators\UserUpdateBindingValidator.cs" />
     <Compile Include="Providers\JogTrackerOAuthProvider.cs">
       <ItemGuid>b26ed03d-3837-4ce6-800d-b80368dec154</ItemGuid>
     </Compile>

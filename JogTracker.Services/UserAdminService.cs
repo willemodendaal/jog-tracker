@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
 using JogTracker.Common;
@@ -28,10 +29,9 @@ namespace JogTracker.Services
         /// Reset password, or return user-friendly error string.
         /// </summary>
         Task<string> ResetPasswordAsync(string userId, string token, string newPassword);
-
-        PagedModel<JogTrackerUser> GetUsers(int pageIndex, int pageSize);
-
-        JogTrackerUser GetUser(string userId);
+        Task<PagedModel<JogTrackerUser>> GetUsersAsync(int pageIndex, int pageSize);
+        Task<JogTrackerUser> GetUserAsync(string userId);
+        Task<UpdateResult> UpdateAsync(string userId, string firstName, string lastName, string email);
     }
 
     public class UserAdminService : IUserAdminService
@@ -110,22 +110,40 @@ namespace JogTracker.Services
             return null; //Success.
         }
 
-        public PagedModel<JogTrackerUser> GetUsers(int pageIndex, int pageSize)
+        public async Task<PagedModel<JogTrackerUser>> GetUsersAsync(int pageIndex, int pageSize)
         {
             int totalCount = _dbContext.Users.Count();
                 
-            var resultList = _dbContext.Users
+            var resultList = await ( _dbContext.Users
                 .OrderBy(u => u.UserName)
                 .Skip(pageIndex*pageSize)
-                .Take(pageSize)
-                .ToList();
+                .Take(pageSize))
+                .ToListAsync();
 
             return new PagedModel<JogTrackerUser>(pageIndex, pageSize, totalCount, resultList);
         }
 
-        public JogTrackerUser GetUser(string userId)
+        public async Task<JogTrackerUser> GetUserAsync(string userId)
         {
-            return _dbContext.Users.Find(userId);
+            return await _dbContext.Users.FirstOrDefaultAsync(u => u.Id == userId);
         }
+
+        public async Task<UpdateResult> UpdateAsync(string userId, string firstName, string lastName, string email)
+        {
+            var user = await _dbContext.Users.FirstOrDefaultAsync(u => u.Id == userId);
+
+            if (user == null)
+            {
+                return UpdateResult.Failure(string.Concat(userId, " is an invalid user id."));
+            }
+
+            user.FirstName = firstName;
+            user.LastName = lastName;
+            user.Email = email;
+            await _dbContext.SaveChangesAsync();
+
+            return UpdateResult.Success();
+        }
+
     }
 }

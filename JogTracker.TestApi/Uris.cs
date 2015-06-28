@@ -18,7 +18,7 @@ namespace JogTracker.TestApi
         public static readonly string ResetPassword = Base + "account/resetPwd";
 
         public static readonly string ListUsers = Base + "user/";
-        public static readonly string UpdateUser = Base + "user/update/{0}";
+        public static readonly string UpdateUser = Base + "user/{0}/update/";
         public static readonly string GetUser = Base + "user/{0}";
 
         public static readonly string Login = Host + "Token";
