@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Http;
-using System.Web.Mvc;
-using System.Web.UI.WebControls;
+﻿using System.Web.Http;
 using Microsoft.AspNet.Identity;
 
 namespace JogTracker.Api.ApiControllers
@@ -14,7 +8,6 @@ namespace JogTracker.Api.ApiControllers
         protected string GetCurrentUserId()
         {
             return RequestContext.Principal.Identity.GetUserId();
-
         }
     }
 }

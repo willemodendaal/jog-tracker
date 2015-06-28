@@ -1,17 +1,12 @@
-﻿using JogTracker.Data.Repositories;
-using JogTracker.DomainModel;
-using JogTracker.Api.Filters;
-using JogTracker.Api.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Web.Http;
+using JogTracker.Api.Filters;
+using JogTracker.Api.Models;
 using JogTracker.Api.Models.JsonResults;
 using JogTracker.Api.Utils;
-using Microsoft.AspNet.Identity;
+using JogTracker.Data.Repositories;
+using JogTracker.DomainModel;
 
 namespace JogTracker.Api.ApiControllers
 {
@@ -22,7 +17,7 @@ namespace JogTracker.Api.ApiControllers
     [RoutePrefix("api/v1/jog")]
     public class JogController : JogApiControllerBase
     {
-        IJogEntryRepository _repo;
+        private IJogEntryRepository _repo;
 
         public JogController(IJogEntryRepository repo)
         {
@@ -31,9 +26,10 @@ namespace JogTracker.Api.ApiControllers
 
         [Route("")]
         [Validate]
-        public async Task<IHttpActionResult> GetJogs([FromUri]JogFilterBindingModel filter)
+        public async Task<IHttpActionResult> GetJogs([FromUri] JogFilterBindingModel filter)
         {
-            PagedModel<JogEntry> allJogs = (await _repo.AllAsync(filter.PageIndex.Value, filter.PageSize.Value, base.GetCurrentUserId()));
+            PagedModel<JogEntry> allJogs =
+                (await _repo.AllAsync(filter.PageIndex.Value, filter.PageSize.Value, GetCurrentUserId()));
             ICollection<JogJsonResult> jsonResult = new Mapper<JogEntry, JogJsonResult>().Map(allJogs.Items);
             return Ok(new PagingResults(filter.PageIndex.Value, filter.PageSize.Value, allJogs.TotalResults, jsonResult));
         }
@@ -43,12 +39,11 @@ namespace JogTracker.Api.ApiControllers
         [HttpPost]
         public async Task<IHttpActionResult> CreateNew(JogBindingModel jog)
         {
-            JogEntry newJogEntry = await _repo.CreateNewAsync(jog.DateTime, jog.DistanceKM, jog.Duration, base.GetCurrentUserId());
+            JogEntry newJogEntry =
+                await _repo.CreateNewAsync(jog.DateTime, jog.DistanceKM, jog.Duration, GetCurrentUserId());
             JogJsonResult jsonJog = new Mapper<JogEntry, JogJsonResult>().Map(newJogEntry);
-            
+
             return Ok(jsonJog);
         }
-        
-
     }
 }

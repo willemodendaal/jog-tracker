@@ -28,7 +28,8 @@ namespace JogTracker.Api.ApiControllers
         [HttpGet]
         public async Task<IHttpActionResult> Users([FromUri] UserFilterBindingModel model)
         {
-            PagedModel<JogTrackerUser> users = await _userService.GetUsersAsync(model.PageIndex.Value, model.PageSize.Value);
+            PagedModel<JogTrackerUser> users =
+                await _userService.GetUsersAsync(model.PageIndex.Value, model.PageSize.Value);
             List<UserJsonResult> jsonUsers = new Mapper<JogTrackerUser, UserJsonResult>().Map(users.Items).ToList();
 
             return Ok(new PagingResults(model.PageIndex.Value, model.PageSize.Value, users.TotalResults, jsonUsers));
@@ -44,7 +45,6 @@ namespace JogTracker.Api.ApiControllers
 
             return Ok(jsonUser);
         }
-
 
         [Route("{userId}/update")]
         [HttpPut]
