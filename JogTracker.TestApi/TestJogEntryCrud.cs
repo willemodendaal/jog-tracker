@@ -139,7 +139,7 @@ namespace JogTracker.TestApi
             //Edit...
             DateTime newDate = DateTime.Now.AddMonths(-3);
             var response = await UpdateJogEntry(id, newDate, new TimeSpan(3, 0, 3), 10.5f);
-            Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);
+            Assert.IsTrue(response.IsSuccessStatusCode);
 
             //Fetch again and compare
             var singleResponse = await GetJogEntry(id);
@@ -153,9 +153,18 @@ namespace JogTracker.TestApi
         }
 
         [TestMethod]
-        public void TestDeleteEntry()
+        public async Task TestDeleteEntry()
         {
-            Assert.Fail();
+            //Create entry, then delete.
+            var jogJson = await CreateJogEntry(DateTime.Now, new TimeSpan(0, 0, 11), 11f);
+            string jogId = jogJson.id.Value;
+
+            var response = await _client.DeleteAsync(string.Format(Uris.DeleteJogEntry, jogId));
+            Assert.IsTrue(response.IsSuccessStatusCode);
+
+            //Try and find it. Check for a 404.
+            var getResponse = await GetJogEntry(jogId);
+            Assert.AreEqual(HttpStatusCode.NotFound, getResponse.StatusCode);
         }
 
         [TestMethod]
@@ -171,9 +180,9 @@ namespace JogTracker.TestApi
 
             //Attempt to access first user's jog.
             var response = await GetJogEntry(jogId); 
-            
+
             //Expect a "BadRequest" back.
-            Assert.AreEqual(HttpStatusCode.BadRequest, response.StatusCode);
+            Assert.AreEqual(HttpStatusCode.NotFound, response.StatusCode);
         }
 
         [TestMethod]
@@ -208,7 +217,7 @@ namespace JogTracker.TestApi
                     DistanceKM = distance
                 });
             var json = GetJson(response);
-            Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);
+            Assert.IsTrue(response.IsSuccessStatusCode);
             return json;
         }
 

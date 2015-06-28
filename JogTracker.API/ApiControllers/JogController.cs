@@ -47,11 +47,28 @@ namespace JogTracker.Api.ApiControllers
 
             if (jog == null)
             {
-                return BadRequest("Unknown jogId.");
+                return NotFound();
             }
 
             JogJsonResult jsonResult = new Mapper<JogEntry, JogJsonResult>().Map(jog);
             return Ok(jsonResult);
+        }
+
+        [Route("{jogId}")]
+        [HttpDelete]
+        [Validate]
+        public async Task<IHttpActionResult> DeleteJog(string jogId)
+        {
+            try
+            {
+                await _repo.DeleteAsync(jogId, GetCurrentUserId());
+                return Ok();
+            }
+            catch (UnauthorizedAccessException)
+            {
+                //When people try and get access to jogs they shouldn't have access to.
+                return BadRequest("Invalid jogId.");
+            }
         }
 
         [Route("new")]

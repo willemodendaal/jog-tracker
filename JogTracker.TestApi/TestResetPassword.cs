@@ -55,7 +55,7 @@ namespace JogTracker.TestApi
                         Email = email
                     });
 
-                Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);
+                Assert.IsTrue(response.IsSuccessStatusCode);
 
                 //At this point an email would have been sent. Get the code from the email
                 //  and run the resetPassword test.
@@ -76,7 +76,7 @@ namespace JogTracker.TestApi
                             NewPassword = newPassword
                         });
 
-                Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);
+                Assert.IsTrue(response.IsSuccessStatusCode);
 
                 //Log in with *new password* must succeed.
                 var loginResult = await base.Login(email, newPassword, client);

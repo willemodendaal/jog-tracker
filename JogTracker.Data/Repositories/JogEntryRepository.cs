@@ -14,7 +14,11 @@ namespace JogTracker.Data.Repositories
 
         Task<JogEntry> CreateNewAsync(DateTime dateTime, float distanceKm, TimeSpan duration, string userId);
         Task<JogEntry> GetAsync(string jogId, string userId);
-        Task<JogEntry> UpdateAsync(string jogId, DateTime dateTime, float distanceKm, TimeSpan duration, string getCurrentUserId);
+
+        Task<JogEntry> UpdateAsync(string jogId, DateTime dateTime, float distanceKm, TimeSpan duration,
+            string getCurrentUserId);
+
+        Task DeleteAsync(string jogId, string userId);
     }
 
     public class JogEntryRepository : IJogEntryRepository
@@ -45,9 +49,23 @@ namespace JogTracker.Data.Repositories
 
         public async Task<JogEntry> GetAsync(string jogId, string userId)
         {
-            var jogEntry = await _dbContext.JogEntries.FirstOrDefaultAsync(j => j.ID.ToString() == jogId && j.UserId == userId);
+            var jogEntry =
+                await _dbContext.JogEntries.FirstOrDefaultAsync(j => j.ID.ToString() == jogId && j.UserId == userId);
 
             return jogEntry;
+        }
+
+        public async Task DeleteAsync(string jogId, string userId)
+        {
+            var jog = await GetAsync(jogId, userId);
+            if (jog == null)
+            {
+                throw new UnauthorizedAccessException(
+                    string.Format("Attempt to update jog {0} which does not exist for user {1}.", jogId, userId));
+            }
+
+            _dbContext.JogEntries.Remove(jog);
+            await _dbContext.SaveChangesAsync();
         }
 
         public async Task<JogEntry> CreateNewAsync(DateTime dateTime, float distanceKm, TimeSpan duration, string userId)
@@ -65,12 +83,14 @@ namespace JogTracker.Data.Repositories
             return newJog;
         }
 
-        public async Task<JogEntry> UpdateAsync(string jogId, DateTime dateTime, float distanceKm, TimeSpan duration, string userId)
+        public async Task<JogEntry> UpdateAsync(string jogId, DateTime dateTime, float distanceKm, TimeSpan duration,
+            string userId)
         {
             var jog = await GetAsync(jogId, userId);
             if (jog == null)
             {
-                throw new UnauthorizedAccessException(string.Format("Attempt to update jog {0} which does not exist for user {1}.", jogId, userId));
+                throw new UnauthorizedAccessException(
+                    string.Format("Attempt to update jog {0} which does not exist for user {1}.", jogId, userId));
             }
 
             jog.DateTime = dateTime;
