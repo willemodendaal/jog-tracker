@@ -2,7 +2,7 @@ namespace JogTracker.Data.Migrations
 {
     using System;
     using System.Data.Entity.Migrations;
-
+    
     public partial class Initial : DbMigration
     {
         public override void Up()
@@ -10,14 +10,14 @@ namespace JogTracker.Data.Migrations
             CreateTable(
                 "dbo.JogEntry",
                 c => new
-                {
-                    ID = c.Guid(nullable: false, identity: true),
-                    DateTime = c.DateTime(nullable: false),
-                    Duration = c.Time(nullable: false, precision: 7),
-                    DistanceKM = c.Single(nullable: false),
-                })
+                    {
+                        ID = c.Guid(nullable: false, identity: true),
+                        DateTime = c.DateTime(nullable: false),
+                        Duration = c.Time(nullable: false, precision: 7),
+                        DistanceKM = c.Single(nullable: false),
+                    })
                 .PrimaryKey(t => t.ID);
-
+            
             CreateTable(
                 "dbo.AspNetRoles",
                 c => new
@@ -27,7 +27,7 @@ namespace JogTracker.Data.Migrations
                     })
                 .PrimaryKey(t => t.Id)
                 .Index(t => t.Name, unique: true, name: "RoleNameIndex");
-
+            
             CreateTable(
                 "dbo.AspNetUserRoles",
                 c => new
@@ -40,12 +40,14 @@ namespace JogTracker.Data.Migrations
                 .ForeignKey("dbo.AspNetUsers", t => t.UserId, cascadeDelete: true)
                 .Index(t => t.UserId)
                 .Index(t => t.RoleId);
-
+            
             CreateTable(
                 "dbo.AspNetUsers",
                 c => new
                     {
                         Id = c.String(nullable: false, maxLength: 128),
+                        FirstName = c.String(),
+                        LastName = c.String(),
                         Email = c.String(maxLength: 256),
                         EmailConfirmed = c.Boolean(nullable: false),
                         PasswordHash = c.String(),
@@ -60,7 +62,7 @@ namespace JogTracker.Data.Migrations
                     })
                 .PrimaryKey(t => t.Id)
                 .Index(t => t.UserName, unique: true, name: "UserNameIndex");
-
+            
             CreateTable(
                 "dbo.AspNetUserClaims",
                 c => new
@@ -73,7 +75,7 @@ namespace JogTracker.Data.Migrations
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.AspNetUsers", t => t.UserId, cascadeDelete: true)
                 .Index(t => t.UserId);
-
+            
             CreateTable(
                 "dbo.AspNetUserLogins",
                 c => new
@@ -85,9 +87,9 @@ namespace JogTracker.Data.Migrations
                 .PrimaryKey(t => new { t.LoginProvider, t.ProviderKey, t.UserId })
                 .ForeignKey("dbo.AspNetUsers", t => t.UserId, cascadeDelete: true)
                 .Index(t => t.UserId);
-
+            
         }
-
+        
         public override void Down()
         {
             DropForeignKey("dbo.AspNetUserRoles", "UserId", "dbo.AspNetUsers");

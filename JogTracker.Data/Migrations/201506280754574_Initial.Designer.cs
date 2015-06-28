@@ -13,7 +13,7 @@ namespace JogTracker.Data.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201506270948180_Initial"; }
+            get { return "201506280754574_Initial"; }
         }
         
         string IMigrationMetadata.Source
