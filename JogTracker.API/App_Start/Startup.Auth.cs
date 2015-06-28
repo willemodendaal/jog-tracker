@@ -44,7 +44,7 @@ namespace JogTracker.Api
         {
             // This is what allows our front-end to submit tokens instead of userName/password with every request.
             app.UseOAuthBearerTokens(OAuthOptions);
-            SharedSecurity.DataProtectionProvider = app.GetDataProtectionProvider();
+            GlobalSharedSecurity.DataProtectionProvider = app.GetDataProtectionProvider();
             EnableCors(app);
         }
 

@@ -41,15 +41,15 @@ namespace JogTracker.Data.Migrations
                 return false;
             }
 
-            identityResult = userManager.AddToRole(user.Id, Config.AdminRole);
+            identityResult = userManager.AddToRole(user.Id, GlobalConfig.AdminRole);
             return identityResult.Succeeded;
         }
 
         private static void CreateDefaultRoles(JogDbContext context)
         {
             var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
-            roleManager.Create(new IdentityRole(Config.AdminRole));
-            roleManager.Create(new IdentityRole(Config.UserRole));
+            roleManager.Create(new IdentityRole(GlobalConfig.AdminRole));
+            roleManager.Create(new IdentityRole(GlobalConfig.UserRole));
         }
     }
 }

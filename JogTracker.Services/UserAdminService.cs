@@ -33,11 +33,11 @@ namespace JogTracker.Services
             var context = new JogDbContext();
             _roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
             _userManager = new UserManager<IdentityUser>(new UserStore<IdentityUser>(context));
-            _userManager.PasswordValidator = Config.PasswordValidator;
+            _userManager.PasswordValidator = GlobalConfig.PasswordValidator;
             _emailService = emailService;
 
             //Assign token provider used to generate Reset password tokens.
-            var dataProtectorProvider = SharedSecurity.DataProtectionProvider; //Use the same provider we used when auth was initialized.
+            var dataProtectorProvider = GlobalSharedSecurity.DataProtectionProvider; //Use the same provider we used when auth was initialized.
             var dataProtector = dataProtectorProvider.Create("My Asp.Net Identity");
             _userManager.UserTokenProvider = new DataProtectorTokenProvider<IdentityUser, string>(dataProtector)
             {
@@ -61,7 +61,7 @@ namespace JogTracker.Services
                 throw new Exception("Seed failed.");
             }
 
-            identityResult = _userManager.AddToRole(user.Id, Config.UserRole);
+            identityResult = _userManager.AddToRole(user.Id, GlobalConfig.UserRole);
         }
 
 

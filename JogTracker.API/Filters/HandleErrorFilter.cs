@@ -21,7 +21,7 @@ namespace JogTracker.Api.Filters
                     context.Exception.Message,
                     context.Exception.StackTrace);
 
-                context.Response.Content = new StringContent(Config.FriendlyGenericError, Encoding.UTF8, "application/json");
+                context.Response.Content = new StringContent(GlobalConfig.FriendlyGenericError, Encoding.UTF8, "application/json");
 
             }
         }

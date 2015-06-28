@@ -20,19 +20,19 @@ namespace JogTracker.Services
     {
         public async Task SendEmailTo(string address, string subject, string body)
         {
-            var smtpClient = new SmtpClient(Config.SendGridSmtpServer);
-            var mail = new MailMessage(Config.JogTrackerEmail, address);
+            var smtpClient = new SmtpClient(GlobalConfig.SendGridSmtpServer);
+            var mail = new MailMessage(GlobalConfig.JogTrackerEmail, address);
             mail.Subject = subject;
             mail.Body = body;
 
-            smtpClient.Credentials = new NetworkCredential(Config.SendGridUser, Config.SendGridPassword);
+            smtpClient.Credentials = new NetworkCredential(GlobalConfig.SendGridUser, GlobalConfig.SendGridPassword);
             smtpClient.Send(mail);
         }
 
         public string GetResetPasswordEmailBody(string userId, string resetToken, string userName)
         {
-            return string.Format("Dear {0}\n\nPlease click on this link to reset your password:\n{1}\n\nIf you did not request this email, please ignore it.\n\nRegards,\nThe Jogging Tracker team",
-                userName, resetToken);
+            string emailBody = new ResetEmailBodyGenerator().GetEmailBody(userName, userId, resetToken);
+            return emailBody;
         }
 
     }
