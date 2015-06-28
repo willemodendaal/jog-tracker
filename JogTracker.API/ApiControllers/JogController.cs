@@ -29,7 +29,7 @@ namespace JogTracker.Api.ApiControllers
         public async Task<IHttpActionResult> GetJogs([FromUri] JogFilterBindingModel filter)
         {
             PagedModel<JogEntry> allJogs =
-                (await _repo.AllAsync(filter.PageIndex.Value, filter.PageSize.Value, GetCurrentUserId()));
+                (await _repo.FindAsync(filter.PageIndex.Value, filter.PageSize.Value, filter.FromDate.Value, filter.ToDate.Value, GetCurrentUserId()));
             ICollection<JogJsonResult> jsonResult = new Mapper<JogEntry, JogJsonResult>().Map(allJogs.Items);
             return Ok(new PagingResults(filter.PageIndex.Value, filter.PageSize.Value, allJogs.TotalResults, jsonResult));
         }

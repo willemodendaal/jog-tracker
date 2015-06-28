@@ -1,7 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 using JogTracker.DomainModel;
 
@@ -9,7 +9,9 @@ namespace JogTracker.Data.Repositories
 {
     public interface IJogEntryRepository
     {
-        Task<PagedModel<JogEntry>> AllAsync(int pageIndex, int pageSize, string userId);
+        Task<PagedModel<JogEntry>> FindAsync(int pageIndex, int pageSize, DateTime startDateTime, DateTime endDateTime,
+            string userId);
+
         Task<JogEntry> CreateNewAsync(DateTime dateTime, float distanceKm, TimeSpan duration, string userId);
     }
 
@@ -22,18 +24,19 @@ namespace JogTracker.Data.Repositories
             _dbContext = dbContext;
         }
 
-        public async Task<PagedModel<JogEntry>> AllAsync(int pageIndex, int pageSize, string userId)
+        public async Task<PagedModel<JogEntry>> FindAsync(int pageIndex, int pageSize, DateTime startDateTime,
+            DateTime endDateTime, string userId)
         {
             int totalResults = await _dbContext.JogEntries
-                .Where(j => j.UserId == userId)
+                .Where(MatchJogEntries(startDateTime, endDateTime, userId))
                 .CountAsync();
 
             var result = await (_dbContext.JogEntries
                 .OrderByDescending(j => j.DateTime)
-                .Where(j => j.UserId == userId)
-                .Skip(pageIndex * pageSize)
+                .Where(MatchJogEntries(startDateTime, endDateTime, userId))
+                .Skip(pageIndex*pageSize)
                 .Take(pageSize)
-            ).ToListAsync();
+                ).ToListAsync();
 
             return new PagedModel<JogEntry>(pageIndex, pageSize, totalResults, result);
         }
@@ -53,5 +56,14 @@ namespace JogTracker.Data.Repositories
             return newJog;
         }
 
+
+        /// <summary>
+        /// Returns true if JogEntry belongs to the user and is within the start/end date range.
+        /// </summary>
+        private static Expression<Func<JogEntry, bool>> MatchJogEntries(DateTime startDateTime, DateTime endDateTime,
+            string userId)
+        {
+            return j => j.UserId == userId && j.DateTime >= startDateTime && j.DateTime < endDateTime;
+        }
     }
 }

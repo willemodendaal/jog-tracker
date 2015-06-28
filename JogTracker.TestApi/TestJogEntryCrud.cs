@@ -74,7 +74,7 @@ namespace JogTracker.TestApi
             query["pageSize"] = "1";
             query["pageIndex"] = "0";
             query["fromDate"] = _queryFrom;
-            query["toDate"] = _queryFrom;
+            query["toDate"] = _queryTo;
             var page1 = await _client.GetAsync(Uris.GetJogs + "?" + query);
 
             query["pageSize"] = "1";
@@ -125,7 +125,7 @@ namespace JogTracker.TestApi
             //Assertions...
             Assert.AreEqual(HttpStatusCode.OK, page1.StatusCode);
             
-            int totalCount = GetJson(page1).TotalResults.Value;
+            long totalCount = GetJson(page1).TotalResults.Value;
             Assert.AreEqual(0, totalCount);
         }
 
