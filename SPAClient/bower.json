@@ -1,11 +1,8 @@
 {
-  "name": "reactPlay",
+  "name": "JogTracker.Web",
   "version": "1.0.0",
   "authors": [
-    "Willem Odendaal <willem@newmedialabs.co.za>"
-  ],
-  "moduleType": [
-    "es6"
+    "Willem Odendaal <willem.odendaal@gmail.com>"
   ],
   "license": "MIT",
   "ignore": [
