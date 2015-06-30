@@ -30,8 +30,8 @@ gulp.task('localscripts', function () {
         .pipe(plumber({
             errorHandler: onError
         }))
-        .pipe(sourcemaps.init()) //Load existing source maps.
-            .pipe(concat('local.min.js'))
+        .pipe(sourcemaps.init())
+            .pipe(concat('app.min.js'))
             .pipe(uglify())
         .pipe(sourcemaps.write('./', {includeContent: false, sourceRoot: '/js/sources'}))
         .pipe(gulp.dest('./dist/js/'));
@@ -40,7 +40,8 @@ gulp.task('localscripts', function () {
 gulp.task('vendorscripts', function() {
     var vendorScripts = [
         './bower_components/angular/angular.min.js',
-        './bower_components/angular-bootstrap/ui-bootstrap.min.js'
+        './bower_components/angular-bootstrap/ui-bootstrap.min.js',
+        './bower_components/angular-ui-router/release/angular-ui-router.min.js'
     ];
 
     return gulp.src(vendorScripts)
@@ -60,12 +61,21 @@ gulp.task('scripts', ['vendorscripts', 'localscripts', 'copysources']);
 
 
 gulp.task('copystatic', function() {
-    return gulp.src('./src/static/**/*.{html,ico}')
+    var staticSources = [
+        './src/**/*.{html,ico,txt,xml}',
+        './src/partials/**/*.html'
+    ];
+
+    return gulp.src(staticSources)
         .pipe(gulp.dest('./dist'));
 });
 
 gulp.task('styles', function() {
-    return gulp.src('./src/sass/*.scss')
+    var styleSources = [
+        './src/sass/*.{scss,css}'
+    ];
+
+    return gulp.src(styleSources)
         .pipe(plumber({
             errorHandler: onError
         }))
@@ -80,13 +90,8 @@ gulp.task('styles', function() {
 
 gulp.task('watch', function() {
 
-    // Watch .scss files
     gulp.watch('./src/static/**/*.*', ['copystatic']);
-
-    // Watch .js files
     gulp.watch('./src/sass/**/*.scss', ['styles']);
-
-    // Watch image files
     gulp.watch('./src/js/**/*.js', ['scripts']);
 
 });
