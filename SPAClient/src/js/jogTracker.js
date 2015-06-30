@@ -1,4 +1,4 @@
-angular.module('jogTracker', ['ui.router'])
+angular.module('jogTracker', ['jogTracker.api', 'ui.router'])
 
     .config(function($stateProvider, $urlRouterProvider){
 
@@ -7,11 +7,11 @@ angular.module('jogTracker', ['ui.router'])
 
         $stateProvider
             .state('login', {
-                url: "login",
+                url: "/login",
                 templateUrl: "partials/login.html"
             })
             .state('register', {
-                url: "register",
+                url: "/register",
                 templateUrl: "partials/register.html"
             })
             .state('main', {
