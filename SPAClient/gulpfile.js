@@ -39,8 +39,8 @@ gulp.task('localscripts', function () {
 
 gulp.task('vendorscripts', function() {
     var vendorScripts = [
-        './bower_components/react/react.min.js'
-
+        './bower_components/angular/angular.min.js',
+        './bower_components/angular-bootstrap/ui-bootstrap.min.js'
     ];
 
     return gulp.src(vendorScripts)
