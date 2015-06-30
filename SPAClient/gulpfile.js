@@ -32,14 +32,14 @@ gulp.task('localscripts', function () {
         }))
         .pipe(sourcemaps.init())
             .pipe(concat('app.min.js'))
-            .pipe(uglify())
+            //.pipe(uglify())
         .pipe(sourcemaps.write('./', {includeContent: false, sourceRoot: '/js/sources'}))
         .pipe(gulp.dest('./dist/js/'));
 });
 
 gulp.task('vendorscripts', function() {
     var vendorScripts = [
-        './bower_components/angular/angular.min.js',
+        './bower_components/angular/angular.js',
         './bower_components/angular-bootstrap/ui-bootstrap.min.js',
         './bower_components/angular-ui-router/release/angular-ui-router.min.js'
     ];
@@ -49,8 +49,8 @@ gulp.task('vendorscripts', function() {
             errorHandler: onError
         }))
         .pipe(sourcemaps.init({loadMaps: true}))
-            .pipe(concat('vendor.min.js'))
-            .pipe(uglify())
+            .pipe(concat('vendor.js'))
+            //.pipe(uglify())
         .pipe(sourcemaps.write('./', {includeContent: false, sourceRoot: '/js/sources'}))
         .pipe(gulp.dest('./dist/js/'));
 });
@@ -90,7 +90,7 @@ gulp.task('styles', function() {
 
 gulp.task('watch', function() {
 
-    gulp.watch('./src/static/**/*.*', ['copystatic']);
+    gulp.watch('./src/**/*.{html,xml,txt,ico}', ['copystatic']);
     gulp.watch('./src/sass/**/*.scss', ['styles']);
     gulp.watch('./src/js/**/*.js', ['scripts']);
 

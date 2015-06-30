@@ -7,11 +7,11 @@ angular.module('jogTracker', ['ui.router'])
 
         $stateProvider
             .state('login', {
-                url: "/login",
+                url: "login",
                 templateUrl: "partials/login.html"
             })
             .state('register', {
-                url: "/register",
+                url: "register",
                 templateUrl: "partials/register.html"
             })
             .state('main', {
@@ -19,15 +19,15 @@ angular.module('jogTracker', ['ui.router'])
                 templateUrl: "partials/main.html"
             })
             .state('main.jogs', {
-                url: "/jogs",
+                url: "jogs",
                 templateUrl: "partials/main.jogs.html"
             })
             .state('main.reports', {
-                url: "/reports",
+                url: "reports",
                 templateUrl: "partials/main.reports.html"
             })
             .state('main.admin', { //For admin functions, like user maintenance.
-                url: "/admin",
+                url: "admin",
                 templateUrl: "partials/main.admin.html"
             });
     });
