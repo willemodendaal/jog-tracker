@@ -8,8 +8,8 @@ namespace JogTracker.TestApi
 {
     internal class Uris
     {
-        //public static readonly string Host = "https://localhost/"; //Local IIS, to make testing easier.
-        public static readonly string Host = "https://localhost:44301/"; 
+        public static readonly string Host = "https://dev.jogTracker.api/"; //Local IIS, to make testing easier.
+        //public static readonly string Host = "https://localhost:44301/"; 
         public static readonly string Base = Host + "api/v1/";
 
         public static readonly string Register = Base + "account/register";
