@@ -13,12 +13,13 @@ namespace JogTracker.Api
 
         public static void Register(HttpConfiguration config)
         {
-            config.Filters.Add(new HandleErrorFilter());
             config.EnableSystemDiagnosticsTracing();
 
             // Enable CORS on all our controllers.
             var corsConfig = new EnableCorsAttribute(string.Join(",", GlobalConfig.AllowedCorsOrigins), "*", "*");
             config.EnableCors(corsConfig);
+
+            config.Filters.Add(new HandleErrorFilter());
 
             // Web API routes
             config.MapHttpAttributeRoutes();

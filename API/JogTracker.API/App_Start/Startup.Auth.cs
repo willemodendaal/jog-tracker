@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Web.Http.Cors;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Owin;
@@ -44,11 +45,11 @@ namespace JogTracker.Api
         public void ConfigureAuth(IAppBuilder app)
         {
             System.Diagnostics.Trace.TraceInformation("Configuring webApi authentication.");
+            EnableCors(app);
 
             // This is what allows our front-end to submit tokens instead of userName/password with every request.
             app.UseOAuthBearerTokens(OAuthOptions);
             GlobalSharedSecurity.DataProtectionProvider = app.GetDataProtectionProvider();
-            EnableCors(app);
         }
 
         private void EnableCors(IAppBuilder app)
