@@ -24,7 +24,15 @@
 
             var deferred = $q.defer();
 
-            $http.post(apiUrls.login, payload)
+            var stringPayload = "userName=" + encodeURIComponent(email) +
+                            "&password=" + encodeURIComponent(password) +
+                            "&grant_type=password";
+
+            $http({
+                url: apiUrls.login,
+                data: stringPayload,
+                method: 'post'
+            })
                 .success(function (data, status, headers, config) {
                     $log.info('Login ok.');
                     var token = data.access_token;

@@ -5,25 +5,28 @@
     angular.module('jogTracker.api.auth')
         .service('loginInterceptor', loginInterceptor);
 
-    loginInterceptor.$inject = ['$rootScope', 'authToken'];
+    loginInterceptor.$inject = ['$rootScope', '$q', 'userInfo'];
 
-    function loginInterceptor($rootScope, authToken) {
+    function loginInterceptor($rootScope, $q, userInfo) {
         var service = this;
 
         service.request = function(config) {
 
-            if (authToken) {
-                config.headers.authorization = access_token;
+            if (userInfo.authToken) {
+                config.headers.authorization = userInfo.access_token;
             }
             return config;
         };
 
         service.responseError = function(response) {
             if (response.status === 401 || response.status === 403) {
+                //Ensure token is not set. If it was, there is something wrong with it.
+                userInfo.access_token = null;
+
                 //Broadcast so that app can nav to the login page.
                 $rootScope.$broadcast('must-login');
             }
-            return response;
+            return $q.reject(response); //must reject explicitly.
         };
     }
 }());

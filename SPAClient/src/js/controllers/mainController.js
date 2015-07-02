@@ -7,10 +7,10 @@
     mainController.$inject = [
         '$scope',
         '$log',
-        '$location',
+        '$state',
         'accountFactory'];
 
-    function mainController($scope, $log, $location, accountFactory) {
+    function mainController($scope, $log, $state, accountFactory) {
         $scope.registerPlease = function () {
             var p = accountFactory.register($scope.email, $scope.firstName, $scope.lastName, $scope.password);
 
@@ -23,7 +23,7 @@
         };
 
         $scope.$on('must-login', function() {
-            $location.path('/login');
+            $state.go('login');
         });
 
 
