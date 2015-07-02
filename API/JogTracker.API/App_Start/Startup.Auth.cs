@@ -61,7 +61,7 @@ namespace JogTracker.Api
                 if (req.Path.StartsWithSegments(new PathString("/Token")))
                 {
                     var origin = req.Headers.Get("Origin");
-                    if (!string.IsNullOrEmpty(origin) && WebApiConfig.AllowedCorsOrigins.Any(o => o.Equals(origin, StringComparison.InvariantCultureIgnoreCase)) )
+                    if (!string.IsNullOrEmpty(origin) && GlobalConfig.AllowedCorsOrigins.Any(o => o.Equals(origin, StringComparison.InvariantCultureIgnoreCase)))
                     {
                         res.Headers.Set("Access-Control-Allow-Origin", origin);
                     }
