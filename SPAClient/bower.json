@@ -1,0 +1,15 @@
+{
+  "name": "JogTracker.Web",
+  "version": "1.0.0",
+  "authors": [
+    "Willem Odendaal <willem.odendaal@gmail.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

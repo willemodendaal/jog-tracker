@@ -1,0 +1,20 @@
+<div ng-controller="mainController">
+    <div>
+        [Top menu] [User info]
+    </div>
+    <div>
+        <div class="navbar">
+            <div class="navbar-inner">
+                <a class="brand" href="#">Jog Tracker</a>
+                <ul class="nav">
+                    <li><a ui-sref="main.jogs">Jogs</a></li>
+                    <li><a ui-sref="main.reports">Reports</a></li>
+                    <li><a ui-sref="main.admin">Admin</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div>
+        <div ui-view></div>
+    </div>
+</div>
