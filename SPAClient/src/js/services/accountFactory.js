@@ -3,9 +3,9 @@
     angular.module('jogTracker.api')
         .factory('accountFactory', accountFactory);
 
-    accountFactory.$inject = ['$log', 'apiUrls'];
+    accountFactory.$inject = ['$log', '$http', 'apiUrls'];
 
-    function accountFactory($log, apiUrls) {
+    function accountFactory($log, $http, apiUrls) {
 
         var register = function(email, firstName, lastName, password) {
 
@@ -16,7 +16,7 @@
                 password: password
             };
 
-            $http.post(apiUrls.register, payload).
+            return $http.post(apiUrls.register, payload).
                 success(function (data, status, headers, config) {
                     $log.info('Register success.');
                 }).

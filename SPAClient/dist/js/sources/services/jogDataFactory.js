@@ -1,10 +1,13 @@
-angular.module('jogTracker.api')
-    .factory('jogDataFactory', jogDataFactory);
+(function() {
 
-jogDataFactory.$inject = ['$log'];
+    angular.module('jogTracker.api')
+        .factory('jogDataFactory', jogDataFactory);
 
-function jogDataFactory($log) {
-    $log.info('jogDataFactory loaded.');
+    jogDataFactory.$inject = ['$log'];
 
-    return 100;
-}
+    function jogDataFactory($log) {
+        $log.info('jogDataFactory loaded.');
+
+        return 100;
+    }
+}());

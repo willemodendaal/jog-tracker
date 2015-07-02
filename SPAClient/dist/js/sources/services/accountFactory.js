@@ -1,10 +1,33 @@
-angular.module('jogTracker.api')
-    .factory('accountFactory', accountFactory);
+(function() {
 
-accountFactory.$inject = ['$log'];
+    angular.module('jogTracker.api')
+        .factory('accountFactory', accountFactory);
 
-function accountFactory($log) {
-    $log.info('accountFactory loaded.');
+    accountFactory.$inject = ['$log', '$http', 'apiUrls'];
 
-    return 100;
-}
+    function accountFactory($log, $http, apiUrls) {
+
+        var register = function(email, firstName, lastName, password) {
+
+            var payload = {
+                email: email,
+                firstName: firstName,
+                lastName: lastName,
+                password: password
+            };
+
+            return $http.post(apiUrls.register, payload).
+                success(function (data, status, headers, config) {
+                    $log.info('Register success.');
+                }).
+                error(function (data, status, headers, config) {
+                    $log.info('register failure.');
+                });
+        };
+
+        return {
+            register : register
+        };
+    }
+}());
+
