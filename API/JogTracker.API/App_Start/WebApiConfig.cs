@@ -9,7 +9,7 @@ namespace JogTracker.Api
 {
     public static class WebApiConfig
     {
-        internal static readonly string[] AllowedCorsOrigins = new[] { "https://localhost:44302" }; //TODO: Make configurable
+        internal static readonly string[] AllowedCorsOrigins = new[] { "https://localhost:44302", "http://localhost:3000" }; //TODO: Make configurable
 
         public static void Register(HttpConfiguration config)
         {
