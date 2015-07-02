@@ -4,21 +4,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
 using System.Web.Http.Cors;
+using JogTracker.Common;
 
 namespace JogTracker.Api
 {
     public static class WebApiConfig
     {
-        internal static readonly string[] AllowedCorsOrigins = new[] { "https://localhost:44302" }; //TODO: Make configurable
 
         public static void Register(HttpConfiguration config)
         {
-            config.Filters.Add(new HandleErrorFilter());
             config.EnableSystemDiagnosticsTracing();
 
             // Enable CORS on all our controllers.
-            var corsConfig = new EnableCorsAttribute(string.Join(",", AllowedCorsOrigins), "*", "*");
+            var corsConfig = new EnableCorsAttribute(string.Join(",", GlobalConfig.AllowedCorsOrigins), "*", "*");
             config.EnableCors(corsConfig);
+
+            config.Filters.Add(new HandleErrorFilter());
 
             // Web API routes
             config.MapHttpAttributeRoutes();

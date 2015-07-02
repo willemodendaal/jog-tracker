@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using JogTracker.Common;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Owin.Security;
@@ -36,8 +37,6 @@ namespace JogTracker.Api.Providers
 
         public override async Task GrantResourceOwnerCredentials(OAuthGrantResourceOwnerCredentialsContext context)
         {
-            context.OwinContext.Response.Headers.Add("Access-Control-Allow-Origin", new[] { "*" });
-
             using (UserManager<JogTrackerUser> userManager = _userManagerFactory())
             {
                 //Authentication happens here. ASP.NET identity verifies against database.

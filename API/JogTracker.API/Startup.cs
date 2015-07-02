@@ -12,6 +12,8 @@ namespace JogTracker.Api
     {
         public void Configuration(IAppBuilder app)
         {
+            System.Diagnostics.Trace.TraceInformation("Owin initialized OK. Starting app...");
+
             ConfigureAuth(app);
             
         }

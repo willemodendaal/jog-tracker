@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Web.Http.Cors;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Owin;
@@ -43,14 +44,17 @@ namespace JogTracker.Api
 
         public void ConfigureAuth(IAppBuilder app)
         {
+            System.Diagnostics.Trace.TraceInformation("Configuring webApi authentication.");
+            EnableCors(app);
+
             // This is what allows our front-end to submit tokens instead of userName/password with every request.
             app.UseOAuthBearerTokens(OAuthOptions);
             GlobalSharedSecurity.DataProtectionProvider = app.GetDataProtectionProvider();
-            EnableCors(app);
         }
 
         private void EnableCors(IAppBuilder app)
         {
+            System.Diagnostics.Trace.TraceInformation("Configuring CORS.");
 
             app.Use(async (context, next) =>
             {
@@ -58,10 +62,13 @@ namespace JogTracker.Api
                 IOwinResponse res = context.Response;
 
                 //Allow requests for authentication to /Token (because we cannot use normal Cors filters here).
+                System.Diagnostics.Trace.TraceInformation(string.Concat("Got Request: ", req.Path));
+
                 if (req.Path.StartsWithSegments(new PathString("/Token")))
                 {
                     var origin = req.Headers.Get("Origin");
-                    if (!string.IsNullOrEmpty(origin) && WebApiConfig.AllowedCorsOrigins.Any(o => o.Equals(origin, StringComparison.InvariantCultureIgnoreCase)) )
+                    System.Diagnostics.Trace.TraceInformation(string.Concat("Got /token request for origin: ", origin, ". Checking against allowed: ", string.Join("  ", GlobalConfig.AllowedCorsOrigins)));
+                    if (!string.IsNullOrEmpty(origin) && GlobalConfig.AllowedCorsOrigins.Any(o => o.Equals(origin, StringComparison.InvariantCultureIgnoreCase)))
                     {
                         res.Headers.Set("Access-Control-Allow-Origin", origin);
                     }
