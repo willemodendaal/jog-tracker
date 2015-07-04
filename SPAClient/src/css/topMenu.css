@@ -47,3 +47,10 @@
 .top-menu .user-info {
   float: right;
 }
+.top-menu .user-info .avatar {
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  border-radius: 50%;
+  /* for a circular avatar */
+}

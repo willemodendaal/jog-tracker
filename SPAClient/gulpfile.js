@@ -60,7 +60,8 @@ gulp.task('vendorscripts', function() {
         './bower_components/moment/min/moment.min.js',
         './bower_components/angular-toastr/dist/angular-toastr.min.js',
         './bower_components/angular-toastr/dist/angular-toastr.tpls.min.js',
-        './bower_components/angular-animate/angular-animate.min.js'
+        './bower_components/angular-animate/angular-animate.min.js',
+        './bower_components/angular-md5/angular-md5.min.js'
     ];
 
     return gulp.src(vendorScripts)

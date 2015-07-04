@@ -23,6 +23,7 @@
         resetPwd: baseUrl + '/account/resetPwd',
 
         login: host + '/token',
+        userInfo: baseUrl + '/account',
 
         jogs: jogUrl,
         newJog: baseUrl + '/jog/new',

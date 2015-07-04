@@ -12,7 +12,7 @@
 
         service.request = function(config) {
 
-            if (userInfo.authToken) {
+            if (userInfo.access_token) {
                 config.headers.authorization = userInfo.access_token;
             }
             return config;
