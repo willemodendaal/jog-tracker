@@ -47,6 +47,7 @@
 
         $scope.register = function () {
             _setDisabled(true);
+            $scope.friendlyErrors = [];
 
             accountFactory.register( $scope.email, $scope.firstName, $scope.lastName, $scope.password )
                 .then(_doLogin)

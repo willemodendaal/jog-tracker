@@ -33,6 +33,7 @@
 
         $scope.login = function () {
             _setDisabled(true);
+            $scope.friendlyErrors = [];
 
             accountFactory.login( $scope.email, $scope.password )
                 .then(function(token) {
