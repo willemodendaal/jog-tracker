@@ -27,11 +27,20 @@
                 </p>
 
                 <p>
-                    <input type="submit" value="Register"/>
+                    <input type="submit" ng-disabled="disableButton" value="{{ buttonText }}"/>
                 </p>
 
             </fieldset>
         </form>
+
+        <div ng-if="friendlyErrors.length > 0" class="register-error">
+            <h3>Error doing registration</h3>
+            <ul>
+                <li ng-repeat="err in friendlyErrors">
+                    {{ err }}
+                </li>
+            </ul>
+        </div>
     </div>
 
     <div class="col-md-2">

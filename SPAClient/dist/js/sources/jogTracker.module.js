@@ -1,4 +1,8 @@
-angular.module('jogTracker', ['jogTracker.api', 'ui.router'])
+angular.module('jogTracker', [
+    'jogTracker.api',
+    'ui.router',
+    'ngAnimate',
+    'toastr'])
 
     .config(function($stateProvider, $urlRouterProvider){
 

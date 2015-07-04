@@ -1,0 +1,10 @@
+.register-error {
+  border: 1px solid #ddd;
+  background-color: #ffeaea;
+  border-radius: 3px;
+}
+.register-error h3 {
+  font-size: medium;
+  font-weight: bold;
+  padding-left: 20px;
+}

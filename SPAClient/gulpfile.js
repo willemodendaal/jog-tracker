@@ -38,10 +38,17 @@ gulp.task('localscripts', function () {
 });
 
 gulp.task('vendorcss', function() {
-    return gulp.src('./bower_components/bootstrap/dist/css/bootstrap.min.css')
+
+    var vendorCss = [
+        './bower_components/bootstrap/dist/css/bootstrap.min.css',
+        './bower_components/angular-toastr/dist/angular-toastr.min.css'
+        ];
+
+    return gulp.src(vendorCss)
         .pipe(plumber({
             errorHandler: onError
         }))
+        .pipe(concat('vendorstyles.css'))
         .pipe(gulp.dest('./dist/css/'));
 });
 
@@ -50,7 +57,10 @@ gulp.task('vendorscripts', function() {
         './bower_components/angular/angular.js',
         './bower_components/angular-bootstrap/ui-bootstrap.min.js',
         './bower_components/angular-ui-router/release/angular-ui-router.min.js',
-        './bower_components/moment/min/moment.min.js'
+        './bower_components/moment/min/moment.min.js',
+        './bower_components/angular-toastr/dist/angular-toastr.min.js',
+        './bower_components/angular-toastr/dist/angular-toastr.tpls.min.js',
+        './bower_components/angular-animate/angular-animate.min.js'
     ];
 
     return gulp.src(vendorScripts)
@@ -92,6 +102,7 @@ gulp.task('styles', function() {
             css: './src/css',
             sass: './src/sass'
         }))
+        .pipe(concat('styles.css'))
         .pipe(gulp.dest('./dist/css'))
         .pipe(notify({ message: 'Styles task complete' }));
 });
