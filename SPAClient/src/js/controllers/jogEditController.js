@@ -11,9 +11,16 @@
 
     function jogEditController($scope, $log, jogDataFactory) {
 
+        $scope.title = 'New Jog';
+        $scope.buttonText = 'Create New';
+
         $scope.date = moment();
         $scope.durationMinutes = 1;
         $scope.distanceKm = 0;
+
+        $scope.save = function() {
+            alert('Saved');
+        };
 
         $log.info('JogEdit controller loaded.');
     }

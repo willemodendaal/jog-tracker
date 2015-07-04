@@ -1,1 +1,28 @@
-<div ng-controller="jogsController">Jogs</div>
+<div ng-controller="jogsController">
+    <div ng-controller="jogEditController">
+        <h3>{ title }</h3>
+        <input type="text" ng-model="date" >
+        <input type="text" ng-model="durationMinutes" >
+        <input type="text" ng-model="distanceKm" >
+
+        <input type="button" ng-click="save()" value="{ buttonText }">
+    </div>
+
+    <div>
+        <h3>Jogs</h3>
+        <table>
+            <tr ng-repeat="j in jogs">
+                <td>{{ j.id }} (hidden)</td>
+                <td>{{ j.date }}</td>
+                <td>{{ j.duration }}</td>
+                <td>{{ j.distanceKm }}</td>
+                <td>{{ j.averageKmh }}</td>
+            </tr>
+            <li ng-if="!jogs.length">
+                <tr>
+                    <td>No jogs to show for this time period.</td>
+                </tr>
+            </li>
+        </table>
+    </div>
+</div>
