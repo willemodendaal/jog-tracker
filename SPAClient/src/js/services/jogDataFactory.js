@@ -11,6 +11,9 @@
     function jogDataFactory($log, apiUrls) {
         $log.info('jogDataFactory loaded.');
 
+        /*             *
+         *   getList   *
+         *             */
         var getList = function(fromDate, toDate, pageIndex, pageSize) {
             var payLoad = {
                 fromDate: fromDate,
@@ -24,18 +27,27 @@
             });
         };
 
+        /*             *
+         *   Get       *
+         *             */
         var get = function(jogId) {
             return $http.get(apiUrls.jogs(jogId), {
                 params: { jogId: jogId }
             });
         };
 
+        /*             *
+         *   Del       *
+         *             */
         var del = function(jogId) {
             return $http.delete(apiUrls.jogs(jogId), {
                 params: { jogId: jogId }
             });
         };
 
+        /*             *
+         *   Create    *
+         *             */
         var create = function(dateTime, distance, duration) {
             var payLoad = {
                 dateTime: dateTime,
@@ -46,6 +58,9 @@
             return $http.post(apiUrls.newJog, payLoad);
         };
 
+        /*             *
+         *   Update    *
+         *             */
         var update = function(jogId, dateTime, distance, duration) {
             var payLoad = {
                 dateTime: dateTime,

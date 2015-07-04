@@ -1,4 +1,4 @@
-(function () {
+(function (moment) {
 
     angular
         .module('jogTracker')
@@ -11,8 +11,26 @@
 
     function jogsController($scope, $log, jogDataFactory) {
 
+        $scope.jogs = [];
+        $scope.fromDate = moment().subtract(7, 'days'); //Default filter from last week.
+        $scope.toDate = moment();
+        $scope.pageIndex = 0;
+        $scope.pageSize = 30;
 
+        var _reloadData = function() {
+            jogDataFactory.getList($scope.fromDate, $scope.toDate, $scope.pageIndex, $scope.pageSize)
+                .then(function(data)
+                {
+                    $scope.jogs = data;
+                })
+                .catch(function(err) {
+                    //Todo: show toast.
+                    alert('Unable to load jogs data. Message: ' + err);
+                });
+        };
+
+        _reloadData();
         $log.info('Jogs controller loaded.');
     }
 
-}());
+}(moment));
