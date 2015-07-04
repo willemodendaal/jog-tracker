@@ -1,5 +1,5 @@
 (function() {
-    var apiModule = angular.module('jogTracker.api', []);
+    var apiModule = angular.module('jogTracker.api', ['jogTracker.api.auth']);
 
     var host = 'https://dev.jogTracker.api';
     var baseUrl = host + '/api/v1';
