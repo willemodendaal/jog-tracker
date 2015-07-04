@@ -1,21 +1,23 @@
 <div class="container-fluid" ng-controller="mainController">
-    <div class="row">
-        [Top menu] [User info]
+    <div class="row top-menu">
+        <div class="site-title">JogTracker</div>
+        <div class="user-info">
+            <img class="avatar" ng-src="{{ userImage }}">
+            <span>{{ userFirstName }}</span>
+        </div>
     </div>
     <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-3">
             <div class="navbar">
-                <div class="navbar-inner">
-                    <a class="brand" href="#">Jog Tracker</a>
-                    <ul class="nav">
-                        <li><a ui-sref="main.jogs">Jogs</a></li>
-                        <li><a ui-sref="main.reports">Reports</a></li>
-                        <li><a ui-sref="main.admin">Admin</a></li>
-                    </ul>
+                <ul class="nav">
+                    <li><a ui-sref="main.jogs">My Jogs</a></li>
+                    <li><a ui-sref="main.reports">Reports</a></li>
+                    <li><a ui-sref="main.admin">Admin</a></li>
+                    <li><a ui-sref="main.account">Account</a></li>
+                </ul>
                 </div>
-            </div>
         </div>
-        <div class="col-md-8">
+        <div class="col-md-9">
             <div ui-view></div>
         </div>
     </div>

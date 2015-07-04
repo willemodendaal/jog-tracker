@@ -3,7 +3,9 @@ angular.module('jogTracker', [
     'jogTracker.validation',
     'ui.router',
     'ngAnimate',
-    'toastr'])
+    'toastr', //"toaster" for notification messages
+    'angular-md5' //Needed to hash user email for gravatar
+    ])
 
     .config(function($stateProvider, $urlRouterProvider){
 
@@ -34,5 +36,9 @@ angular.module('jogTracker', [
             .state('main.admin', { //For admin functions, like user maintenance.
                 url: "admin",
                 templateUrl: "partials/main.admin.html"
+            })
+            .state('main.account', {
+                url: "account",
+                templateUrl: "partials/main.account.html"
             });
     });

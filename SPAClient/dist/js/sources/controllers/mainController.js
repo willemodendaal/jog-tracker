@@ -8,9 +8,20 @@
         '$scope',
         '$log',
         '$state',
-        'accountFactory'];
+        'accountFactory',
+        'userInfo',
+        'md5'];
 
-    function mainController($scope, $log, $state, accountFactory) {
+    function mainController($scope, $log, $state, accountFactory, userInfo, md5) {
+
+        $scope.userFirstName = userInfo.firstName;
+        $scope.userImage = _getUserImage(userInfo.email);
+
+        var _getUserImage = function(email) {
+            var hash = md5.createHash(email || '');
+            return 'http://www.gravatar.com/avatar/' + hash + '?s=20';
+        };
+
         $scope.registerPlease = function () {
             var p = accountFactory.register($scope.email, $scope.firstName, $scope.lastName, $scope.password);
 

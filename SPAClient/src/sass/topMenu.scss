@@ -1,0 +1,20 @@
+@import 'jogTrackerShared';
+
+.top-menu {
+    background-color: #222222;
+    height: 40px;
+    color: #ddd;
+    padding: 10px;
+
+    .site-title {
+        float: left;
+    }
+
+    .user-info {
+        float: right;
+
+        .avatar {
+            @include border-radius(50%); /* for a circular avatar */
+        }
+    };
+}
