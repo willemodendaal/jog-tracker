@@ -5,10 +5,11 @@
 
     jogDataFactory.$inject = [
         '$log',
-        'apiUrls'
+        'apiUrls',
+        '$http'
     ];
 
-    function jogDataFactory($log, apiUrls) {
+    function jogDataFactory($log, apiUrls, $http) {
         $log.info('jogDataFactory loaded.');
 
         /*             *
