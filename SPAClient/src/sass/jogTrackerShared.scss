@@ -1,5 +1,11 @@
 $error-background: #ffeaea;
 $error-border: #ddd;
+$box-padding: 10px;
+
+$box-background: #fff;
+$box-foreground: #444;
+$box-border: #bbb;
+$box-margin: 5px;
 
 @mixin border-radius($radius) {
     -webkit-border-radius: $radius;
@@ -18,6 +24,26 @@ $error-border: #ddd;
         font-size:medium;
         font-weight: bold;
         padding-left: 20px;
+    }
+}
+
+.box {
+    border: 1px solid $box-border;
+    background-color: $box-background;
+    padding: $box-padding;
+    margin: $box-margin;
+    color: $box-foreground;
+
+    h1 {
+        font-size: 20pt;
+        margin-top: 2px;
+        margin-bottom: 20px;
+    }
+
+    h3 {
+        font-size: 16pt;
+        margin-top: 2px;
+        margin-bottom: 20px;
     }
 }
 

@@ -12,6 +12,24 @@
   padding-left: 20px;
 }
 
+.box {
+  border: 1px solid #bbb;
+  background-color: #fff;
+  padding: 10px;
+  margin: 5px;
+  color: #444;
+}
+.box h1 {
+  font-size: 20pt;
+  margin-top: 2px;
+  margin-bottom: 20px;
+}
+.box h3 {
+  font-size: 16pt;
+  margin-top: 2px;
+  margin-bottom: 20px;
+}
+
 .error-box, .login-error {
   -webkit-border-radius: 4px;
   -moz-border-radius: 4px;
@@ -26,6 +44,27 @@
   padding-left: 20px;
 }
 
+.box {
+  border: 1px solid #bbb;
+  background-color: #fff;
+  padding: 10px;
+  margin: 5px;
+  color: #444;
+}
+.box h1 {
+  font-size: 20pt;
+  margin-top: 2px;
+  margin-bottom: 20px;
+}
+.box h3 {
+  font-size: 16pt;
+  margin-top: 2px;
+  margin-bottom: 20px;
+}
+
+body.jog-tracker-body {
+  background-color: #eee;
+}
 
 /*! normalize.css v3.0.2 | MIT License | git.io/normalize */
 /**
@@ -437,4 +476,22 @@ th {
   font-size: medium;
   font-weight: bold;
   padding-left: 20px;
+}
+
+.box {
+  border: 1px solid #bbb;
+  background-color: #fff;
+  padding: 10px;
+  margin: 5px;
+  color: #444;
+}
+.box h1 {
+  font-size: 20pt;
+  margin-top: 2px;
+  margin-bottom: 20px;
+}
+.box h3 {
+  font-size: 16pt;
+  margin-top: 2px;
+  margin-bottom: 20px;
 }
