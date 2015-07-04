@@ -18,8 +18,9 @@
         $scope.friendlyErrors = []; //validation errors.
         $scope.disableButton = false;
         $scope.dtFormat = 'yyyy/MM/dd';
+        $scope.opened = false;
 
-        $scope.date = moment();
+        $scope.date = moment().format('YYYY/MM/DD');
         $scope.durationMinutes = 20;
         $scope.distanceKm = 0;
 
@@ -34,10 +35,10 @@
             }
         };
 
-        $scope.openDatePicker = function($event) {
+        $scope.toggleDatePicker = function($event) {
             $event.preventDefault();
             $event.stopPropagation();
-            $scope.opened = true;
+            $scope.opened = !$scope.opened;
         };
 
 

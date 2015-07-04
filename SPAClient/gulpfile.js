@@ -13,7 +13,7 @@ var onError = function(err) {
 };
 
 // Lets us type "gulp" on the command line and run all of our tasks
-gulp.task('default', ['copystatic', 'scripts', 'styles', 'watch', 'vendorcss']);
+gulp.task('default', ['copystatic', 'scripts', 'styles', 'watch', 'vendorcss', 'vendorfonts']);
 
 
 //Copies local source files, so that it can be found by the source maps.
@@ -75,6 +75,10 @@ gulp.task('vendorscripts', function() {
         .pipe(gulp.dest('./dist/js/'));
 });
 
+gulp.task('vendorfonts', function() {
+    return gulp.src('./bower_components/bootstrap/dist/fonts/**/*')
+        .pipe(gulp.dest('./dist/fonts/'));
+});
 
 gulp.task('scripts', ['vendorscripts', 'localscripts', 'copysources']);
 
