@@ -25,8 +25,8 @@
         var _fetchUserInfo = function() {
             accountFactory.getUserInfo()
                 .then(function(userInfo) {
-                    $scope.userFirstName = userInfo.firstName;
-                    $scope.userImage = _getUserImage(userInfo.email);
+                    $scope.userFirstName = userInfo.data.firstName;
+                    $scope.userImage = _getUserImage(userInfo.data.email);
                 })
                 .catch(function(err) {
                     notificationUtils.showErrorToast(err, 'Error fetching info');

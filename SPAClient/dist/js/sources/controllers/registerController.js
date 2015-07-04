@@ -9,12 +9,11 @@
         '$log',
         '$state',
         'accountFactory',
-        'userInfo',
         'validatorUtils',
         'notificationUtils'
     ];
 
-    function registerController($scope, $log, $state, accountFactory, userInfo, validatorUtils, notificationUtils) {
+    function registerController($scope, $log, $state, accountFactory, validatorUtils, notificationUtils) {
 
         $scope.friendlyErrors = []; //Registration error message (i.e. invalid password)
         $scope.disableButton = false;
@@ -36,7 +35,7 @@
             _setDisabled(true);
             accountFactory.login($scope.email, $scope.password)
                 .then(function (token) {
-                    userInfo.access_token = token;
+                    sessionStorage.access_token = token;
                     $state.go('main');
                 })
                 .catch(function (err) {
