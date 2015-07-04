@@ -1,27 +1,22 @@
-<div ng-controller="mainController">
-    <div>
+<div class="container-fluid" ng-controller="mainController">
+    <div class="row">
         [Top menu] [User info]
     </div>
-    <div>
-        <div class="navbar">
-            <div class="navbar-inner">
-                <a class="brand" href="#">Jog Tracker</a>
-                <ul class="nav">
-                    <li><a ui-sref="main.jogs">Jogs</a></li>
-                    <li><a ui-sref="main.reports">Reports</a></li>
-                    <li><a ui-sref="main.admin">Admin</a></li>
-                </ul>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="navbar">
+                <div class="navbar-inner">
+                    <a class="brand" href="#">Jog Tracker</a>
+                    <ul class="nav">
+                        <li><a ui-sref="main.jogs">Jogs</a></li>
+                        <li><a ui-sref="main.reports">Reports</a></li>
+                        <li><a ui-sref="main.admin">Admin</a></li>
+                    </ul>
+                </div>
             </div>
         </div>
-    </div>
-    <div>
-        <input type="text" ng-model="email" placeholder="email"><br>
-        <input type="text" ng-model="firstName" placeholder="first name"><br>
-        <input type="text" ng-model="lastName" placeholder="last name"><br>
-        <input type="password" ng-model="password" placeholder="password"><br>
-
-
-        <input type="button" ng-click="registerPlease()" value="Register" />
-        <div ui-view></div>
+        <div class="col-md-8">
+            <div ui-view></div>
+        </div>
     </div>
 </div>
