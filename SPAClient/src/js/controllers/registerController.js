@@ -34,6 +34,14 @@
             accountFactory.register( $scope.email, $scope.firstName, $scope.lastName, $scope.password )
                 .then(_doLogin)
                 .catch(function(err) {
+
+                    if (err.status == 500) {
+                        //Show error in a toast.
+
+                    } else {
+                        //Show error on the page (could be something like 'user name taken already'.
+                    }
+
                     //Todo: show toast.
                     alert('Unable to register. Message: ' + err);
                 });
