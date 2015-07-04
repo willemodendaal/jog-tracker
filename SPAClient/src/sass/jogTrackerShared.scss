@@ -14,14 +14,16 @@ $box-margin: 5px;
     border-radius: $radius;
 }
 
-.error-box {
+.box .error-box {
     @include border-radius(4px);
 
     border: 1px solid $error-border;
     background-color: $error-background;
 
     h3 {
-        font-size:medium;
+        font-size: 14pt;
+        margin-top: 10px;
+        margin-bottom: 10px;
         font-weight: bold;
         padding-left: 20px;
     }

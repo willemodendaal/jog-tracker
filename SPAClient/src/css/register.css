@@ -1,4 +1,4 @@
-.error-box, .register-error {
+.box .error-box, .box .register-error {
   -webkit-border-radius: 4px;
   -moz-border-radius: 4px;
   -ms-border-radius: 4px;
@@ -6,8 +6,10 @@
   border: 1px solid #ddd;
   background-color: #ffeaea;
 }
-.error-box h3, .register-error h3 {
-  font-size: medium;
+.box .error-box h3, .box .register-error h3 {
+  font-size: 14pt;
+  margin-top: 10px;
+  margin-bottom: 10px;
   font-weight: bold;
   padding-left: 20px;
 }
