@@ -18,6 +18,10 @@
             }
         };
 
+        var showSuccess = function(message, title) {
+            toastr.success(message, title);
+        };
+
         return {
             showErrorToast : showErrorToast
         };

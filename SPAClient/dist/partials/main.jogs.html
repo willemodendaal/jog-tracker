@@ -1,14 +1,23 @@
 <div ng-controller="jogsController">
-    <div ng-controller="jogEditController">
+    <div ng-controller="jogEditController" class="box">
         <h3>{{ title }}</h3>
         <input type="text" ng-model="date" >
         <input type="text" ng-model="durationMinutes" >
         <input type="text" ng-model="distanceKm" >
 
         <input type="button" ng-click="save()" value="{{ buttonText }}">
+
+        <div ng-if="friendlyErrors.length > 0" class="register-error">
+            <h3>Error doing registration</h3>
+            <ul>
+                <li ng-repeat="err in friendlyErrors">
+                    {{ err }}
+                </li>
+            </ul>
+        </div>
     </div>
 
-    <div>
+    <div class="box">
         <h3>Jogs</h3>
         <table>
             <tr ng-repeat="j in jogs">
