@@ -1,9 +1,26 @@
-.register-error {
+.error-box {
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -ms-border-radius: 4px;
+  border-radius: 4px;
   border: 1px solid #ddd;
   background-color: #ffeaea;
-  border-radius: 3px;
 }
-.register-error h3 {
+.error-box h3 {
+  font-size: medium;
+  font-weight: bold;
+  padding-left: 20px;
+}
+
+.error-box, .login-error {
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -ms-border-radius: 4px;
+  border-radius: 4px;
+  border: 1px solid #ddd;
+  background-color: #ffeaea;
+}
+.error-box h3, .login-error h3 {
   font-size: medium;
   font-weight: bold;
   padding-left: 20px;
@@ -406,4 +423,18 @@ table {
 td,
 th {
   padding: 0;
+}
+
+.error-box, .register-error {
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -ms-border-radius: 4px;
+  border-radius: 4px;
+  border: 1px solid #ddd;
+  background-color: #ffeaea;
+}
+.error-box h3, .register-error h3 {
+  font-size: medium;
+  font-weight: bold;
+  padding-left: 20px;
 }

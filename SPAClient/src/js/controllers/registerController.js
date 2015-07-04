@@ -29,7 +29,7 @@
                 $scope.disableButton = false;
                 $scope.buttonText = "Register";
             }
-        }; 
+        };
 
         var _doLogin = function() {
             //Success. Do login and redirect.

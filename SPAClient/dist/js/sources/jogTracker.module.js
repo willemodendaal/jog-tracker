@@ -1,5 +1,6 @@
 angular.module('jogTracker', [
     'jogTracker.api',
+    'jogTracker.validation',
     'ui.router',
     'ngAnimate',
     'toastr'])
