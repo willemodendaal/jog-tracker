@@ -34,7 +34,7 @@ namespace JogTracker.DomainModel
         {
             get
             {
-                return DistanceKM / Duration.Hours;
+                return (float)( DistanceKM / Duration.TotalHours);
             }
         }
     }
