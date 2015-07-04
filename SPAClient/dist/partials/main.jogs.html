@@ -7,14 +7,7 @@
 
         <input type="button" ng-click="save()" value="{{ buttonText }}">
 
-        <div ng-if="friendlyErrors.length > 0" class="register-error">
-            <h3>Error doing registration</h3>
-            <ul>
-                <li ng-repeat="err in friendlyErrors">
-                    {{ err }}
-                </li>
-            </ul>
-        </div>
+        <error-panel></error-panel>
     </div>
 
     <div class="box">

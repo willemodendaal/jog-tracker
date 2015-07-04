@@ -25,14 +25,8 @@
             </p>
         </form>
 
-        <div ng-if="friendlyErrors.length > 0" class="login-error">
-            <h3>Error on login</h3>
-            <ul>
-                <li ng-repeat="err in friendlyErrors">
-                    {{ err }}
-                </li>
-            </ul>
-        </div>
+        <error-panel></error-panel>
+
     </div>
 
     <div class="col-md-2 box">
