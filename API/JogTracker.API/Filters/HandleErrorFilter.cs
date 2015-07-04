@@ -14,6 +14,9 @@ namespace JogTracker.Api.Filters
     {
         public override void OnException(HttpActionExecutedContext context)
         {
+            if (context.Response == null)
+                return;
+
             if (context.Response.StatusCode == HttpStatusCode.InternalServerError)
             {
                 //Log and return friendly generic message.

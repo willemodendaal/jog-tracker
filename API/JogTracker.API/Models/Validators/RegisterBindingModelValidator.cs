@@ -20,6 +20,9 @@ namespace JogTracker.Api.Models.Validators
 
         private bool MustBeValidPassword(string password)
         {
+            if (string.IsNullOrWhiteSpace(password))
+                return false;
+
             var result = GlobalConfig.PasswordValidator.ValidateAsync(password).Result;
 
             return result.Succeeded;
