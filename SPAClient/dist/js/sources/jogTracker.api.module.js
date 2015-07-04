@@ -4,12 +4,29 @@
     var host = 'https://dev.jogTracker.api';
     var baseUrl = host + '/api/v1';
 
+    var jogUrl = function(jogId) {
+        if (jogId) {
+            return baseUrl + '/jog/' + jogId;
+        }
+
+        return baseUrl + '/jog';
+    };
+
+    var updateJogUrl = function(jogId) {
+        return baseUrl + '/jog/' + jogId + '/update';
+    };
+
     apiModule.constant('apiUrls', {
         register: baseUrl + '/account/register',
         registerAsAdmin: baseUrl + '/account/registerAsAdmin',
         requestResetPwd: baseUrl + '/account/requestResetPwd',
         resetPwd: baseUrl + '/account/resetPwd',
-        login: host + '/token'
+
+        login: host + '/token',
+
+        jogs: jogUrl,
+        newJog: baseUrl + '/jog/new',
+        updateJog: updateJogUrl
     });
 
 }());

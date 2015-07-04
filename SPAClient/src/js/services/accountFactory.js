@@ -24,6 +24,7 @@
 
             var deferred = $q.defer();
 
+            //Need to encode this way to make ASP.NET WebAPI happy.
             var stringPayload = "userName=" + encodeURIComponent(email) +
                             "&password=" + encodeURIComponent(password) +
                             "&grant_type=password";
