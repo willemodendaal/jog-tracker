@@ -17,13 +17,29 @@ using JogTracker.Services.Responses;
 namespace JogTracker.Api.ApiControllers
 {
     [RoutePrefix("api/v1/account")]
-    public class AccountController : ApiController
+    public class AccountController : JogApiControllerBase
     {
         private IUserAdminService _userAdminService;
 
         public AccountController(IUserAdminService regService)
         {
             _userAdminService = regService;
+        }
+
+        [Route("")]
+        [Authorize]
+        [HttpGet]
+        public async Task<IHttpActionResult> GetUserInfo()
+        {
+            var currentUser = await _userAdminService.GetUserAsync(base.GetCurrentUserId());
+
+            if (currentUser == null)
+            {
+                //This should never happen, but just in case someone breaks the auth logic.
+                return BadRequest("Invalid user specified.");
+            }
+
+            return Ok(new UserJsonResult().Map(currentUser));
         }
 
         [Route("register")]
