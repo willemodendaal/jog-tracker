@@ -6,26 +6,40 @@
     jogDataFactory.$inject = [
         '$log',
         'apiUrls',
-        '$http'
+        '$http',
+        '$q'
     ];
 
-    function jogDataFactory($log, apiUrls, $http) {
+    var dateFormat = 'YYYY-MM-DDTHH:mm:ss';
+
+    function jogDataFactory($log, apiUrls, $http, $q) {
         $log.info('jogDataFactory loaded.');
 
         /*             *
          *   getList   *
          *             */
         var getList = function(fromDate, toDate, pageIndex, pageSize) {
+            var deferred = $q.defer();
+
             var payLoad = {
-                fromDate: fromDate,
-                toDate: toDate,
+                fromDate: fromDate.format(dateFormat),
+                toDate: toDate.format(dateFormat),
                 pageIndex: pageIndex,
                 pageSize: pageSize
             };
 
-            return $http.get(apiUrls.jogs(), {
-                params: payLoad
-            });
+            $http.get(apiUrls.jogs(), {
+                    params: payLoad
+                })
+                .success(function (data, status, headers, config) {
+                    deferred.resolve(data);
+                })
+                .error(function (err) {
+                    deferred.reject(err);
+                });
+            ;
+
+            return deferred.promise;
         };
 
         /*             *

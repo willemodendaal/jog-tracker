@@ -17,11 +17,15 @@
         $scope.pageIndex = 0;
         $scope.pageSize = 30;
 
+        $scope.noData = function() {
+            return $scope.jogs.length == 0;
+        };
+
         var _reloadData = function() {
             jogDataFactory.getList($scope.fromDate, $scope.toDate, $scope.pageIndex, $scope.pageSize)
                 .then(function(data)
                 {
-                    $scope.jogs = data;
+                    $scope.jogs = data.Items;
                 })
                 .catch(function(err) {
                     //Todo: show toast.

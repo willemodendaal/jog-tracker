@@ -1,11 +1,11 @@
 <div ng-controller="jogsController">
     <div ng-controller="jogEditController">
-        <h3>{ title }</h3>
+        <h3>{{ title }}</h3>
         <input type="text" ng-model="date" >
         <input type="text" ng-model="durationMinutes" >
         <input type="text" ng-model="distanceKm" >
 
-        <input type="button" ng-click="save()" value="{ buttonText }">
+        <input type="button" ng-click="save()" value="{{ buttonText }}">
     </div>
 
     <div>
@@ -18,11 +18,9 @@
                 <td>{{ j.distanceKm }}</td>
                 <td>{{ j.averageKmh }}</td>
             </tr>
-            <li ng-if="!jogs.length">
-                <tr>
+            <tr ng-if="noData()">
                     <td>No jogs to show for this time period.</td>
-                </tr>
-            </li>
+            </tr>
         </table>
     </div>
 </div>

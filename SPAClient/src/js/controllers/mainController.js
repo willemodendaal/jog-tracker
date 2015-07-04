@@ -15,7 +15,7 @@
     function mainController($scope, $log, $state, accountFactory, md5, notificationUtils) {
 
         $scope.userFirstName = 'User';
-        $scope.userImage = 'http://www.gravatar.com/avatar/?d=mm?s=20'; //default image
+        $scope.userImage = '';
 
         var _getUserImage = function(email) {
             var hash = md5.createHash(email || '');
