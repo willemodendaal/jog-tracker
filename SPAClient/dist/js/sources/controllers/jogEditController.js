@@ -19,7 +19,7 @@
         $scope.disableButton = false;
 
         $scope.date = moment();
-        $scope.durationMinutes = 1;
+        $scope.durationMinutes = 20;
         $scope.distanceKm = 0;
 
         var _setDisabled = function(disabled) {
@@ -35,12 +35,16 @@
 
         $scope.save = function() {
             _setDisabled(true);
+            $scope.friendlyErrors = [];
 
-            jogDataFactory.create($scope.date, $scope.distanceKm, $scope.durationMinutes)
+            var duration = moment.duration($scope.durationMinutes, 'minutes');
+            var durationString = duration.hours() + ':' + duration.minutes() + ':' + duration.seconds();
+
+            jogDataFactory.create($scope.date, $scope.distanceKm, durationString)
                 .then(function(data)
                 {
                     notificationUtils.showSuccess('Jog logged.', 'Success');
-                    $scope.$broadcast('refresh'); //Indicate that a refresh is required.
+                    $scope.$emit('refresh'); //Indicate that a refresh is required.
                 })
                 .catch(function(err) {
                     _setDisabled(false);

@@ -66,7 +66,7 @@
         var create = function(dateTime, distance, duration) {
             var payLoad = {
                 dateTime: dateTime,
-                distance: distance,
+                distanceKm: distance,
                 duration: duration
             };
 
@@ -79,7 +79,7 @@
         var update = function(jogId, dateTime, distance, duration) {
             var payLoad = {
                 dateTime: dateTime,
-                distance: distance,
+                distanceKm: distance,
                 duration: duration
             };
 

@@ -23,7 +23,8 @@
         };
 
         return {
-            showErrorToast : showErrorToast
+            showErrorToast : showErrorToast,
+            showSuccess: showSuccess
         };
     }
 }());
