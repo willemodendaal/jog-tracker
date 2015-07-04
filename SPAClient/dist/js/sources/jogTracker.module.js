@@ -2,6 +2,7 @@ angular.module('jogTracker', [
     'jogTracker.api',
     'jogTracker.validation',
     'ui.router',
+    'ui.bootstrap',
     'ngAnimate',
     'toastr', //"toaster" for notification messages
     'angular-md5' //Needed to hash user email for gravatar

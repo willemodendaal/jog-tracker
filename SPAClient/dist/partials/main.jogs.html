@@ -1,28 +1,54 @@
 <div ng-controller="jogsController">
-    <div ng-controller="jogEditController" class="box">
-        <h3>{{ title }}</h3>
-        <input type="text" ng-model="date" >
-        <input type="number" placeholder="Duration(minutes)" ng-model="durationMinutes" >
-        <input type="number" placeholder="Distance(km)" ng-model="distanceKm" >
+    <div class="row">
+        <!-- List -->
+        <div class="col-md-8">
+            <div class="box">
+                <h3>Jogs</h3>
+                <table>
+                    <tr ng-repeat="j in jogs">
+                        <td>{{ j.id }} (hidden)</td>
+                        <td>{{ j.date }}</td>
+                        <td>{{ j.duration }}</td>
+                        <td>{{ j.distanceKm }}</td>
+                        <td>{{ j.averageKmh }}</td>
+                    </tr>
+                    <tr ng-if="noData()">
+                        <td>No jogs to show for this time period.</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
 
-        <input type="button" ng-click="save()" value="{{ buttonText }}">
+        <!-- Add and Edit. -->
+        <div class="col-md-4">
+            <div ng-controller="jogEditController" class="box">
+                <h3>{{ title }}</h3>
 
-        <error-panel></error-panel>
+                <alert   type="success" >msg</alert>
+
+                <p class="input-group">
+                    <input type="text"
+                           datepicker-popup="shortDate"
+                           class="form-control"
+                           ng-model="date"
+                           is-open="true"
+                        />
+                    <span class="input-group-btn">
+                        <!--
+                        <button type="button" class="btn btn-default" ng-click="openDatePicker($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                        -->
+                    </span>
+                </p>
+
+                <input type="text" class="form-control" ng-model="date" ng-required="true" />
+                <input type="number" class="form-control" placeholder="Duration(minutes)" ng-model="durationMinutes">
+                <input type="number" class="form-control" placeholder="Distance(km)" ng-model="distanceKm">
+                <input type="button" ng-click="save()" value="{{ buttonText }}">
+                <error-panel></error-panel>
+            </div>
+        </div>
+
     </div>
 
-    <div class="box">
-        <h3>Jogs</h3>
-        <table>
-            <tr ng-repeat="j in jogs">
-                <td>{{ j.id }} (hidden)</td>
-                <td>{{ j.date }}</td>
-                <td>{{ j.duration }}</td>
-                <td>{{ j.distanceKm }}</td>
-                <td>{{ j.averageKmh }}</td>
-            </tr>
-            <tr ng-if="noData()">
-                    <td>No jogs to show for this time period.</td>
-            </tr>
-        </table>
-    </div>
+
 </div>

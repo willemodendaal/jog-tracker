@@ -17,6 +17,7 @@
         $scope.buttonText = 'Create New';
         $scope.friendlyErrors = []; //validation errors.
         $scope.disableButton = false;
+        $scope.dtFormat = 'yyyy/MM/dd';
 
         $scope.date = moment();
         $scope.durationMinutes = 20;
@@ -32,6 +33,13 @@
                 $scope.buttonText = "Create new";
             }
         };
+
+        $scope.openDatePicker = function($event) {
+            $event.preventDefault();
+            $event.stopPropagation();
+            $scope.opened = true;
+        };
+
 
         $scope.save = function() {
             _setDisabled(true);
