@@ -27,7 +27,7 @@ The Jogging Tracker team";
             string encodedUserId = HttpUtility.UrlEncode(userId);
             string encodedToken = HttpUtility.UrlEncode(token);
 
-            string url = string.Format("{0}#/choosePassword?uid={1}&token={2}", GlobalConfig.ProdHost, encodedUserId, encodedToken);
+            string url = string.Format("{0}#/choosepassword?uid={1}&token={2}", GlobalConfig.ProdHost, encodedUserId, encodedToken);
 
             string message = string.Format(ResetPasswordEmailTemplate, firstName, url);
             return message;
