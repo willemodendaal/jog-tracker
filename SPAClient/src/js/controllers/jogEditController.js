@@ -19,7 +19,7 @@
         $scope.dtFormat = 'yyyy/MM/dd';
         $scope.date = moment().format('YYYY/MM/DD');
 
-        $rootScope.$on('$stateChangeStart', function(event, nextState, currentState) {
+        $rootScope.$on('$stateChangeSuccess', function(event, nextState, currentState) {
             //Open in edit mode, if user has navigated to jogs/{jogId}
             if (nextState.name == 'main.jogs.edit') {
                 $log.info('Edit state params are: ', $stateParams);
