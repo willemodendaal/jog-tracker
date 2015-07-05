@@ -38,8 +38,10 @@ namespace JogTracker.Api.ApiControllers
                 //This should never happen, but just in case someone breaks the auth logic.
                 return BadRequest("Invalid user specified.");
             }
+            var jsonUser = new UserJsonResult().Map(currentUser);
+            jsonUser.isAdmin = base.UserIsAdmin();
 
-            return Ok(new UserJsonResult().Map(currentUser));
+            return Ok(jsonUser);
         }
 
         [Route("register")]
@@ -105,6 +107,23 @@ namespace JogTracker.Api.ApiControllers
                 //Return info about why request failed. (i.e. password not complex enough)
                 //  Should be picked up by validation layer in most cases.
                 return BadRequest(errorResult);
+            }
+
+            return Ok();
+        }
+
+        [Route("")]
+        [HttpPut]
+        [Validate]
+        public async Task<IHttpActionResult> Update(AccountUpdateBindingModel model)
+        {
+            UpdateResult result = await _userAdminService.UpdateAsync(base.GetCurrentUserId(), model.FirstName, model.LastName);
+
+            if (!result.Succeeded)
+            {
+                //Return info about why request failed. (i.e. password not complex enough)
+                //  Should be picked up by validation layer in most cases.
+                return BadRequest(result.ErrorMessage);
             }
 
             return Ok();

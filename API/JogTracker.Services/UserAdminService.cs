@@ -31,7 +31,7 @@ namespace JogTracker.Services
         Task<string> ResetPasswordAsync(string userId, string token, string newPassword);
         Task<PagedModel<JogTrackerUser>> GetUsersAsync(int pageIndex, int pageSize);
         Task<JogTrackerUser> GetUserAsync(string userId);
-        Task<UpdateResult> UpdateAsync(string userId, string firstName, string lastName, string email);
+        Task<UpdateResult> UpdateAsync(string userId, string firstName, string lastName, string email = null);
     }
 
     public class UserAdminService : IUserAdminService
@@ -93,11 +93,20 @@ namespace JogTracker.Services
 
         public async Task RequestResetPasswordAsync(string email)
         {
-            JogTrackerUser user = _userManager.FindByEmail(email);
+            JogTrackerUser user = _userManager.FindByName(email);
+
+            if (user == null)
+            {
+                //Even if email was invalid, we don't want to return an error. Don't
+                //  want to give hackers an opportunity to figure out which emails in the
+                //  system are valid.
+                return;
+            }
+
             string token = _userManager.GeneratePasswordResetToken(user.Id);
 
-            string emailBody = _emailService.GetResetPasswordEmailBody(user.Id, token, user.UserName);
-            await _emailService.SendEmailTo(user.Email, "Password reset request", emailBody);
+            string emailBody = _emailService.GetResetPasswordEmailBody(user.Id, token, user.FirstName ?? user.UserName);
+            await _emailService.SendEmailTo(user.UserName, "Password reset request", emailBody);
         }
 
         /// <summary>
@@ -134,7 +143,7 @@ namespace JogTracker.Services
             return await _dbContext.Users.FirstOrDefaultAsync(u => u.Id == userId);
         }
 
-        public async Task<UpdateResult> UpdateAsync(string userId, string firstName, string lastName, string email)
+        public async Task<UpdateResult> UpdateAsync(string userId, string firstName, string lastName, string email = null)
         {
             var user = await _dbContext.Users.FirstOrDefaultAsync(u => u.Id == userId);
 
@@ -145,7 +154,11 @@ namespace JogTracker.Services
 
             user.FirstName = firstName;
             user.LastName = lastName;
-            user.Email = email;
+
+            if (email != null)
+            {
+                user.Email = email;
+            }
             await _dbContext.SaveChangesAsync();
 
             return UpdateResult.Success();

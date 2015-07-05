@@ -20,7 +20,7 @@ namespace JogTracker.Common
         public static readonly string SendGridSmtpServer = "smtp.sendgrid.net"; 
         public static readonly string SendGridPassword = "kq9fAqOu4OFQxRa";
 
-        public static readonly string ProdHost = "https://testazurespa.azurewebsites.net/";
+        public static readonly string ProdHost = "http://localhost:3000/";
 
         //Shared password validator, used in the database, and from the API.
         private static PasswordValidator _passwordValidator;

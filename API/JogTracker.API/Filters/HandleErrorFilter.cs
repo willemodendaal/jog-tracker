@@ -14,18 +14,16 @@ namespace JogTracker.Api.Filters
     {
         public override void OnException(HttpActionExecutedContext context)
         {
+            System.Diagnostics.Trace.TraceError("Error. Message: {0}, Stack: {1}",
+                context.Exception.Message,
+                context.Exception.StackTrace);
+
             if (context.Response == null)
                 return;
 
             if (context.Response.StatusCode == HttpStatusCode.InternalServerError)
             {
-                //Log and return friendly generic message.
-                System.Diagnostics.Trace.TraceError("Error. Message: {0}, Stack: {1}",
-                    context.Exception.Message,
-                    context.Exception.StackTrace);
-
                 context.Response.Content = new StringContent(GlobalConfig.FriendlyGenericError, Encoding.UTF8, "application/json");
-
             }
         }
     }

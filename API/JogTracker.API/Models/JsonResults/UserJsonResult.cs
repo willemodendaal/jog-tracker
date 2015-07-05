@@ -12,6 +12,7 @@ namespace JogTracker.Api.Models.JsonResults
         public string firstName { get; set; }
         public string lastName { get; set; }
         public string email { get; set; }
+        public bool isAdmin { get; set; }
 
         public UserJsonResult Map(JogTrackerUser model)
         {
@@ -20,7 +21,7 @@ namespace JogTracker.Api.Models.JsonResults
                 id = model.Id,
                 firstName = model.FirstName,
                 lastName = model.LastName,
-                email = model.Email
+                email = model.Email,
             };
         }
     }

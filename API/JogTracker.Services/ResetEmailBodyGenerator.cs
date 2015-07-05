@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 
 namespace JogTracker.Services
 {
@@ -21,10 +22,15 @@ If you did not request this email, please ignore it.
 Regards,
 The Jogging Tracker team";
 
-        public string GetEmailBody(string userName, string userId, string token)
+        public string GetEmailBody(string firstName, string userId, string token)
         {
-            string url = string.Format("{0}/api/v1/resetPwd?uid={1}&token={2}", GlobalConfig.ProdHost, userId, token);
-            return url;
+            string encodedUserId = HttpUtility.UrlEncode(userId);
+            string encodedToken = HttpUtility.UrlEncode(token);
+
+            string url = string.Format("{0}#/choosepassword?uid={1}&token={2}", GlobalConfig.ProdHost, encodedUserId, encodedToken);
+
+            string message = string.Format(ResetPasswordEmailTemplate, firstName, url);
+            return message;
         }
     }
 }
