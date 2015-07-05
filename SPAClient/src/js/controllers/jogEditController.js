@@ -55,7 +55,12 @@
         };
 
 
-        $scope.save = function() {
+        $scope.save = function(validForm) {
+
+            if (! validForm) {
+                return;
+            }
+
             _setDisabled(true);
             $scope.friendlyErrors = [];
 

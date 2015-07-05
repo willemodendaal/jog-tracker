@@ -39,6 +39,10 @@
   width: 100%;
 }
 
+.form-control.ng-dirty.ng-invalid {
+  border: 1px solid red;
+}
+
 .no-data {
   color: #555;
   font-size: 16px;
@@ -160,16 +164,8 @@
   width: 100%;
 }
 
-body.jog-tracker-body {
-  background-color: #eee;
-}
-
-.big-jogtracker-text {
-  font-size: 40pt;
-  font-weight: bold;
-  font-style: italic;
-  color: #bbb;
-  text-align: center;
+.form-control.ng-dirty.ng-invalid {
+  border: 1px solid red;
 }
 
 .box .error-box {
@@ -211,6 +207,22 @@ body.jog-tracker-body {
 }
 .box label.horiz-label {
   width: 100%;
+}
+
+.form-control.ng-dirty.ng-invalid {
+  border: 1px solid red;
+}
+
+body.jog-tracker-body {
+  background-color: #eee;
+}
+
+.big-jogtracker-text {
+  font-size: 40pt;
+  font-weight: bold;
+  font-style: italic;
+  color: #bbb;
+  text-align: center;
 }
 
 /*! normalize.css v3.0.2 | MIT License | git.io/normalize */
@@ -650,6 +662,10 @@ th {
 }
 .box label.horiz-label {
   width: 100%;
+}
+
+.form-control.ng-dirty.ng-invalid {
+  border: 1px solid red;
 }
 
 .top-menu {

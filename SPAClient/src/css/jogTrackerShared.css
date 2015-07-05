@@ -38,3 +38,7 @@
 .box label.horiz-label {
   width: 100%;
 }
+
+.form-control.ng-dirty.ng-invalid {
+  border: 1px solid red;
+}

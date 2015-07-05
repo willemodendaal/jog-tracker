@@ -39,6 +39,10 @@
   width: 100%;
 }
 
+.form-control.ng-dirty.ng-invalid {
+  border: 1px solid red;
+}
+
 body.jog-tracker-body {
   background-color: #eee;
 }

@@ -39,6 +39,10 @@
   width: 100%;
 }
 
+.form-control.ng-dirty.ng-invalid {
+  border: 1px solid red;
+}
+
 .top-menu {
   background-color: #222222;
   height: 40px;
