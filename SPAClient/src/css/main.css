@@ -39,3 +39,11 @@
 body.jog-tracker-body {
   background-color: #eee;
 }
+
+.big-jogtracker-text {
+  font-size: 40pt;
+  font-weight: bold;
+  font-style: italic;
+  color: #bbb;
+  text-align: center;
+}
