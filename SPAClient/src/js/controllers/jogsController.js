@@ -81,7 +81,6 @@
                 .then(function(data)
                 {
                     $scope.totalItems = data.TotalResults;
-                    $scope.pageNumber = data.PageIndex + 1;
                     $scope.jogs = data.Items;
                 })
                 .catch(function(err) {

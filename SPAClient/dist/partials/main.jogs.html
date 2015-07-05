@@ -1,23 +1,25 @@
 <div ng-controller="jogsController">
+
     <div class="row">
         <!-- List -->
         <div class="col-md-8">
             <div class="jogs-list box">
                 <h3>My Jogs</h3>
+
                 <div class="jog-filter">
                     <input class="form-control"
                            datepicker-popup="{{dtFormat}}"
                            ng-model="dtPickers.to.date"
                            ng-change="dateChanged()"
                            is-open="dtPickers.to.opened" placeholder="To date"
-                           ng-click="toggleDatePicker($event, dtPickers.to)" />
+                           ng-click="toggleDatePicker($event, dtPickers.to)"/>
                     <span>to</span>
                     <input class="form-control"
                            datepicker-popup="{{dtFormat}}"
                            ng-model="dtPickers.from.date"
                            ng-change="dateChanged()"
                            is-open="dtPickers.from.opened" placeholder="From date"
-                           ng-click="toggleDatePicker($event, dtPickers.from)" />
+                           ng-click="toggleDatePicker($event, dtPickers.from)"/>
                 </div>
                 <div ng-if="noData()" class="no-data">
                     No jogs to show for this time period.
@@ -38,15 +40,17 @@
                     <div class="date">{{ j.date | date : 'dd MMM yyyy' }}</div>
                 </div>
 
-                <pagination
-                    ng-if="!noData()"
-                    direction-links="false"
-                    boundary-links="true"
-                    total-items="totalItems"
-                    ng-change="pageChanged()"
-                    items-per-page="pageSize"
-                    max-size="10"
-                    ng-model="pageNumber"></pagination>
+                <div ng-hide="noData()">
+                    <pagination
+                        ng-model="pageNumber"
+                        direction-links="false"
+                        boundary-links="true"
+                        total-items="totalItems"
+                        ng-change="pageChanged()"
+                        items-per-page="pageSize"
+                        max-size="10"
+                        ></pagination>
+                </div>
 
             </div>
         </div>
@@ -66,7 +70,8 @@
                            ng-click="toggleDatePicker($event)"
                         />
                     <span class="input-group-btn">
-                        <button type="button" class="btn btn-default" ng-click="toggleDatePicker($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                        <button type="button" class="btn btn-default" ng-click="toggleDatePicker($event)"><i
+                            class="glyphicon glyphicon-calendar"></i></button>
                     </span>
                 </p>
 
