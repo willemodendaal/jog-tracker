@@ -23,7 +23,7 @@ The Jogging Tracker team";
 
         public string GetEmailBody(string userName, string userId, string token)
         {
-            string url = string.Format("{0}/api/v1/resetPwd?uid={1}&token={2}", GlobalConfig.ProdHost, userId, token);
+            string url = string.Format("{0}#/choosePassword?uid={1}&token={2}", GlobalConfig.ProdHost, userId, token);
             return url;
         }
     }
