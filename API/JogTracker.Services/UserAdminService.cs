@@ -93,7 +93,7 @@ namespace JogTracker.Services
 
         public async Task RequestResetPasswordAsync(string email)
         {
-            JogTrackerUser user = _userManager.FindByEmail(email);
+            JogTrackerUser user = _userManager.FindByName(email);
 
             if (user == null)
             {
