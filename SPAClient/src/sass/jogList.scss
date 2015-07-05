@@ -2,7 +2,7 @@
 
 $jogBorder: 1px solid #bbb;
 $selectedJogBackgroundColor: #F7F2E0;
-$jogBackgroundColor: #eee;
+$jogBackgroundColor: #f5f5f5;
 
 .no-data {
     color: #555;
@@ -10,12 +10,13 @@ $jogBackgroundColor: #eee;
 }
 
 .jog-entry {
+    margin: 8px;
     @include border-radius(4px);
     @include shadow();
     padding: 10px;
     border: $jogBorder;
     background-color: $jogBackgroundColor;
-    height: 90px;
+    height: 100px;
 
     .date {
         display: block;
