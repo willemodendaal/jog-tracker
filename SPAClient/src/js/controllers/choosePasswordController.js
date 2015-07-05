@@ -19,18 +19,21 @@
         $scope.showSuccess = false;
         $scope.userId = $stateParams.uid;
         $scope.token = $stateParams.token;
+        $scope.disableButton = false;
 
         $log.info('Reset page loaded with userId ['+ $scope.userId + '] and token [' + $scope.token + ']');
 
         $scope.resetPassword = function () {
             $scope.friendlyErrors = [];
+            $scope.disableButton = true;
 
             accountFactory.resetPwd( $scope.userId, $scope.newPassword, $scope.token )
                 .then(function() {
                     $scope.showSuccess = true;
-                    //All good.
+                    $scope.disableButton = false;
                 })
                 .catch(function(err) {
+                    $scope.disableButton = false;
                     $scope.showSuccess = false;
                     if (err.status == 500) {
                         notificationUtils.showErrorToast(err, 'Reset password error');
