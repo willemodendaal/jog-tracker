@@ -13,7 +13,7 @@ var onError = function(err) {
 };
 
 // Lets us type "gulp" on the command line and run all of our tasks
-gulp.task('default', ['copystatic', 'scripts', 'styles', 'watch', 'vendorcss']);
+gulp.task('default', ['copystatic', 'scripts', 'styles', 'watch', 'vendorcss', 'vendorfonts']);
 
 
 //Copies local source files, so that it can be found by the source maps.
@@ -55,12 +55,14 @@ gulp.task('vendorcss', function() {
 gulp.task('vendorscripts', function() {
     var vendorScripts = [
         './bower_components/angular/angular.js',
-        './bower_components/angular-bootstrap/ui-bootstrap.min.js',
+        './bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js',
         './bower_components/angular-ui-router/release/angular-ui-router.min.js',
         './bower_components/moment/min/moment.min.js',
         './bower_components/angular-toastr/dist/angular-toastr.min.js',
         './bower_components/angular-toastr/dist/angular-toastr.tpls.min.js',
-        './bower_components/angular-animate/angular-animate.min.js'
+        './bower_components/angular-animate/angular-animate.min.js',
+        './bower_components/angular-md5/angular-md5.min.js',
+        './bower_components/underscore/underscore-min.js'
     ];
 
     return gulp.src(vendorScripts)
@@ -74,6 +76,10 @@ gulp.task('vendorscripts', function() {
         .pipe(gulp.dest('./dist/js/'));
 });
 
+gulp.task('vendorfonts', function() {
+    return gulp.src('./bower_components/bootstrap/dist/fonts/**/*')
+        .pipe(gulp.dest('./dist/fonts/'));
+});
 
 gulp.task('scripts', ['vendorscripts', 'localscripts', 'copysources']);
 

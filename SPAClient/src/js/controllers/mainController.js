@@ -9,17 +9,28 @@
         '$log',
         '$state',
         'accountFactory',
-        'userInfo',
-        'md5'];
+        'md5',
+        'notificationUtils'];
 
-    function mainController($scope, $log, $state, accountFactory, userInfo, md5) {
+    function mainController($scope, $log, $state, accountFactory, md5, notificationUtils) {
 
-        $scope.userFirstName = userInfo.firstName;
-        $scope.userImage = _getUserImage(userInfo.email);
+        $scope.userFirstName = 'User';
+        $scope.userImage = '';
 
         var _getUserImage = function(email) {
             var hash = md5.createHash(email || '');
-            return 'http://www.gravatar.com/avatar/' + hash + '?s=20';
+            return 'http://www.gravatar.com/avatar/' + hash + '?s=20&d=mm';
+        };
+
+        var _fetchUserInfo = function() {
+            accountFactory.getUserInfo()
+                .then(function(userInfo) {
+                    $scope.userFirstName = userInfo.data.firstName;
+                    $scope.userImage = _getUserImage(userInfo.data.email);
+                })
+                .catch(function(err) {
+                    notificationUtils.showErrorToast(err, 'Error fetching info');
+                });
         };
 
         $scope.registerPlease = function () {
@@ -37,7 +48,7 @@
             $state.go('login');
         });
 
-
+        _fetchUserInfo();
         $log.info('Main controller loaded.');
     }
 

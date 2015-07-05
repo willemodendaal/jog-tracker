@@ -36,7 +36,7 @@
             })
                 .success(function (data, status, headers, config) {
                     $log.info('Login ok.');
-                    var token = data.access_token;
+                    var token = 'bearer ' + data.access_token;
                     deferred.resolve(token);
                 })
                 .error(function (err) {
@@ -77,11 +77,20 @@
             return $http.post(apiUrls.registerAsAdmin, payload).success(_successLog);
         };
 
+        /*                                *
+         *   Get logged in user info      *
+         *                                */
+        var getUserInfo = function(jogId) {
+            console.log('Fetching current user info...');
+            return $http.get(apiUrls.userInfo);
+        };
+
 
         return {
             register : register,
             registerAsAdmin: registerAsAdmin,
-            login : login
+            login : login,
+            getUserInfo: getUserInfo
         };
     }
 }());

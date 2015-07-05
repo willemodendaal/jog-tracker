@@ -6,26 +6,67 @@
     jogDataFactory.$inject = [
         '$log',
         'apiUrls',
-        '$http'
+        '$http',
+        '$q'
     ];
 
-    function jogDataFactory($log, apiUrls, $http) {
+    var dateFormat = 'YYYY-MM-DDT00:00:00';
+
+    function jogDataFactory($log, apiUrls, $http, $q) {
         $log.info('jogDataFactory loaded.');
 
         /*             *
          *   getList   *
          *             */
         var getList = function(fromDate, toDate, pageIndex, pageSize) {
+            var deferred = $q.defer();
+
+            var from;
+            if (fromDate.format) {
+                //already a moment date.
+                from = fromDate.format(dateFormat);
+            }
+            else {
+                from = moment(fromDate).format(dateFormat);
+            }
+
+            var to;
+            if (toDate.format) {
+                //already a moment date.
+                //Add 1 day, we want the whole of the end date.
+                to = toDate.add(1,'days').format(dateFormat);
+            }
+            else {
+                //Add 1 day, we want the whole of the end date.
+                to = moment(toDate).add(1,'days').format(dateFormat);
+            }
+
+            //Swap the dates if they are the wrong way around (lets be nice to the user).
+            if (moment(fromDate) > moment(toDate)) {
+                var temp = to;
+                to = from;
+                from = temp;
+            }
+
             var payLoad = {
-                fromDate: fromDate,
-                toDate: toDate,
+                fromDate: from,
+                toDate: to,
                 pageIndex: pageIndex,
                 pageSize: pageSize
             };
 
-            return $http.get(apiUrls.jogs(), {
-                params: payLoad
-            });
+            $http.get(apiUrls.jogs(), {
+                    params: payLoad
+                })
+                .success(function (data, status, headers, config) {
+                    deferred.resolve(data);
+                })
+                .error(function (err) {
+                    deferred.reject(err);
+                });
+            ;
+
+            return deferred.promise;
         };
 
         /*             *
@@ -52,7 +93,7 @@
         var create = function(dateTime, distance, duration) {
             var payLoad = {
                 dateTime: dateTime,
-                distance: distance,
+                distanceKm: distance,
                 duration: duration
             };
 
@@ -65,7 +106,7 @@
         var update = function(jogId, dateTime, distance, duration) {
             var payLoad = {
                 dateTime: dateTime,
-                distance: distance,
+                distanceKm: distance,
                 duration: duration
             };
 

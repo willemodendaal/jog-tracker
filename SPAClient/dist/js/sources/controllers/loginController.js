@@ -9,12 +9,11 @@
         '$log',
         '$state',
         'accountFactory',
-        'userInfo',
         'notificationUtils',
         'validatorUtils'
        ];
 
-    function loginController($scope, $log, $state, accountFactory, userInfo, notificationUtils, validatorUtils) {
+    function loginController($scope, $log, $state, accountFactory, notificationUtils, validatorUtils) {
 
         $scope.disableButton = false;
         $scope.buttonText = "Login";
@@ -37,8 +36,8 @@
 
             accountFactory.login( $scope.email, $scope.password )
                 .then(function(token) {
-                    userInfo.access_token = token;
-                    $state.go('main');
+                    sessionStorage.access_token = token;
+                    $state.go('main.jogs');
                 })
                 .catch(function(err) {
                     _setDisabled(false);

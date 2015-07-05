@@ -30,9 +30,17 @@
   font-size: 16pt;
   margin-top: 2px;
   margin-bottom: 20px;
+  color: #888;
 }
 .box label {
   width: 100px;
+}
+.box label.horiz-label {
+  width: 100%;
+}
+
+.form-control.ng-dirty.ng-invalid {
+  border: 1px solid red;
 }
 
 .top-menu {
@@ -46,4 +54,11 @@
 }
 .top-menu .user-info {
   float: right;
+}
+.top-menu .user-info .avatar {
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  border-radius: 50%;
+  /* for a circular avatar */
 }

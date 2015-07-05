@@ -1,0 +1,61 @@
+<div ng-controller="jogEditController" class="box jog-edit">
+
+    <div ng-hide="panelOpen">
+        <h3>Actions</h3>
+        <a href="javascript:void(0);" ng-click="startAddNew()" class="btn btn-default">
+            <span class="glyphicon glyphicon-plus"></span> Record Jog
+        </a>
+
+    </div>
+    <div ng-show="panelOpen">
+        <form name="editJog" ng-submit="save(editJog.$valid)" novalidate>
+
+            <h3>{{ title }}</h3>
+
+            <label class="horiz-label" for="date">Date</label>
+
+            <input type="text"
+                   id="date"
+                   name="date"
+                   datepicker-popup="{{dtFormat}}"
+                   class="form-control"
+                   ng-model="date"
+                   is-open="opened"
+                   ng-required="true"
+                   ng-click="toggleDatePicker($event)"
+                   ng-required="true"
+                />
+
+            <label class="horiz-label" for="duration">Duration (minutes or hh:mm:ss)</label>
+            <input  type="text"
+                    min="0"
+                    max="1440"
+                    id="duration"
+                    name="duration"
+                    class="form-control"
+                    placeholder="Duration(minutes)"
+                    ng-model="durationMinutes"
+                    select-on-click
+                    ng-pattern="/^[1-9][0-9:]{0,9}$/"
+                    ng-required="true"
+                >
+
+            <label class="horiz-label" for="distance">Distance (km)</label>
+            <input type="text"
+                   id="distance"
+                   name="distance"
+                   class="form-control"
+                   placeholder="Distance(km)"
+                   ng-model="distanceKm"
+                   select-on-click
+                   ng-required="true"
+                   ng-pattern="/^[1-9][0-9]*$/"
+                >
+
+            <input type="submit" class="btn btn-primary" ng-disabled="editJog.$invalid" value="{{ buttonText }}">
+            <button type="button" class="btn btn-default" ng-click="closePanel()">Cancel</button>
+            <error-panel></error-panel>
+        </form>
+
+    </div>
+</div>

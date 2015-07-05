@@ -1,28 +1,71 @@
 <div ng-controller="jogsController">
-    <div ng-controller="jogEditController">
-        <h3>{ title }</h3>
-        <input type="text" ng-model="date" >
-        <input type="text" ng-model="durationMinutes" >
-        <input type="text" ng-model="distanceKm" >
 
-        <input type="button" ng-click="save()" value="{ buttonText }">
+    <div class="row">
+        <!-- List -->
+        <div class="col-md-8">
+            <div class="jogs-list box">
+                <h3>My Jogs</h3>
+
+                <div class="jog-filter">
+                    <input class="form-control"
+                           datepicker-popup="{{dtFormat}}"
+                           ng-model="dtPickers.to.date"
+                           ng-change="dateChanged()"
+                           is-open="dtPickers.to.opened" placeholder="To date"
+                           ng-click="toggleDatePicker($event, dtPickers.to)"/>
+                    <span>to</span>
+                    <input class="form-control"
+                           datepicker-popup="{{dtFormat}}"
+                           ng-model="dtPickers.from.date"
+                           ng-change="dateChanged()"
+                           is-open="dtPickers.from.opened" placeholder="From date"
+                           ng-click="toggleDatePicker($event, dtPickers.from)"/>
+                </div>
+                <div ng-if="noData()" class="no-data">
+                    No jogs to show for this time period.
+                </div>
+
+                <!-- Individual Jog -->
+                <div class="jog-entry"
+                     ng-repeat="j in jogs"
+                     ng-click="selectJog(j)"
+                    ng-class="{ selected : j.selected }">
+                    <div class="jog-field duration">
+                        <span>Duration</span>
+                        {{ j.duration }}
+                    </div>
+                    <div class="jog-field distance">
+                        <span>Distance (km)</span>
+                        {{ j.distanceKm | number }}
+                    </div>
+                    <div class="jog-field average">
+                        <span>Average km/h</span>
+                        {{ j.averageKmh | number : 1 }}
+                    </div>
+                    <div class="date">{{ j.date | date : 'dd MMM yyyy' }}</div>
+                </div>
+
+                <div ng-hide="noData()">
+                    <pagination
+                        ng-model="pageNumber"
+                        direction-links="false"
+                        boundary-links="true"
+                        total-items="totalItems"
+                        ng-change="pageChanged()"
+                        items-per-page="pageSize"
+                        max-size="10"
+                        ></pagination>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Add and Edit. -->
+        <div class="col-md-4">
+            <jog-edit-panel />
+        </div>
+
     </div>
 
-    <div>
-        <h3>Jogs</h3>
-        <table>
-            <tr ng-repeat="j in jogs">
-                <td>{{ j.id }} (hidden)</td>
-                <td>{{ j.date }}</td>
-                <td>{{ j.duration }}</td>
-                <td>{{ j.distanceKm }}</td>
-                <td>{{ j.averageKmh }}</td>
-            </tr>
-            <li ng-if="!jogs.length">
-                <tr>
-                    <td>No jogs to show for this time period.</td>
-                </tr>
-            </li>
-        </table>
-    </div>
+
 </div>

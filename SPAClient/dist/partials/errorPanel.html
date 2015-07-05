@@ -1,0 +1,8 @@
+<div ng-if="friendlyErrors.length > 0" class="error-box">
+    <h3>Unable to proceed</h3>
+    <ul>
+        <li ng-repeat="err in friendlyErrors">
+            {{ err }}
+        </li>
+    </ul>
+</div>

@@ -1,6 +1,7 @@
 $error-background: #ffeaea;
 $error-border: #ddd;
 $box-padding: 10px;
+$lightHeading: #888;
 
 $box-background: #fff;
 $box-foreground: #444;
@@ -12,6 +13,12 @@ $box-margin: 5px;
     -moz-border-radius: $radius;
     -ms-border-radius: $radius;
     border-radius: $radius;
+}
+
+@mixin shadow {
+    -webkit-box-shadow: 2px 2px 5px 0px rgba(0,0,0,0.3);
+    -moz-box-shadow: 2px 2px 5px 0px rgba(0,0,0,0.3);
+    box-shadow: 2px 2px 5px 0px rgba(0,0,0,0.3);
 }
 
 .box .error-box {
@@ -46,10 +53,18 @@ $box-margin: 5px;
         font-size: 16pt;
         margin-top: 2px;
         margin-bottom: 20px;
+        color: $lightHeading;
     }
 
     label {
         width: 100px;
     }
+
+    label.horiz-label {
+        width: 100%;
+    }
 }
 
+.form-control.ng-dirty.ng-invalid {
+    border: 1px solid red;
+}

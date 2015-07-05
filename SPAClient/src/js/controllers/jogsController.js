@@ -1,4 +1,4 @@
-(function (moment) {
+(function (moment, _) {
 
     angular
         .module('jogTracker')
@@ -6,31 +6,82 @@
 
     jogsController.$inject = [
         '$scope',
-        '$log',
-        'jogDataFactory'];
+        'jogDataFactory',
+        'notificationUtils',
+        '$rootScope'];
 
-    function jogsController($scope, $log, jogDataFactory) {
+    function jogsController($scope, jogDataFactory, notificationUtils, $rootScope) {
 
         $scope.jogs = [];
-        $scope.fromDate = moment().subtract(7, 'days'); //Default filter from last week.
-        $scope.toDate = moment();
-        $scope.pageIndex = 0;
-        $scope.pageSize = 30;
+        $scope.pageNumber = 1;
+        $scope.pageSize = 3;
+        $scope.totalItems = 0;
+        $scope.dtPickers = {
+            from: { opened: false, date: moment().subtract(1, 'months').format($scope.dtFormat)},
+            to: { opened: false, date: moment().format($scope.dtFormat)}
+        };
+        $scope.dtFormat = 'yyyy/MM/dd';
+
+        $scope.noData = function() {
+            return $scope.jogs.length == 0;
+        };
+
+        $scope.$on('refresh', function() {
+            _reloadData();
+        });
+
+        $scope.pageChanged = function() {
+            _reloadData();
+        };
+
+        $scope.dateChanged = function() {
+            _reloadData();
+        };
+
+        $scope.selectJog = function(jog) {
+            _selectOnlyJog(jog.id);
+            $rootScope.$broadcast('editJog', jog);
+        };
+
+        $scope.toggleDatePicker = function($event, picker) {
+            $event.preventDefault();
+            $event.stopPropagation();
+            picker.opened = !picker.opened;
+        };
+
+        var _selectOnlyJog = function(jogId) {
+            _.each(
+                $scope.jogs,
+                function(j) {
+                    j.selected = j.id == jogId;
+                });
+        };
 
         var _reloadData = function() {
-            jogDataFactory.getList($scope.fromDate, $scope.toDate, $scope.pageIndex, $scope.pageSize)
+
+            var fromDate = $scope.dtPickers.from.date;
+            var toDate = $scope.dtPickers.to.date;
+
+            if (!fromDate) {
+                fromDate = moment().subtract(1, 'months');
+            }
+
+            if (!toDate) {
+                toDate = moment();
+            }
+
+            jogDataFactory.getList(fromDate, toDate, $scope.pageNumber - 1, $scope.pageSize)
                 .then(function(data)
                 {
-                    $scope.jogs = data;
+                    $scope.totalItems = data.TotalResults;
+                    $scope.jogs = data.Items;
                 })
                 .catch(function(err) {
-                    //Todo: show toast.
-                    alert('Unable to load jogs data. Message: ' + err);
+                    notificationUtils.showErrorToast(err, 'Error listing jogs');
                 });
         };
 
         _reloadData();
-        $log.info('Jogs controller loaded.');
     }
 
-}(moment));
+}(moment, _));
