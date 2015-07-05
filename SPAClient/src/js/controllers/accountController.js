@@ -7,9 +7,10 @@
     accountController.$inject = [
         '$scope',
         'accountFactory',
-        'notificationUtils'];
+        'notificationUtils',
+        '$state'];
 
-    function accountController($scope, accountFactory, notificationUtils) {
+    function accountController($scope, accountFactory, notificationUtils, $state) {
         $scope.email = 'willem.odendaal@gmail.com';
         $scope.firstName = 'willem';
         $scope.lastName = 'odendaal';
@@ -51,6 +52,11 @@
                 $scope.disableButton = false;
                 $scope.buttonText = "Save";
             }
+        };
+
+        $scope.logout = function() {
+            sessionStorage.access_token = null;
+            $state.go('login');
         };
 
         $scope.save = function(valid) {
