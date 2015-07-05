@@ -38,13 +38,9 @@
             _reloadData();
         };
 
-        $scope.selectJog = function(jogId) {
-            jogDataFactory.get(jogId)
-                .then(function(data) {
-                    //Select jog, and navigate to edit URL.
-                    _selectOnlyJog(data.id);
-                    $state.go('main.jogs.edit', { jogId: jogId });
-                });
+        $scope.selectJog = function(jog) {
+            _selectOnlyJog(jog.id);
+            $state.go('main.jogs.edit', {jogId: jog.id, duration: jog.duration, distance: jog.distanceKm, date: jog.date});
         };
 
         $scope.toggleDatePicker = function($event, picker) {

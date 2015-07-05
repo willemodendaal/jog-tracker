@@ -22,8 +22,7 @@
         $rootScope.$on('$stateChangeSuccess', function(event, nextState, currentState) {
             //Open in edit mode, if user has navigated to jogs/{jogId}
             if (nextState.name == 'main.jogs.edit') {
-                $log.info('Edit state params are: ', $stateParams);
-                $scope.title = 'EDIT JOG' + $stateParams.jogId;
+                _editJog($stateParams.jogId, $stateParams.duration, $stateParams.distance, $stateParams.date);
             }
         });
 
@@ -35,6 +34,16 @@
             $scope.opened = false;
             $scope.durationMinutes = 0;
             $scope.distanceKm = 0;
+        };
+
+        var _editJog = function(jogId, duration, distance, date) {
+            _reset();
+            $scope.title = 'Edit Jog';
+            $scope.buttonText = 'Update';
+            $scope.jogId = jogId;
+            $scope.date = date;
+            $scope.durationMinutes = duration;
+            $scope.distanceKm = distance;
         };
 
         var _setDisabled = function(disabled) {
