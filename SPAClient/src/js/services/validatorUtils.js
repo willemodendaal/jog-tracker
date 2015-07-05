@@ -3,10 +3,9 @@
     angular.module('jogTracker.validation')
         .factory('validatorUtils', validatorUtils);
 
-    validatorUtils.$inject = ['$log'];
+    validatorUtils.$inject = [];
 
-    function validatorUtils($log) {
-        $log.info('validatorUtils loaded.');
+    function validatorUtils() {
 
         //Return collection of strings of errors to show on front-end.
         //  (get errors from server response)
