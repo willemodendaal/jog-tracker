@@ -1,1 +1,55 @@
-<div>Admin</div>
+<div ng-controller="usersController">
+
+    <div class="row">
+        <!-- List -->
+        <div class="col-md-8">
+            <div class="users-list box">
+                <h3>Registered Users</h3>
+
+                <div ng-if="noData()" class="no-data">
+                    Loading users...
+                </div>
+
+                <!-- Individual User -->
+                <div class="user-entry"
+                     ng-repeat="u in users"
+                     ng-click="selectUser(u)"
+                     ng-class="{ selected : u.selected }">
+                    <div class="user-field">
+                        <span>Email</span>
+                        {{ u.email }}
+                    </div>
+                    <div class="user-field">
+                        <span>First Name</span>
+                        {{ u.firstName }}
+                    </div>
+                    <div class="user-field">
+                        <span>Last Name</span>
+                        {{ u.firstName }}
+                    </div>
+                </div>
+
+                <div ng-hide="noData()">
+                    <pagination
+                        ng-model="pageNumber"
+                        direction-links="false"
+                        boundary-links="true"
+                        total-items="totalItems"
+                        ng-change="pageChanged()"
+                        items-per-page="pageSize"
+                        max-size="10"
+                        ></pagination>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Add and Edit. -->
+        <div class="col-md-4">
+            <user-edit-panel />
+        </div>
+
+    </div>
+
+
+</div>

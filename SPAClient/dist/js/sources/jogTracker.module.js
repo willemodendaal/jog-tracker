@@ -44,7 +44,8 @@ angular.module('jogTracker', [
             });
     });
 
-//Extra global functions
+//Extra global functions.
+// Pad zeros onto a number.
 Number.prototype.pad = function(size) {
     var s = String(this);
     while (s.length < (size || 2)) {s = "0" + s;}
