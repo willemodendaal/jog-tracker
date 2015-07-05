@@ -13,7 +13,7 @@
     .user-info {
         float: right;
 
-        .avatar {
+        a .avatar {
             @include border-radius(50%); /* for a circular avatar */
         }
     };

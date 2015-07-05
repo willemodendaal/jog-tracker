@@ -1,8 +1,81 @@
-<div>
+<div ng-controller="accountController">
 
-    Gravatar <br>
-    FirstName <br>
-    LastName  <br>
-    Reset Password <br>
+    <div class="row">
+        <div class="col-md-8">
+            <div class="my-account box">
+                <h3>My Account</h3>
+
+                <!-- View mode -->
+                <div ng-hide="editMode" class="my-details">
+                    <div class="my-image">
+                        <img class="avatar" ng-src="{{ getUserImage(email, 60) }}">
+                    </div>
+                    <div class="my-email">
+                        {{ email }}
+                    </div>
+                    <div class="editable-field">
+                        <span class="label">First Name:</span>
+                        <span>{{ firstName }}</span>
+                    </div>
+                    <div class="editable-field">
+                        <span class="label">Last Name:</span>
+                        <span>{{ lastName }}</span>
+                    </div>
+                </div>
+
+                <!-- Edit mode -->
+                <div ng-show="editMode" class="edit-my-details" ng-submit="save(editMyDetails.$invalid)">
+                    <form novalidate name="editMyDetails">
+                        <div class="my-image">
+                            <img class="avatar" ng-src="{{ getUserImage(email, 60) }}">
+                        </div>
+                        <div class="my-email">
+                            {{ email }}
+                        </div>
+                        <div class="editable-field">
+                            <span class="label">First Name:</span>
+                            <input
+                                type="text"
+                                class="form-control"
+                                ng-model="edit.firstName"
+                                ng-required="true"
+                                ng-minlength="3"
+                                ng-maxlength="40" />
+                        </div>
+                        <div class="editable-field">
+                            <span class="label">Last Name:</span>
+                            <input
+                                type="text"
+                                class="form-control"
+                                ng-model="edit.lastName"
+                                ng-required="true"
+                                ng-minlength="3"
+                                ng-maxlength="40"  />
+                        </div>
+                        <div class="buttons">
+                            <input type="submit" class="btn btn-primary" ng-disabled="editMyDetails.$invalid" value="Save">
+                            <button type="button" class="btn btn-default" ng-click="cancel()">Cancel</button>
+                            <error-panel></error-panel>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="account-actions box">
+                <h3>Actions</h3>
+                <a href="javascript:void(0);" ng-click="editDetails()" class="btn btn-default">
+                    <span class="glyphicon glyphicon-edit"></span> Edit my details
+                </a>
+                <a href="javascript:void(0);" ng-click="resetPassword()" class="btn btn-default">
+                    <span class="glyphicon glyphicon-lock"></span> Reset password
+                </a>
+            </div>
+        </div>
+
+    </div>
+
 
 </div>

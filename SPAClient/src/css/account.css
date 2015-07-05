@@ -43,22 +43,41 @@
   border: 1px solid red;
 }
 
-.top-menu {
-  background-color: #222222;
-  height: 40px;
-  color: #ddd;
-  padding: 10px;
+.account-actions.box .btn {
+  width: 180px;
+  margin-bottom: 8px;
 }
-.top-menu .site-title {
+
+.my-details .my-image, .edit-my-details .my-image {
   float: left;
+  margin-right: 20px;
+  margin-left: 10px;
+  height: 150px;
 }
-.top-menu .user-info {
-  float: right;
-}
-.top-menu .user-info a .avatar {
+.my-details .my-image img, .edit-my-details .my-image img {
   -webkit-border-radius: 50%;
   -moz-border-radius: 50%;
   -ms-border-radius: 50%;
   border-radius: 50%;
-  /* for a circular avatar */
+}
+.my-details .my-email, .edit-my-details .my-email {
+  overflow: hidden;
+  font-size: 16pt;
+  margin-bottom: 8px;
+}
+.my-details .editable-field, .edit-my-details .editable-field {
+  font-size: 14pt;
+  font-weight: normal;
+}
+.my-details .editable-field span.label, .edit-my-details .editable-field span.label {
+  color: #aaa;
+  width: 120px;
+}
+.my-details .editable-field input, .edit-my-details .editable-field input {
+  width: 200px;
+  display: inline;
+  margin-bottom: 8px;
+}
+.my-details .buttons, .edit-my-details .buttons {
+  margin-top: 20px;
 }
