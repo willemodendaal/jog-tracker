@@ -6,11 +6,11 @@
 
     jogsController.$inject = [
         '$scope',
-        '$log',
         'jogDataFactory',
-        'notificationUtils'];
+        'notificationUtils',
+        '$state'];
 
-    function jogsController($scope, $log, jogDataFactory, notificationUtils) {
+    function jogsController($scope, jogDataFactory, notificationUtils, $state) {
 
         $scope.jogs = [];
         $scope.pageNumber = 1;
@@ -38,9 +38,13 @@
             _reloadData();
         };
 
-        $scope.selectJog = function(jog) {
-            _deselectOtherJogs(jog);
-            jog.selected = true;
+        $scope.selectJog = function(jogId) {
+            jogDataFactory.get(jogId)
+                .then(function(data) {
+                    //Select jog, and navigate to edit URL.
+                    _selectOnlyJog(data.id);
+                    $state.go('main.jogs.edit', { jogId: jogId });
+                });
         };
 
         $scope.toggleDatePicker = function($event, picker) {
@@ -49,17 +53,11 @@
             picker.opened = !picker.opened;
         };
 
-        var _deselectOtherJogs = function(jog) {
-            var otherJogs = _.filter(
+        var _selectOnlyJog = function(jogId) {
+            _.each(
                 $scope.jogs,
                 function(j) {
-                    return j.id != jog.id;
-                });
-
-            _.each(
-                otherJogs,
-                function(j) {
-                    j.selected = false;
+                    j.selected = j.id == jogId;
                 });
         };
 
@@ -88,7 +86,6 @@
         };
 
         _reloadData();
-        $log.info('Jogs controller loaded.');
     }
 
 }(moment, _));

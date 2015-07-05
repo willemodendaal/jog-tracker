@@ -11,7 +11,7 @@ angular.module('jogTracker', [
     .config(function($stateProvider, $urlRouterProvider){
 
         //By default, go home.
-        $urlRouterProvider.otherwise("/");
+        $urlRouterProvider.otherwise("/home");
 
         $stateProvider
             .state('login', {
@@ -23,23 +23,27 @@ angular.module('jogTracker', [
                 templateUrl: "partials/register.html"
             })
             .state('main', {
-                url: "/",
+                url: "/home",
                 templateUrl: "partials/main.html"
             })
             .state('main.jogs', {
-                url: "jogs",
+                url: "/jogs",
                 templateUrl: "partials/main.jogs.html"
             })
+            .state('main.jogs.edit', {
+                url: "/{jogId}",
+                templateUrl: "partials/register.html" //Open same page, but in edit mode.
+            })
             .state('main.reports', {
-                url: "reports",
+                url: "/reports",
                 templateUrl: "partials/main.reports.html"
             })
             .state('main.admin', { //For admin functions, like user maintenance.
-                url: "admin",
+                url: "/admin",
                 templateUrl: "partials/main.admin.html"
             })
             .state('main.account', {
-                url: "account",
+                url: "/account",
                 templateUrl: "partials/main.account.html"
             });
     });

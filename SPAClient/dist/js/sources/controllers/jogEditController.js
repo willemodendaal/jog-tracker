@@ -7,16 +7,25 @@
     jogEditController.$inject = [
         '$scope',
         '$log',
+        '$rootScope',
+        '$stateParams',
         'jogDataFactory',
         'notificationUtils',
         'validatorUtils'];
 
-    function jogEditController($scope, $log, jogDataFactory, notificationUtils, validatorUtils) {
+    function jogEditController($scope, $log, $rootScope, $stateParams, jogDataFactory, notificationUtils, validatorUtils) {
 
         $scope.panelOpen = true; //Show 'add' panel by default.
         $scope.dtFormat = 'yyyy/MM/dd';
         $scope.date = moment().format('YYYY/MM/DD');
 
+        $rootScope.$on('$stateChangeStart', function(event, nextState, currentState) {
+            //Open in edit mode, if user has navigated to jogs/{jogId}
+            if (nextState.name == 'main.jogs.edit') {
+                $log.info('Edit state params are: ', $stateParams);
+                $scope.title = 'EDIT JOG' + $stateParams.jogId;
+            }
+        });
 
         var _reset = function() {
             $scope.title = 'Record Jog';
@@ -88,7 +97,6 @@
         };
 
         _reset();
-        $log.info('JogEdit controller loaded.');
     }
 
 }(moment));
