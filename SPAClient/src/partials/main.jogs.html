@@ -24,7 +24,12 @@
                 <div ng-if="noData()" class="no-data">
                     No jogs to show for this time period.
                 </div>
-                <div class="jog-entry" ng-repeat="j in jogs" ng-click="selectJog(j)">
+
+                <!-- Individual Jog -->
+                <div class="jog-entry"
+                     ng-repeat="j in jogs"
+                     ng-click="selectJog(j)"
+                    ng-class="{ selected : j.selected }">
                     <div class="jog-field duration">
                         <span>Duration</span>
                         {{ j.duration }}

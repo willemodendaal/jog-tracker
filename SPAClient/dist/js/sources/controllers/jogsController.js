@@ -41,7 +41,6 @@
         $scope.selectJog = function(jog) {
             _deselectOtherJogs(jog);
             jog.selected = true;
-            //Open in 'edit' panel.
         };
 
         $scope.toggleDatePicker = function($event, picker) {

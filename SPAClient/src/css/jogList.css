@@ -78,6 +78,10 @@
 .jog-entry.selected {
   background-color: #F7F2E0;
 }
+.jog-entry:hover {
+  background-color: #F7F2E0;
+  cursor: pointer;
+}
 .jog-entry .date {
   display: block;
   font-size: 14px;
