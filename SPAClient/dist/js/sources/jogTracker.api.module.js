@@ -33,6 +33,7 @@
         registerAsAdmin: baseUrl + '/account/registerAsAdmin',
         requestResetPwd: baseUrl + '/account/requestResetPwd',
         resetPwd: baseUrl + '/account/resetPwd',
+        updateAccount: baseUrl + '/account',
 
         login: host + '/token',
         userInfo: baseUrl + '/account',

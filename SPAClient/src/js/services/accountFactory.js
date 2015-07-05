@@ -85,12 +85,24 @@
             return $http.get(apiUrls.userInfo);
         };
 
+        /*             *
+         *   Update    *
+         *             */
+        var update = function(firstName, lastName) {
+            var payLoad = {
+                firstName: firstName,
+                lastName: lastName
+            };
+
+            return $http.put(apiUrls.updateAccount, payLoad);
+        };
 
         return {
             register : register,
             registerAsAdmin: registerAsAdmin,
             login : login,
-            getUserInfo: getUserInfo
+            getUserInfo: getUserInfo,
+            update: update
         };
     }
 }());

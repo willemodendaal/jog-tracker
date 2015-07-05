@@ -5,8 +5,12 @@
             <div class="my-account box">
                 <h3>My Account</h3>
 
+                <div ng-show="loading">
+                    Loading details...
+                </div>
+
                 <!-- View mode -->
-                <div ng-hide="editMode" class="my-details">
+                <div ng-hide="editMode || loading" class="my-details">
                     <div class="my-image">
                         <img class="avatar" ng-src="{{ getUserImage(email, 60) }}">
                     </div>
@@ -24,7 +28,7 @@
                 </div>
 
                 <!-- Edit mode -->
-                <div ng-show="editMode" class="edit-my-details" ng-submit="save(editMyDetails.$invalid)">
+                <div ng-show="editMode && !loading" class="edit-my-details" ng-submit="save(editMyDetails.$valid)">
                     <form novalidate name="editMyDetails">
                         <div class="my-image">
                             <img class="avatar" ng-src="{{ getUserImage(email, 60) }}">
@@ -53,7 +57,7 @@
                                 ng-maxlength="40"  />
                         </div>
                         <div class="buttons">
-                            <input type="submit" class="btn btn-primary" ng-disabled="editMyDetails.$invalid" value="Save">
+                            <input type="submit" class="btn btn-primary" ng-disabled="editMyDetails.$invalid || disableButton" value="{{ buttonText }}">
                             <button type="button" class="btn btn-default" ng-click="cancel()">Cancel</button>
                             <error-panel></error-panel>
                         </div>
