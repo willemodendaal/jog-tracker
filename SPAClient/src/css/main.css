@@ -54,3 +54,8 @@ body.jog-tracker-body {
   color: #bbb;
   text-align: center;
 }
+
+.navbar span.glyphicon {
+  font-size: 8pt;
+  margin-right: 6px;
+}

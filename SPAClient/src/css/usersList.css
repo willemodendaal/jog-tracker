@@ -57,7 +57,7 @@
 
 .users-list h3 {
   float: left;
-  width: 20%;
+  width: 100%;
 }
 
 .user-entry {
@@ -74,6 +74,7 @@
   border: 1px solid #bbb;
   background-color: #f5f5f5;
   height: 100px;
+  position: relative;
 }
 .user-entry.selected {
   background-color: #F7F2E0;
@@ -82,14 +83,41 @@
   background-color: #F7F2E0;
   cursor: pointer;
 }
-.user-entry .user-field {
-  float: left;
-  font-size: 20px;
-  width: 30%;
+.user-entry .user-image {
+  position: absolute;
+  top: 10px;
+  left: 10px;
 }
-.user-entry .user-field span {
-  display: block;
-  font-size: 14px;
+.user-entry .user-image img {
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  border-radius: 50%;
+}
+.user-entry .user-email {
+  position: absolute;
+  overflow: hidden;
+  font-size: 18px;
+  top: 10px;
+  left: 60px;
+}
+.user-entry .user-fn {
+  position: absolute;
+  top: 40px;
+  left: 60px;
+  overflow: hidden;
+}
+.user-entry .user-fn span {
+  color: #aaa;
+}
+.user-entry .user-ln {
+  position: absolute;
+  top: 70px;
+  left: 60px;
+  overflow: hidden;
+}
+.user-entry .user-ln span {
+  color: #aaa;
 }
 
 .user-edit .form-control {

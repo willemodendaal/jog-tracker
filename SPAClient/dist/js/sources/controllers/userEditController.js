@@ -13,7 +13,7 @@
 
     function userEditController($scope, userDataFactory, accountFactory, notificationUtils, validatorUtils) {
 
-        $scope.panelOpen = true; //Show 'add' panel by default.
+        $scope.panelOpen = false; //Hide 'add' panel by default.
         $scope.editMode = false;
 
         $scope.$on('editUser', function (event, user) {
@@ -44,7 +44,7 @@
             $scope.email = user.email;
             $scope.firstName = user.firstName;
             $scope.lastName = user.lastName;
-            $scope.password = ''; //We don't do anything with password in 'edit' mode.
+            $scope.password = 'NotUsed'; //We don't do anything with password in 'edit' mode.
         };
 
         var _setDisabled = function (disabled) {

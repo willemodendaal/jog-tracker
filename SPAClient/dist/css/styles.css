@@ -43,51 +43,6 @@
   border: 1px solid red;
 }
 
-.box .error-box {
-  -webkit-border-radius: 4px;
-  -moz-border-radius: 4px;
-  -ms-border-radius: 4px;
-  border-radius: 4px;
-  border: 1px solid #ddd;
-  background-color: #ffeaea;
-}
-.box .error-box h3 {
-  font-size: 14pt;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  font-weight: bold;
-  padding-left: 20px;
-}
-
-.box {
-  border: 1px solid #bbb;
-  background-color: #fff;
-  padding: 10px;
-  margin: 5px;
-  color: #444;
-}
-.box h1 {
-  font-size: 20pt;
-  margin-top: 2px;
-  margin-bottom: 20px;
-}
-.box h3 {
-  font-size: 16pt;
-  margin-top: 2px;
-  margin-bottom: 20px;
-  color: #888;
-}
-.box label {
-  width: 100px;
-}
-.box label.horiz-label {
-  width: 100%;
-}
-
-.form-control.ng-dirty.ng-invalid {
-  border: 1px solid red;
-}
-
 .no-data {
   color: #555;
   font-size: 16px;
@@ -217,18 +172,6 @@
   border: 1px solid red;
 }
 
-body.jog-tracker-body {
-  background-color: #eee;
-}
-
-.big-jogtracker-text {
-  font-size: 40pt;
-  font-weight: bold;
-  font-style: italic;
-  color: #bbb;
-  text-align: center;
-}
-
 .box .error-box {
   -webkit-border-radius: 4px;
   -moz-border-radius: 4px;
@@ -274,61 +217,21 @@ body.jog-tracker-body {
   border: 1px solid red;
 }
 
-.no-data {
-  color: #555;
-  font-size: 16px;
-  padding-top: 30px;
-  margin-top: 30px;
-  margin-bottom: 30px;
+body.jog-tracker-body {
+  background-color: #eee;
 }
 
-.users-list .pagination {
-  padding-left: 10px;
+.big-jogtracker-text {
+  font-size: 40pt;
+  font-weight: bold;
+  font-style: italic;
+  color: #bbb;
+  text-align: center;
 }
 
-.users-list h3 {
-  float: left;
-  width: 20%;
-}
-
-.user-entry {
-  clear: both;
-  margin: 8px;
-  -webkit-border-radius: 4px;
-  -moz-border-radius: 4px;
-  -ms-border-radius: 4px;
-  border-radius: 4px;
-  -webkit-box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 0.3);
-  -moz-box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 0.3);
-  box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 0.3);
-  padding: 10px;
-  border: 1px solid #bbb;
-  background-color: #f5f5f5;
-  height: 100px;
-}
-.user-entry.selected {
-  background-color: #F7F2E0;
-}
-.user-entry:hover {
-  background-color: #F7F2E0;
-  cursor: pointer;
-}
-.user-entry .user-field {
-  float: left;
-  font-size: 20px;
-  width: 30%;
-}
-.user-entry .user-field span {
-  display: block;
-  font-size: 14px;
-}
-
-.user-edit .form-control {
-  margin-bottom: 10px;
-}
-.user-edit .error-box {
-  margin-top: 10px;
-  padding: 5px;
+.navbar span.glyphicon {
+  font-size: 8pt;
+  margin-right: 6px;
 }
 
 /*! normalize.css v3.0.2 | MIT License | git.io/normalize */
@@ -792,4 +695,134 @@ th {
   -ms-border-radius: 50%;
   border-radius: 50%;
   /* for a circular avatar */
+}
+
+.box .error-box {
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -ms-border-radius: 4px;
+  border-radius: 4px;
+  border: 1px solid #ddd;
+  background-color: #ffeaea;
+}
+.box .error-box h3 {
+  font-size: 14pt;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  font-weight: bold;
+  padding-left: 20px;
+}
+
+.box {
+  border: 1px solid #bbb;
+  background-color: #fff;
+  padding: 10px;
+  margin: 5px;
+  color: #444;
+}
+.box h1 {
+  font-size: 20pt;
+  margin-top: 2px;
+  margin-bottom: 20px;
+}
+.box h3 {
+  font-size: 16pt;
+  margin-top: 2px;
+  margin-bottom: 20px;
+  color: #888;
+}
+.box label {
+  width: 100px;
+}
+.box label.horiz-label {
+  width: 100%;
+}
+
+.form-control.ng-dirty.ng-invalid {
+  border: 1px solid red;
+}
+
+.no-data {
+  color: #555;
+  font-size: 16px;
+  padding-top: 30px;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+.users-list .pagination {
+  padding-left: 10px;
+}
+
+.users-list h3 {
+  float: left;
+  width: 100%;
+}
+
+.user-entry {
+  clear: both;
+  margin: 8px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -ms-border-radius: 4px;
+  border-radius: 4px;
+  -webkit-box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 0.3);
+  -moz-box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 0.3);
+  box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 0.3);
+  padding: 10px;
+  border: 1px solid #bbb;
+  background-color: #f5f5f5;
+  height: 100px;
+  position: relative;
+}
+.user-entry.selected {
+  background-color: #F7F2E0;
+}
+.user-entry:hover {
+  background-color: #F7F2E0;
+  cursor: pointer;
+}
+.user-entry .user-image {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+}
+.user-entry .user-image img {
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  border-radius: 50%;
+}
+.user-entry .user-email {
+  position: absolute;
+  overflow: hidden;
+  font-size: 18px;
+  top: 10px;
+  left: 60px;
+}
+.user-entry .user-fn {
+  position: absolute;
+  top: 40px;
+  left: 60px;
+  overflow: hidden;
+}
+.user-entry .user-fn span {
+  color: #aaa;
+}
+.user-entry .user-ln {
+  position: absolute;
+  top: 70px;
+  left: 60px;
+  overflow: hidden;
+}
+.user-entry .user-ln span {
+  color: #aaa;
+}
+
+.user-edit .form-control {
+  margin-bottom: 10px;
+}
+.user-edit .error-box {
+  margin-top: 10px;
+  padding: 5px;
 }

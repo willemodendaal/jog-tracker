@@ -36,7 +36,7 @@
 
         login: host + '/token',
         userInfo: baseUrl + '/account',
-        users: baseUrl + '/user',
+        users: userUrl,
         user: userUrl,
         updateUser: updateUserUrl,
 
