@@ -35,3 +35,6 @@
 .box label {
   width: 100px;
 }
+.box label.horiz-label {
+  width: 100%;
+}

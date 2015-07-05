@@ -59,7 +59,7 @@
             _setDisabled(true);
             $scope.friendlyErrors = [];
 
-            var duration = moment.duration($scope.durationMinutes, 'minutes');
+            var duration = moment.duration(Number($scope.durationMinutes), 'minutes');
             var durationString = duration.hours() + ':' + duration.minutes() + ':' + duration.seconds();
 
             jogDataFactory.create($scope.date, $scope.distanceKm, durationString)

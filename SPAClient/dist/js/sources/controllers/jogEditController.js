@@ -13,12 +13,12 @@
 
     function jogEditController($scope, $log, jogDataFactory, notificationUtils, validatorUtils) {
 
-
+        $scope.panelOpen = true; //Show 'add' panel by default.
         $scope.dtFormat = 'yyyy/MM/dd';
         $scope.date = moment().format('YYYY/MM/DD');
 
         var _reset = function() {
-            $scope.title = 'New Jog';
+            $scope.title = 'Record Jog';
             $scope.buttonText = 'Create New';
             $scope.friendlyErrors = []; //validation errors.
             $scope.disableButton = false;
@@ -38,6 +38,16 @@
             }
         };
 
+        $scope.startAddNew = function() {
+            _reset();
+            $scope.panelOpen = true;
+        };
+
+        $scope.closePanel = function() {
+            $scope.panelOpen = false;
+            _reset();
+        };
+
         $scope.toggleDatePicker = function($event) {
             $event.preventDefault();
             $event.stopPropagation();
@@ -49,7 +59,7 @@
             _setDisabled(true);
             $scope.friendlyErrors = [];
 
-            var duration = moment.duration($scope.durationMinutes, 'minutes');
+            var duration = moment.duration(Number($scope.durationMinutes), 'minutes');
             var durationString = duration.hours() + ':' + duration.minutes() + ':' + duration.seconds();
 
             jogDataFactory.create($scope.date, $scope.distanceKm, durationString)
@@ -57,7 +67,7 @@
                 {
                     notificationUtils.showSuccess('Jog logged.', 'Success');
                     $scope.$emit('refresh'); //Indicate that a refresh is required.
-                    _reset();
+                    $scope.closePanel();
                 })
                 .catch(function(err) {
                     _setDisabled(false);

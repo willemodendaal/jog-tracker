@@ -35,6 +35,9 @@
 .box label {
   width: 100px;
 }
+.box label.horiz-label {
+  width: 100%;
+}
 
 body.jog-tracker-body {
   background-color: #eee;

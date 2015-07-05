@@ -57,7 +57,7 @@
 
         <!-- Add and Edit. -->
         <div class="col-md-4">
-            <div ng-controller="jogEditController" class="box">
+            <div ng-controller="jogEditController" class="box jog-edit">
 
                 <div ng-hide="panelOpen">
                     <h3>Actions</h3>
@@ -67,10 +67,15 @@
 
                 </div>
                 <div ng-show="panelOpen">
-                    <h3>{{ title }}</h3>
+                    <form ng-submit="save()">
 
-                    <p class="input-group">
+                        <h3>{{ title }}</h3>
+
+                        <label class="horiz-label" for="date">Date</label>
+
                         <input type="text"
+                               id="date"
+                               name="date"
                                datepicker-popup="{{dtFormat}}"
                                class="form-control"
                                ng-model="date"
@@ -78,18 +83,19 @@
                                ng-required="true"
                                ng-click="toggleDatePicker($event)"
                             />
-                    <span class="input-group-btn">
-                        <button type="button" class="btn btn-default" ng-click="toggleDatePicker($event)"><i
-                            class="glyphicon glyphicon-calendar"></i></button>
-                    </span>
-                    </p>
 
-                    <input type="number" class="form-control" placeholder="Duration(minutes)"
-                           ng-model="durationMinutes">
-                    <input type="number" class="form-control" placeholder="Distance(km)" ng-model="distanceKm">
-                    <input type="button" class="btn btn-primary" ng-click="save()" value="{{ buttonText }}">
-                    <button type="button" class="btn btn-default" ng-click="closePanel()">Cancel</button>
-                    <error-panel></error-panel>
+                        <label class="horiz-label" for="duration">Duration (minutes)</label>
+                        <input type="text" id="duration" name="duration" class="form-control"
+                               placeholder="Duration(minutes)" ng-model="durationMinutes" select-on-click>
+
+                        <label class="horiz-label" for="distance">Distance (km)</label>
+                        <input type="text" id="distance" name="distance" class="form-control"
+                               placeholder="Distance(km)" ng-model="distanceKm" select-on-click>
+
+                        <input type="submit" class="btn btn-primary" value="{{ buttonText }}">
+                        <button type="button" class="btn btn-default" ng-click="closePanel()">Cancel</button>
+                        <error-panel></error-panel>
+                    </form>
 
                 </div>
             </div>

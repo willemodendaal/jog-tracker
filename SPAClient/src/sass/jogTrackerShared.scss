@@ -59,5 +59,9 @@ $box-margin: 5px;
     label {
         width: 100px;
     }
+
+    label.horiz-label {
+        width: 100%;
+    }
 }
 

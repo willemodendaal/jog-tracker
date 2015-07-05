@@ -35,6 +35,9 @@
 .box label {
   width: 100px;
 }
+.box label.horiz-label {
+  width: 100%;
+}
 
 .no-data {
   color: #555;
@@ -106,4 +109,12 @@
   float: right;
   width: 100px;
   margin-left: 10px;
+}
+
+.jog-edit .form-control {
+  margin-bottom: 10px;
+}
+.jog-edit .error-box {
+  margin-top: 10px;
+  padding: 5px;
 }
