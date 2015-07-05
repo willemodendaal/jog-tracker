@@ -41,6 +41,7 @@
         };
 
         $scope.resetPassword = function() {
+            $state.go('resetpassword');
         };
 
         var _setDisabled = function (disabled) {
