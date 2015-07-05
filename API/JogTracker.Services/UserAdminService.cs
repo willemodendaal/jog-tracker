@@ -31,7 +31,7 @@ namespace JogTracker.Services
         Task<string> ResetPasswordAsync(string userId, string token, string newPassword);
         Task<PagedModel<JogTrackerUser>> GetUsersAsync(int pageIndex, int pageSize);
         Task<JogTrackerUser> GetUserAsync(string userId);
-        Task<UpdateResult> UpdateAsync(string userId, string firstName, string lastName, string email);
+        Task<UpdateResult> UpdateAsync(string userId, string firstName, string lastName, string email = null);
     }
 
     public class UserAdminService : IUserAdminService
@@ -134,7 +134,7 @@ namespace JogTracker.Services
             return await _dbContext.Users.FirstOrDefaultAsync(u => u.Id == userId);
         }
 
-        public async Task<UpdateResult> UpdateAsync(string userId, string firstName, string lastName, string email)
+        public async Task<UpdateResult> UpdateAsync(string userId, string firstName, string lastName, string email = null)
         {
             var user = await _dbContext.Users.FirstOrDefaultAsync(u => u.Id == userId);
 
@@ -145,7 +145,7 @@ namespace JogTracker.Services
 
             user.FirstName = firstName;
             user.LastName = lastName;
-            user.Email = email;
+            user.Email = email ?? user.Email;
             await _dbContext.SaveChangesAsync();
 
             return UpdateResult.Success();

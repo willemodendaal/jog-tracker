@@ -201,6 +201,7 @@
     <Compile Include="ApiControllers\JogApiControllerBase.cs" />
     <Compile Include="ApiControllers\UserController.cs" />
     <Compile Include="Filters\HandleErrorFilter.cs" />
+    <Compile Include="Models\AccountUpdateBindingModel.cs" />
     <Compile Include="Models\BindingModelBase.cs" />
     <Compile Include="Models\JsonResults\IPagingResults.cs" />
     <Compile Include="Models\JsonResults\JogJsonResult.cs" />
@@ -211,6 +212,7 @@
     <Compile Include="Models\ResetPasswordBindingModel.cs" />
     <Compile Include="Models\UserFilterBindingModel.cs" />
     <Compile Include="Models\UserUpdateBindingModel.cs" />
+    <Compile Include="Models\Validators\AccountUpdateBindingValidator.cs" />
     <Compile Include="Models\Validators\JogBindingValidator.cs" />
     <Compile Include="Models\Validators\RegisterBindingModelValidator.cs" />
     <Compile Include="Models\Validators\RequestResetPasswordModelValidator.cs" />

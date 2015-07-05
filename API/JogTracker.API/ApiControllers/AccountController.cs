@@ -112,5 +112,22 @@ namespace JogTracker.Api.ApiControllers
             return Ok();
         }
 
+        [Route("")]
+        [HttpPut]
+        [Validate]
+        public async Task<IHttpActionResult> Update(AccountUpdateBindingModel model)
+        {
+            UpdateResult result = await _userAdminService.UpdateAsync(base.GetCurrentUserId(), model.FirstName, model.LastName);
+
+            if (!result.Succeeded)
+            {
+                //Return info about why request failed. (i.e. password not complex enough)
+                //  Should be picked up by validation layer in most cases.
+                return BadRequest(result.ErrorMessage);
+            }
+
+            return Ok();
+        }
+
     }
 }
