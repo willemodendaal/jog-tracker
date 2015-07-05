@@ -3,19 +3,25 @@
         <!-- List -->
         <div class="col-md-8">
             <div class="box">
-                <h3>Jogs</h3>
-                <table>
-                    <tr ng-repeat="j in jogs">
-                        <td>{{ j.id }} (hidden)</td>
-                        <td>{{ j.date }}</td>
-                        <td>{{ j.duration }}</td>
-                        <td>{{ j.distanceKm }}</td>
-                        <td>{{ j.averageKmh }}</td>
-                    </tr>
-                    <tr ng-if="noData()">
-                        <td>No jogs to show for this time period.</td>
-                    </tr>
-                </table>
+                <h3>My Jogs</h3>
+                    <div ng-if="noData()" class="no-data">
+                        No jogs to show for this time period.
+                    </div>
+                    <div class="jog-entry" ng-repeat="j in jogs" ng-click="selectJog(j)">
+                        <div class="jog-field duration">
+                            <span>Duration</span>
+                            {{ j.duration }}
+                        </div>
+                        <div class="jog-field distance">
+                            <span>Distance (km)</span>
+                            {{ j.distanceKm }}
+                        </div>
+                        <div class="jog-field average">
+                            <span>Average km/h</span>
+                            {{ j.averageKmh }}
+                        </div>
+                        <div class="date">{{ j.date | date : 'dd MMM yyyy' }}</div>
+                    </div>
             </div>
         </div>
 
@@ -30,6 +36,7 @@
                            class="form-control"
                            ng-model="date"
                            is-open="opened"
+                           ng-required="true"
                         />
                     <span class="input-group-btn">
                         <button type="button" class="btn btn-default" ng-click="toggleDatePicker($event)"><i class="glyphicon glyphicon-calendar"></i></button>

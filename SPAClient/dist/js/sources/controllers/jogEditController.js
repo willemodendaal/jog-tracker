@@ -13,16 +13,19 @@
 
     function jogEditController($scope, $log, jogDataFactory, notificationUtils, validatorUtils) {
 
-        $scope.title = 'New Jog';
-        $scope.buttonText = 'Create New';
-        $scope.friendlyErrors = []; //validation errors.
-        $scope.disableButton = false;
-        $scope.dtFormat = 'yyyy/MM/dd';
-        $scope.opened = false;
 
+        $scope.dtFormat = 'yyyy/MM/dd';
         $scope.date = moment().format('YYYY/MM/DD');
-        $scope.durationMinutes = 20;
-        $scope.distanceKm = 0;
+
+        var _reset = function() {
+            $scope.title = 'New Jog';
+            $scope.buttonText = 'Create New';
+            $scope.friendlyErrors = []; //validation errors.
+            $scope.disableButton = false;
+            $scope.opened = false;
+            $scope.durationMinutes = 0;
+            $scope.distanceKm = 0;
+        };
 
         var _setDisabled = function(disabled) {
             if (disabled) {
@@ -54,6 +57,7 @@
                 {
                     notificationUtils.showSuccess('Jog logged.', 'Success');
                     $scope.$emit('refresh'); //Indicate that a refresh is required.
+                    _reset();
                 })
                 .catch(function(err) {
                     _setDisabled(false);
@@ -67,6 +71,7 @@
                 });
         };
 
+        _reset();
         $log.info('JogEdit controller loaded.');
     }
 

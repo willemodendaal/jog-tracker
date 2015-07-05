@@ -1,0 +1,52 @@
+@import 'jogTrackerShared';
+
+$jogBorder: 1px solid #bbb;
+$selectedJogBackgroundColor: #F7F2E0;
+$jogBackgroundColor: #eee;
+
+.no-data {
+    color: #555;
+    font-size: 16px;
+}
+
+.jog-entry {
+    @include border-radius(4px);
+    @include shadow();
+    padding: 10px;
+    border: $jogBorder;
+    background-color: $jogBackgroundColor;
+    height: 90px;
+
+    .date {
+        display: block;
+        font-size: 14px;
+        color: #999;
+        clear:both;
+        padding-top: 10px;
+    }
+
+    .jog-field {
+        float: left;
+        font-size: 20px;
+        width: 30%;
+
+        span {
+            display: block;
+            font-size: 14px;
+        }
+
+        &.duration {
+        }
+        &.distance {
+        }
+        &.average {
+            float: right;
+        }
+    }
+
+
+    .selected {
+        background-color: $selectedJogBackgroundColor;
+
+    }
+}

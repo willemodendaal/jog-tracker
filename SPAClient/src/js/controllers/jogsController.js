@@ -1,4 +1,4 @@
-(function (moment) {
+(function (moment, _) {
 
     angular
         .module('jogTracker')
@@ -26,6 +26,26 @@
             _reloadData();
         });
 
+        $scope.selectJog = function(jog) {
+            _deselectOtherJogs(jog);
+            jog.selected = true;
+            //Open in 'edit' panel.
+        };
+
+        var _deselectOtherJogs = function(jog) {
+            var otherJogs = _.filter(
+                $scope.jogs,
+                function(j) {
+                    return j.id != jog.id;
+                });
+
+            _.each(
+                otherJogs,
+                function(j) {
+                    j.selected = false;
+                });
+        };
+
         var _reloadData = function() {
             jogDataFactory.getList($scope.fromDate, $scope.toDate, $scope.pageIndex, $scope.pageSize)
                 .then(function(data)
@@ -41,4 +61,4 @@
         $log.info('Jogs controller loaded.');
     }
 
-}(moment));
+}(moment, _));

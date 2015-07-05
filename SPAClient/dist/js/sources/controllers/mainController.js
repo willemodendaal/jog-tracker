@@ -19,7 +19,7 @@
 
         var _getUserImage = function(email) {
             var hash = md5.createHash(email || '');
-            return 'http://www.gravatar.com/avatar/' + hash + '?s=20';
+            return 'http://www.gravatar.com/avatar/' + hash + '?s=20&d=mm';
         };
 
         var _fetchUserInfo = function() {
