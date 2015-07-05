@@ -38,8 +38,10 @@ namespace JogTracker.Api.ApiControllers
                 //This should never happen, but just in case someone breaks the auth logic.
                 return BadRequest("Invalid user specified.");
             }
+            var jsonUser = new UserJsonResult().Map(currentUser);
+            jsonUser.isAdmin = base.UserIsAdmin();
 
-            return Ok(new UserJsonResult().Map(currentUser));
+            return Ok(jsonUser);
         }
 
         [Route("register")]
