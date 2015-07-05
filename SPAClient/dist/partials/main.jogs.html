@@ -7,17 +7,17 @@
                 <div class="jog-filter">
                     <input class="form-control"
                            datepicker-popup="{{dtFormat}}"
-                           class="form-control"
                            ng-model="dtPickers.to.date"
+                           ng-change="dateChanged()"
                            is-open="dtPickers.to.opened" placeholder="To date"
-                           ng-click="toggleDatePicker($event, dtPickers.to)">
+                           ng-click="toggleDatePicker($event, dtPickers.to)" />
                     <span>to</span>
                     <input class="form-control"
                            datepicker-popup="{{dtFormat}}"
-                           class="form-control"
                            ng-model="dtPickers.from.date"
+                           ng-change="dateChanged()"
                            is-open="dtPickers.from.opened" placeholder="From date"
-                           ng-click="toggleDatePicker($event, dtPickers.from)">
+                           ng-click="toggleDatePicker($event, dtPickers.from)" />
                 </div>
                 <div ng-if="noData()" class="no-data">
                     No jogs to show for this time period.
@@ -39,6 +39,7 @@
                 </div>
 
                 <pagination
+                    ng-if="!noData()"
                     direction-links="false"
                     boundary-links="true"
                     total-items="totalItems"

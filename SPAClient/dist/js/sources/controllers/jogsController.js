@@ -13,14 +13,12 @@
     function jogsController($scope, $log, jogDataFactory, notificationUtils) {
 
         $scope.jogs = [];
-        $scope.fromDate = moment().subtract(7, 'days'); //Default filter from last week.
-        $scope.toDate = moment();
         $scope.pageNumber = 1;
         $scope.pageSize = 3;
         $scope.totalItems = 0;
         $scope.dtPickers = {
-            from: { opened: false, date: null},
-            to: { opened: false, date: null}
+            from: { opened: false, date: moment().subtract(1, 'months').format($scope.dtFormat)},
+            to: { opened: false, date: moment().format($scope.dtFormat)}
         };
         $scope.dtFormat = 'yyyy/MM/dd';
 
@@ -33,6 +31,10 @@
         });
 
         $scope.pageChanged = function() {
+            _reloadData();
+        };
+
+        $scope.dateChanged = function() {
             _reloadData();
         };
 
@@ -63,7 +65,19 @@
         };
 
         var _reloadData = function() {
-            jogDataFactory.getList($scope.fromDate, $scope.toDate, $scope.pageNumber - 1, $scope.pageSize)
+
+            var fromDate = $scope.dtPickers.from.date;
+            var toDate = $scope.dtPickers.to.date;
+
+            if (!fromDate) {
+                fromDate = moment().subtract(1, 'months');
+            }
+
+            if (!toDate) {
+                toDate = moment();
+            }
+
+            jogDataFactory.getList(fromDate, toDate, $scope.pageNumber - 1, $scope.pageSize)
                 .then(function(data)
                 {
                     $scope.totalItems = data.TotalResults;

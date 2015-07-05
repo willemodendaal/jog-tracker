@@ -10,7 +10,7 @@
         '$q'
     ];
 
-    var dateFormat = 'YYYY-MM-DDTHH:mm:ss';
+    var dateFormat = 'YYYY-MM-DDT00:00:00';
 
     function jogDataFactory($log, apiUrls, $http, $q) {
         $log.info('jogDataFactory loaded.');
@@ -21,9 +21,36 @@
         var getList = function(fromDate, toDate, pageIndex, pageSize) {
             var deferred = $q.defer();
 
+            var from;
+            if (fromDate.format) {
+                //already a moment date.
+                from = fromDate.format(dateFormat);
+            }
+            else {
+                from = moment(fromDate).format(dateFormat);
+            }
+
+            var to;
+            if (toDate.format) {
+                //already a moment date.
+                //Add 1 day, we want the whole of the end date.
+                to = toDate.add(1,'days').format(dateFormat);
+            }
+            else {
+                //Add 1 day, we want the whole of the end date.
+                to = moment(toDate).add(1,'days').format(dateFormat);
+            }
+
+            //Swap the dates if they are the wrong way around (lets be nice to the user).
+            if (moment(fromDate) > moment(toDate)) {
+                var temp = to;
+                to = from;
+                from = temp;
+            }
+
             var payLoad = {
-                fromDate: fromDate.format(dateFormat),
-                toDate: toDate.format(dateFormat),
+                fromDate: from,
+                toDate: to,
                 pageIndex: pageIndex,
                 pageSize: pageSize
             };

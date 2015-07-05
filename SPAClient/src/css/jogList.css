@@ -39,6 +39,9 @@
 .no-data {
   color: #555;
   font-size: 16px;
+  padding-top: 30px;
+  margin-top: 30px;
+  margin-bottom: 30px;
 }
 
 .jogs-list .pagination {
@@ -101,6 +104,6 @@
 }
 .jog-filter input {
   float: right;
-  width: 120px;
+  width: 100px;
   margin-left: 10px;
 }
