@@ -17,6 +17,7 @@
         $scope.dtFormat = 'yyyy/MM/dd';
         $scope.date = moment().format('YYYY/MM/DD');
 
+
         var _reset = function() {
             $scope.title = 'Record Jog';
             $scope.buttonText = 'Create New';
