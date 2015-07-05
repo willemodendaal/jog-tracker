@@ -145,7 +145,11 @@ namespace JogTracker.Services
 
             user.FirstName = firstName;
             user.LastName = lastName;
-            user.Email = email ?? user.Email;
+
+            if (email != null)
+            {
+                user.Email = email;
+            }
             await _dbContext.SaveChangesAsync();
 
             return UpdateResult.Success();
