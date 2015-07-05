@@ -29,6 +29,7 @@
         var _fetchUserInfo = function() {
             accountFactory.getUserInfo()
                 .then(function(userInfo) {
+                    $scope.email = userInfo.data.email;
                     $scope.firstName = userInfo.data.firstName;
                     $scope.lastName = userInfo.data.lastName;
                     $scope.loading = false;
