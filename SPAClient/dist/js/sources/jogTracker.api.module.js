@@ -16,6 +16,18 @@
         return baseUrl + '/jog/' + jogId + '/update';
     };
 
+    var updateUserUrl = function(userId) {
+        return baseUrl + '/user/' + userId + '/update';
+    };
+
+    var userUrl = function(userId) {
+        if (userId) {
+            return baseUrl + '/user/' + userId;
+        }
+
+        return baseUrl + '/user';
+    };
+
     apiModule.constant('apiUrls', {
         register: baseUrl + '/account/register',
         registerAsAdmin: baseUrl + '/account/registerAsAdmin',
@@ -24,6 +36,9 @@
 
         login: host + '/token',
         userInfo: baseUrl + '/account',
+        users: baseUrl + '/user',
+        user: userUrl,
+        updateUser: updateUserUrl,
 
         jogs: jogUrl,
         newJog: baseUrl + '/jog/new',
