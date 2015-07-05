@@ -30,10 +30,6 @@ angular.module('jogTracker', [
                 url: "/jogs",
                 templateUrl: "partials/main.jogs.html"
             })
-            .state('main.jogs.edit', {
-                url: "/{jogId}?{duration}&{distance}&{date}",
-                templateUrl: "partials/register.html" //Open same page, but in edit mode.
-            })
             .state('main.reports', {
                 url: "/reports",
                 templateUrl: "partials/main.reports.html"

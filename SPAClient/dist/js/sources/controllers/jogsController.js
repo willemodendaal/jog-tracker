@@ -8,9 +8,9 @@
         '$scope',
         'jogDataFactory',
         'notificationUtils',
-        '$state'];
+        '$rootScope'];
 
-    function jogsController($scope, jogDataFactory, notificationUtils, $state) {
+    function jogsController($scope, jogDataFactory, notificationUtils, $rootScope) {
 
         $scope.jogs = [];
         $scope.pageNumber = 1;
@@ -40,7 +40,7 @@
 
         $scope.selectJog = function(jog) {
             _selectOnlyJog(jog.id);
-            $state.go('main.jogs.edit', {jogId: jog.id, duration: jog.duration, distance: jog.distanceKm, date: jog.date});
+            $rootScope.$broadcast('editJog', jog);
         };
 
         $scope.toggleDatePicker = function($event, picker) {

@@ -19,11 +19,8 @@
         $scope.dtFormat = 'yyyy/MM/dd';
         $scope.date = moment().format('YYYY/MM/DD');
 
-        $rootScope.$on('$stateChangeSuccess', function(event, nextState, currentState) {
-            //Open in edit mode, if user has navigated to jogs/{jogId}
-            if (nextState.name == 'main.jogs.edit') {
-                _editJog($stateParams.jogId, $stateParams.duration, $stateParams.distance, $stateParams.date);
-            }
+        $scope.$on('editJog', function(event, jog) {
+            _editJog(jog);
         });
 
         var _reset = function() {
@@ -36,14 +33,14 @@
             $scope.distanceKm = 0;
         };
 
-        var _editJog = function(jogId, duration, distance, date) {
+        var _editJog = function(jog) {
             _reset();
             $scope.title = 'Edit Jog';
             $scope.buttonText = 'Update';
-            $scope.jogId = jogId;
-            $scope.date = date;
-            $scope.durationMinutes = duration;
-            $scope.distanceKm = distance;
+            $scope.jogId = jog.Id;
+            $scope.date = jog.date;
+            $scope.durationMinutes = jog.duration;
+            $scope.distanceKm = jog.distanceKm;
         };
 
         var _setDisabled = function(disabled) {
