@@ -105,7 +105,7 @@ namespace JogTracker.Services
 
             string token = _userManager.GeneratePasswordResetToken(user.Id);
 
-            string emailBody = _emailService.GetResetPasswordEmailBody(user.Id, token, user.UserName);
+            string emailBody = _emailService.GetResetPasswordEmailBody(user.Id, token, user.FirstName ?? user.UserName);
             await _emailService.SendEmailTo(user.UserName, "Password reset request", emailBody);
         }
 

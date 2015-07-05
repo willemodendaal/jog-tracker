@@ -13,7 +13,7 @@ namespace JogTracker.Services
     public interface IEmailService
     {
         Task SendEmailTo(string address, string subject, string body);
-        string GetResetPasswordEmailBody(string userId, string resetToken, string userName);
+        string GetResetPasswordEmailBody(string userId, string resetToken, string firstName);
     }
 
     public class EmailService : IEmailService
@@ -29,9 +29,9 @@ namespace JogTracker.Services
             smtpClient.Send(mail);
         }
 
-        public string GetResetPasswordEmailBody(string userId, string resetToken, string userName)
+        public string GetResetPasswordEmailBody(string userId, string resetToken, string firstName)
         {
-            string emailBody = new ResetEmailBodyGenerator().GetEmailBody(userName, userId, resetToken);
+            string emailBody = new ResetEmailBodyGenerator().GetEmailBody(firstName, userId, resetToken);
             return emailBody;
         }
 
