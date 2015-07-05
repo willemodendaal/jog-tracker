@@ -94,6 +94,15 @@ namespace JogTracker.Services
         public async Task RequestResetPasswordAsync(string email)
         {
             JogTrackerUser user = _userManager.FindByEmail(email);
+
+            if (user == null)
+            {
+                //Even if email was invalid, we don't want to return an error. Don't
+                //  want to give hackers an opportunity to figure out which emails in the
+                //  system are valid.
+                return;
+            }
+
             string token = _userManager.GeneratePasswordResetToken(user.Id);
 
             string emailBody = _emailService.GetResetPasswordEmailBody(user.Id, token, user.UserName);
