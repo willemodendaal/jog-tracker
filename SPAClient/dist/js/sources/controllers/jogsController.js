@@ -15,8 +15,9 @@
         $scope.jogs = [];
         $scope.fromDate = moment().subtract(7, 'days'); //Default filter from last week.
         $scope.toDate = moment();
-        $scope.pageIndex = 0;
-        $scope.pageSize = 30;
+        $scope.pageNumber = 1;
+        $scope.pageSize = 3;
+        $scope.totalItems = 0;
 
         $scope.noData = function() {
             return $scope.jogs.length == 0;
@@ -25,6 +26,10 @@
         $scope.$on('refresh', function() {
             _reloadData();
         });
+
+        $scope.pageChanged = function() {
+            _reloadData();
+        };
 
         $scope.selectJog = function(jog) {
             _deselectOtherJogs(jog);
@@ -47,9 +52,11 @@
         };
 
         var _reloadData = function() {
-            jogDataFactory.getList($scope.fromDate, $scope.toDate, $scope.pageIndex, $scope.pageSize)
+            jogDataFactory.getList($scope.fromDate, $scope.toDate, $scope.pageNumber - 1, $scope.pageSize)
                 .then(function(data)
                 {
+                    $scope.totalItems = data.TotalResults;
+                    $scope.pageNumber = data.PageIndex + 1;
                     $scope.jogs = data.Items;
                 })
                 .catch(function(err) {

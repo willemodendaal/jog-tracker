@@ -40,6 +40,10 @@
   font-size: 16px;
 }
 
+.jogs-list .pagination {
+  padding-left: 10px;
+}
+
 .jog-entry {
   margin: 8px;
   -webkit-border-radius: 4px;
@@ -53,6 +57,9 @@
   border: 1px solid #bbb;
   background-color: #f5f5f5;
   height: 100px;
+}
+.jog-entry.selected {
+  background-color: #F7F2E0;
 }
 .jog-entry .date {
   display: block;
@@ -72,7 +79,4 @@
 }
 .jog-entry .jog-field.average {
   float: right;
-}
-.jog-entry .selected {
-  background-color: #F7F2E0;
 }
