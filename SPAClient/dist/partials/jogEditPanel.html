@@ -26,7 +26,7 @@
                    ng-required="true"
                 />
 
-            <label class="horiz-label" for="duration">Duration (minutes)</label>
+            <label class="horiz-label" for="duration">Duration (minutes or hh:mm:ss)</label>
             <input  type="text"
                     min="0"
                     max="1440"
@@ -36,7 +36,7 @@
                     placeholder="Duration(minutes)"
                     ng-model="durationMinutes"
                     select-on-click
-                    ng-pattern="/^[0-9]{1,4}$/"
+                    ng-pattern="/^[0-9:]{1,9}$/"
                     ng-required="true"
                 >
 

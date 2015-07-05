@@ -25,7 +25,7 @@
 
         var _reset = function() {
             $scope.jogId = null;
-            $scope.title = 'Record Jog';
+            $scope.title = '* New Jog';
             $scope.buttonText = 'Create New';
             $scope.friendlyErrors = []; //validation errors.
             $scope.disableButton = false;
@@ -41,7 +41,7 @@
             $scope.title = 'Edit Jog';
             $scope.buttonText = 'Update';
             $scope.date = jog.date;
-            $scope.durationMinutes = moment.duration(jog.duration).asMinutes();
+            $scope.durationMinutes = _getDurationString(moment.duration(jog.duration));
             $scope.distanceKm = jog.distanceKm;
         };
 
@@ -76,7 +76,7 @@
         function _createNewJog(durationString) {
             jogDataFactory.create($scope.date, $scope.distanceKm, durationString)
                 .then(function (data) {
-                    notificationUtils.showSuccess('Jog recorded.', 'Success');
+                    notificationUtils.showSuccess('Jog created.', 'Success');
                     $scope.$emit('refresh'); //Indicate that a refresh is required.
                     $scope.closePanel();
                 })
@@ -84,7 +84,7 @@
                     _setDisabled(false);
 
                     if (err.status == 500) {
-                        notificationUtils.showErrorToast(err, 'Error recording jog');
+                        notificationUtils.showErrorToast(err, 'Error creating jog');
                     } else {
                         //Show error on the page (could be something like 'user name taken already'.
                         $scope.friendlyErrors = validatorUtils.getValidationErrors(err);
@@ -110,6 +110,23 @@
                 });
         }
 
+        var _getDurationString = function(scopeDuration) {
+            var durationString = '00:00:00';
+            if (scopeDuration.asMinutes) {
+                //Already a duration object.
+                durationString = scopeDuration.hours().pad(2) + ':' + scopeDuration.minutes().pad(2) + ':' + scopeDuration.seconds().pad(2);
+            }
+            else if (scopeDuration.indexOf(':') > -1) {
+                var duration = moment.duration(scopeDuration);
+                durationString = duration.hours().pad(2) + ':' + duration.minutes().pad(2) + ':' + duration.seconds().pad(2);
+            }
+            else {
+                var duration = moment.duration(Number(scopeDuration), 'minutes');
+                durationString = duration.hours().pad(2) + ':' + duration.minutes().pad(2) + ':' + duration.seconds().pad(2);
+            }
+            return durationString;
+        };
+
         $scope.save = function(validForm) {
 
             if (! validForm) {
@@ -119,9 +136,7 @@
             _setDisabled(true);
             $scope.friendlyErrors = [];
 
-            var duration = moment.duration(Number($scope.durationMinutes), 'minutes');
-            var durationString = duration.hours() + ':' + duration.minutes() + ':' + duration.seconds();
-
+            var durationString = _getDurationString($scope.durationMinutes);
             if ($scope.jogId == null) {
                 _createNewJog(durationString);
             }

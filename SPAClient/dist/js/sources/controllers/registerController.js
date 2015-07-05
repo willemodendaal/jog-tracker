@@ -36,7 +36,7 @@
             accountFactory.login($scope.email, $scope.password)
                 .then(function (token) {
                     sessionStorage.access_token = token;
-                    $state.go('main');
+                    $state.go('main.jogs');
                 })
                 .catch(function (err) {
                     notificationUtils.showErrorToast(err, 'Login Error');

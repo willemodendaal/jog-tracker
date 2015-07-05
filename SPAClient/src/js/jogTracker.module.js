@@ -43,3 +43,10 @@ angular.module('jogTracker', [
                 templateUrl: "partials/main.account.html"
             });
     });
+
+//Extra global functions
+Number.prototype.pad = function(size) {
+    var s = String(this);
+    while (s.length < (size || 2)) {s = "0" + s;}
+    return s;
+};
