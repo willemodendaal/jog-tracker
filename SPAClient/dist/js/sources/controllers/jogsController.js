@@ -18,6 +18,11 @@
         $scope.pageNumber = 1;
         $scope.pageSize = 3;
         $scope.totalItems = 0;
+        $scope.dtPickers = {
+            from: { opened: false, date: null},
+            to: { opened: false, date: null}
+        };
+        $scope.dtFormat = 'yyyy/MM/dd';
 
         $scope.noData = function() {
             return $scope.jogs.length == 0;
@@ -35,6 +40,12 @@
             _deselectOtherJogs(jog);
             jog.selected = true;
             //Open in 'edit' panel.
+        };
+
+        $scope.toggleDatePicker = function($event, picker) {
+            $event.preventDefault();
+            $event.stopPropagation();
+            picker.opened = !picker.opened;
         };
 
         var _deselectOtherJogs = function(jog) {

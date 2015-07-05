@@ -13,7 +13,13 @@ $jogBackgroundColor: #f5f5f5;
     padding-left: 10px;
 }
 
+.jogs-list h3 {
+    float: left;
+    width: 20%;
+}
+
 .jog-entry {
+    clear: both;
     margin: 8px;
     @include border-radius(4px);
     @include shadow();
@@ -53,5 +59,23 @@ $jogBackgroundColor: #f5f5f5;
             float: right;
         }
     }
+}
 
+.jog-filter {
+    float: right;
+    width: 80%;
+    padding-right: 10px;
+
+    span {
+        float: right;
+        margin-left: 10px;
+        margin-top: 8px;
+        color: #888;
+    }
+
+    input {
+        float: right;
+        width: 120px;
+        margin-left: 10px;
+    }
 }

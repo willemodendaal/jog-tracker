@@ -1,6 +1,7 @@
 $error-background: #ffeaea;
 $error-border: #ddd;
 $box-padding: 10px;
+$lightHeading: #888;
 
 $box-background: #fff;
 $box-foreground: #444;
@@ -52,6 +53,7 @@ $box-margin: 5px;
         font-size: 16pt;
         margin-top: 2px;
         margin-bottom: 20px;
+        color: $lightHeading;
     }
 
     label {

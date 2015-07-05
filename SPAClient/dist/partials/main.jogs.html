@@ -4,33 +4,48 @@
         <div class="col-md-8">
             <div class="jogs-list box">
                 <h3>My Jogs</h3>
-                    <div ng-if="noData()" class="no-data">
-                        No jogs to show for this time period.
+                <div class="jog-filter">
+                    <input class="form-control"
+                           datepicker-popup="{{dtFormat}}"
+                           class="form-control"
+                           ng-model="dtPickers.to.date"
+                           is-open="dtPickers.to.opened" placeholder="To date"
+                           ng-click="toggleDatePicker($event, dtPickers.to)">
+                    <span>to</span>
+                    <input class="form-control"
+                           datepicker-popup="{{dtFormat}}"
+                           class="form-control"
+                           ng-model="dtPickers.from.date"
+                           is-open="dtPickers.from.opened" placeholder="From date"
+                           ng-click="toggleDatePicker($event, dtPickers.from)">
+                </div>
+                <div ng-if="noData()" class="no-data">
+                    No jogs to show for this time period.
+                </div>
+                <div class="jog-entry" ng-repeat="j in jogs" ng-click="selectJog(j)">
+                    <div class="jog-field duration">
+                        <span>Duration</span>
+                        {{ j.duration }}
                     </div>
-                    <div class="jog-entry" ng-repeat="j in jogs" ng-click="selectJog(j)">
-                        <div class="jog-field duration">
-                            <span>Duration</span>
-                            {{ j.duration }}
-                        </div>
-                        <div class="jog-field distance">
-                            <span>Distance (km)</span>
-                            {{ j.distanceKm | number }}
-                        </div>
-                        <div class="jog-field average">
-                            <span>Average km/h</span>
-                            {{ j.averageKmh | number : 1 }}
-                        </div>
-                        <div class="date">{{ j.date | date : 'dd MMM yyyy' }}</div>
+                    <div class="jog-field distance">
+                        <span>Distance (km)</span>
+                        {{ j.distanceKm | number }}
                     </div>
+                    <div class="jog-field average">
+                        <span>Average km/h</span>
+                        {{ j.averageKmh | number : 1 }}
+                    </div>
+                    <div class="date">{{ j.date | date : 'dd MMM yyyy' }}</div>
+                </div>
 
-                    <pagination
-                        direction-links="false"
-                        boundary-links="true"
-                        total-items="totalItems"
-                        ng-change="pageChanged()"
-                        items-per-page="pageSize"
-                        max-size="10"
-                        ng-model="pageNumber"></pagination>
+                <pagination
+                    direction-links="false"
+                    boundary-links="true"
+                    total-items="totalItems"
+                    ng-change="pageChanged()"
+                    items-per-page="pageSize"
+                    max-size="10"
+                    ng-model="pageNumber"></pagination>
 
             </div>
         </div>
@@ -47,6 +62,7 @@
                            ng-model="date"
                            is-open="opened"
                            ng-required="true"
+                           ng-click="toggleDatePicker($event)"
                         />
                     <span class="input-group-btn">
                         <button type="button" class="btn btn-default" ng-click="toggleDatePicker($event)"><i class="glyphicon glyphicon-calendar"></i></button>
