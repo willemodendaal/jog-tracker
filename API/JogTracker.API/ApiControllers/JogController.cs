@@ -40,7 +40,17 @@ namespace JogTracker.Api.ApiControllers
                         GetCurrentUserId(),
                         UserIsAdmin()));
 
-            ICollection<JogJsonResult> jsonResult = new Mapper<JogEntry, JogJsonResult>().Map(allJogs.Items);
+            object jsonResult = null;
+
+            if (base.UserIsAdmin())
+            {
+                //User is admin, map to special result (has email field too).
+                jsonResult = new Mapper<JogEntry, AdminJogJsonResult>().Map(allJogs.Items);
+            }
+            else
+            {
+                jsonResult = new Mapper<JogEntry, JogJsonResult>().Map(allJogs.Items);
+            }
             return Ok(new PagingResults(filter.PageIndex.Value, filter.PageSize.Value, allJogs.TotalResults, jsonResult));
         }
 
