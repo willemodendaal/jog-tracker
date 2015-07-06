@@ -22,6 +22,7 @@ namespace JogTracker.TestApi
         public static readonly string GetUser = Base + "user/{0}";
 
         public static readonly string GetJogs = Base + "jog";
+        public static readonly string GetAllJogs = Base + "jog/all"; //Admin only function
         public static readonly string GetJogEntry = Base + "jog/{0}";
         public static readonly string DeleteJogEntry = Base + "jog/{0}";
         public static readonly string CreateJogEntry = Base + "jog/new";

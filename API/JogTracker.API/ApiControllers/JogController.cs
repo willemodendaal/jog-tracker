@@ -40,8 +40,60 @@ namespace JogTracker.Api.ApiControllers
                         GetCurrentUserId(),
                         UserIsAdmin()));
 
-            ICollection<JogJsonResult> jsonResult = new Mapper<JogEntry, JogJsonResult>().Map(allJogs.Items);
+            object jsonResult = null;
+
+            if (base.UserIsAdmin())
+            {
+                //User is admin, map to special result (has email field too).
+                jsonResult = new Mapper<JogEntry, AdminJogJsonResult>().Map(allJogs.Items);
+            }
+            else
+            {
+                jsonResult = new Mapper<JogEntry, JogJsonResult>().Map(allJogs.Items);
+            }
             return Ok(new PagingResults(filter.PageIndex.Value, filter.PageSize.Value, allJogs.TotalResults, jsonResult));
+        }
+
+        [Route("week/{date}")]
+        [HttpGet]
+        [Validate]
+        public async Task<IHttpActionResult> GetJogsForWeek(DateTime week)
+        {
+            ICollection<JogEntry> allJogs =
+                (await
+                    _repo.FindForWeekAsync(
+                        week,
+                        GetCurrentUserId(),
+                        UserIsAdmin()));
+
+            object jsonResult = null;
+
+            if (base.UserIsAdmin())
+            {
+                //User is admin, map to special result (has email field too).
+                jsonResult = new Mapper<JogEntry, AdminJogJsonResult>().Map(allJogs);
+            }
+            else
+            {
+                jsonResult = new Mapper<JogEntry, JogJsonResult>().Map(allJogs);
+            }
+            return Ok(jsonResult);
+        }
+
+        [Route("all")]
+        [Authorize(Roles="administrator")] //Only admin can see all jogs.
+        [HttpGet]
+        [Validate]
+        public async Task<IHttpActionResult> GetAllJogs([FromUri] JogFilterBindingModel filter)
+        {
+            PagedModel<JogEntry> allJogs =
+                (await
+                    _repo.GetAllAsync(
+                        GetCurrentUserId(),
+                        UserIsAdmin()));
+
+            ICollection<AdminJogJsonResult> jsonResult = new Mapper<JogEntry, AdminJogJsonResult>().Map(allJogs.Items);
+            return Ok(new PagingResults(0, allJogs.TotalResults, allJogs.TotalResults, jsonResult));
         }
 
         [Route("{jogId}")]
@@ -83,7 +135,7 @@ namespace JogTracker.Api.ApiControllers
         public async Task<IHttpActionResult> CreateNew(JogBindingModel jog)
         {
             JogEntry newJogEntry =
-                await _repo.CreateNewAsync(jog.DateTime, jog.DistanceKM, jog.Duration, GetCurrentUserId());
+                await _repo.CreateNewAsync(jog.DateTime, jog.DistanceKM, jog.Duration, GetCurrentUserId(), GetCurrentUserEmail());
 
             JogJsonResult jsonJog = new Mapper<JogEntry, JogJsonResult>().Map(newJogEntry);
 

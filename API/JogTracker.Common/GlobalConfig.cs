@@ -13,6 +13,7 @@ namespace JogTracker.Common
 
         public static readonly string UserRole = "users";
         public static readonly string AdminRole = "administrator";
+        public static readonly string UserManager = "userManager";
         public static readonly string FriendlyGenericError = "The API returned an error. Please try again in a moment.";
 
         public static readonly string JogTrackerEmail = "willem.odendaal@gmail.com"; //Email "From" address.

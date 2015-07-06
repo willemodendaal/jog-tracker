@@ -11,7 +11,6 @@ namespace JogTracker.TestApi
     public class TestJogEntryCrud : TestBase
     {
         private HttpClient _client;
-        private string _dateTimeFormat = "yyyy-MM-ddThh:mm:ss.fffZ";
         private string _email;
         private string _firstName;
         private string _lastName;
@@ -29,8 +28,8 @@ namespace JogTracker.TestApi
             _lastName = "ln_" + id;
 
             //Date from/to query strings
-            _queryFrom = DateTime.Now.AddMonths(-2).ToString(_dateTimeFormat);
-            _queryTo = DateTime.Now.ToString(_dateTimeFormat);
+            _queryFrom = DateTime.Now.AddMonths(-5).ToString(base.DateTimeFormat);
+            _queryTo = DateTime.Now.ToString(base.DateTimeFormat);
 
             //Register and login.
             _client = new HttpClient();
@@ -108,9 +107,9 @@ namespace JogTracker.TestApi
         [TestMethod]
         public async Task TestListJogs_NoResults_BecauseOfDateFilters()
         {
-            string queryFrom = DateTime.Now.AddYears(-10).ToString(_dateTimeFormat);
+            string queryFrom = DateTime.Now.AddYears(-10).ToString(base.DateTimeFormat);
             //*** Ten years in the past should not have any data.
-            string queryTo = DateTime.Now.AddYears(-10).AddMonths(1).ToString(_dateTimeFormat);
+            string queryTo = DateTime.Now.AddYears(-10).AddMonths(1).ToString(base.DateTimeFormat);
 
             await CreateJogEntry(DateTime.Now.AddMonths(-2), new TimeSpan(2, 0, 2), 15.5f);
             await CreateJogEntry(DateTime.Now.AddMonths(-2), new TimeSpan(3, 1, 3), 25.4f);
@@ -212,8 +211,8 @@ namespace JogTracker.TestApi
             var query = HttpUtility.ParseQueryString(string.Empty);
             query["pageSize"] = "10";
             query["pageIndex"] = "0";
-            query["fromDate"] = DateTime.Now.AddYears(-5).ToString(_dateTimeFormat);
-            query["toDate"] = DateTime.Now.AddMonths(1).ToString(_dateTimeFormat);
+            query["fromDate"] = DateTime.Now.AddYears(-5).ToString(base.DateTimeFormat);
+            query["toDate"] = DateTime.Now.AddMonths(1).ToString(base.DateTimeFormat);
             var page1 = await _client.GetAsync(Uris.GetJogs + "?" + query);
             var page1Json = GetJson(page1).Items;
 

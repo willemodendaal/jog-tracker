@@ -40,6 +40,7 @@ namespace JogTracker.Api.ApiControllers
             }
             var jsonUser = new UserJsonResult().Map(currentUser);
             jsonUser.isAdmin = base.UserIsAdmin();
+            jsonUser.isUserManager = base.UserIsUserManager();
 
             return Ok(jsonUser);
         }
@@ -50,7 +51,7 @@ namespace JogTracker.Api.ApiControllers
         [AllowAnonymous]
         public async Task<IHttpActionResult> Register(RegisterBindingModel model)
         {
-            RegistrationResult result = await _userAdminService.RegisterAsync(model.Email, model.Password, model.FirstName, model.LastName, false);
+            RegistrationResult result = await _userAdminService.RegisterAsync(model.Email, model.Password, model.FirstName, model.LastName, false, false);
 
             if (!result.Succeeded)
             {
@@ -63,12 +64,20 @@ namespace JogTracker.Api.ApiControllers
         }
 
         [Route("registerAsAdmin")]
-        [Authorize(Roles = "administrator")] //Only admin role can do this. Will skip email validation (once that is added).
+        [Authorize(Roles = "administrator, userManager")] //Only admin and userManage roles can do this. Will skip email validation (once that is added).
         [HttpPost]
         [Validate]
         public async Task<IHttpActionResult> RegisterAsAdmin(RegisterBindingModel model)
         {
-            RegistrationResult result = await _userAdminService.RegisterAsync(model.Email, model.Password, model.FirstName, model.LastName, model.Admin);
+            bool asAdmin = false;
+
+            if (base.UserIsAdmin())
+            {
+                //Only admins are allowed to set this. Usermanager cannot add another person as top-level admin.
+                asAdmin = model.Admin;
+            }
+
+            RegistrationResult result = await _userAdminService.RegisterAsync(model.Email, model.Password, model.FirstName, model.LastName, asAdmin, model.UserManager);
 
             if (! result.Succeeded)
             {

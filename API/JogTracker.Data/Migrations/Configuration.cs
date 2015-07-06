@@ -51,6 +51,7 @@ namespace JogTracker.Data.Migrations
         {
             var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
             roleManager.Create(new IdentityRole(GlobalConfig.AdminRole));
+            roleManager.Create(new IdentityRole(GlobalConfig.UserManager));
             roleManager.Create(new IdentityRole(GlobalConfig.UserRole));
         }
     }

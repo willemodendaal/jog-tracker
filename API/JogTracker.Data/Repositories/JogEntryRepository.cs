@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Linq.Expressions;
@@ -17,7 +18,12 @@ namespace JogTracker.Data.Repositories
             string userId, 
             bool isAdmin);
 
-        Task<JogEntry> CreateNewAsync(DateTime dateTime, float distanceKm, TimeSpan duration, string userId);
+        Task<ICollection<JogEntry>> FindForWeekAsync(
+            DateTime week,
+            string userId,
+            bool isAdmin);
+
+        Task<JogEntry> CreateNewAsync(DateTime dateTime, float distanceKm, TimeSpan duration, string userId, string userEmail);
         Task<JogEntry> GetAsync(string jogId, string userId, bool isAdmin);
 
         Task<JogEntry> UpdateAsync(
@@ -29,6 +35,7 @@ namespace JogTracker.Data.Repositories
             bool isAdmin);
 
         Task DeleteAsync(string jogId, string userId, bool isAdmin);
+        Task<PagedModel<JogEntry>> GetAllAsync(string userId, bool userIsAdmin);
     }
 
     public class JogEntryRepository : IJogEntryRepository
@@ -38,6 +45,31 @@ namespace JogTracker.Data.Repositories
         public JogEntryRepository(JogDbContext dbContext)
         {
             _dbContext = dbContext;
+        }
+
+        public async Task<PagedModel<JogEntry>> GetAllAsync(string userId, bool userIsAdmin)
+        {
+            var result = await (_dbContext.JogEntries
+                .OrderByDescending(j => j.DateTime)
+                ).ToListAsync();
+
+            return new PagedModel<JogEntry>(0, result.Count, result.Count, result);
+        }
+
+        public async Task<ICollection<JogEntry>> FindForWeekAsync(
+           DateTime week,
+           string userId,
+           bool isAdmin)
+        {
+            DateTime weekStart = GetStartOfWeek(week);
+            DateTime weekEnd = weekStart.AddDays(7); //To previous night.
+
+            var result = await (_dbContext.JogEntries
+                .OrderByDescending(j => j.DateTime)
+                .Where(MatchJogEntries(weekStart, weekEnd, userId, isAdmin))
+                ).ToListAsync();
+
+            return result;
         }
 
         public async Task<PagedModel<JogEntry>> FindAsync(
@@ -83,14 +115,15 @@ namespace JogTracker.Data.Repositories
             await _dbContext.SaveChangesAsync();
         }
 
-        public async Task<JogEntry> CreateNewAsync(DateTime dateTime, float distanceKm, TimeSpan duration, string userId)
+        public async Task<JogEntry> CreateNewAsync(DateTime dateTime, float distanceKm, TimeSpan duration, string userId, string userEmail)
         {
             var newJog = new JogEntry()
             {
                 DistanceKM = distanceKm,
                 DateTime = dateTime,
                 Duration = duration,
-                UserId = userId
+                UserId = userId,
+                UserEmail = userEmail
             };
 
             _dbContext.JogEntries.Add(newJog);
@@ -126,6 +159,17 @@ namespace JogTracker.Data.Repositories
             bool isAdmin)
         {
             return j => (j.UserId == userId || isAdmin) && j.DateTime >= startDateTime && j.DateTime < endDateTime;
+        }
+
+        private DateTime GetStartOfWeek(DateTime dt)
+        {
+            int diff = dt.DayOfWeek - DayOfWeek.Sunday;
+            if (diff < 0)
+            {
+                diff += 7;
+            }
+
+            return dt.AddDays(-1 * diff).Date;
         }
     }
 }

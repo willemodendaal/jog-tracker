@@ -29,6 +29,9 @@ namespace JogTracker.DomainModel
 
         [Required]
         public string UserId { get; set; }
+        
+        [Required]
+        public string UserEmail { get; set; }
 
         public float AverageSpeedKMH
         {
