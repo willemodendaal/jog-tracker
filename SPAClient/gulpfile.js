@@ -32,7 +32,7 @@ gulp.task('localscripts', function () {
         }))
         .pipe(sourcemaps.init())
             .pipe(concat('app.min.js'))
-            //.pipe(uglify())
+            .pipe(uglify())
         .pipe(sourcemaps.write('./', {includeContent: false, sourceRoot: '/js/sources'}))
         .pipe(gulp.dest('./dist/js/'));
 });
