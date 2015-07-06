@@ -49,25 +49,10 @@
   border: 1px solid red;
 }
 
-.top-menu {
-  background-color: #222222;
-  height: 40px;
-  color: #ddd;
-  padding: 10px;
-}
-.top-menu .site-title {
-  float: left;
-}
-.top-menu .user-info {
-  float: right;
-}
-.top-menu .user-info a {
-  color: #ddd;
-}
-.top-menu .user-info a .avatar {
-  -webkit-border-radius: 50%;
-  -moz-border-radius: 50%;
-  -ms-border-radius: 50%;
-  border-radius: 50%;
-  /* for a circular avatar */
+.reports .no-data {
+  color: #555;
+  font-size: 16px;
+  padding-top: 30px;
+  margin-top: 30px;
+  margin-bottom: 30px;
 }

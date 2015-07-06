@@ -28,6 +28,10 @@
         return baseUrl + '/user';
     };
 
+    var jogsForWeek = function(weekDate) {
+            return baseUrl + '/jog/week/' + weekDate;
+    };
+
     apiModule.constant('apiUrls', {
         register: baseUrl + '/account/register',
         registerAsAdmin: baseUrl + '/account/registerAsAdmin',
@@ -42,6 +46,7 @@
         updateUser: updateUserUrl,
 
         jogs: jogUrl,
+        jogsForWeek: jogsForWeek,
         newJog: baseUrl + '/jog/new',
         updateJog: updateJogUrl
     });

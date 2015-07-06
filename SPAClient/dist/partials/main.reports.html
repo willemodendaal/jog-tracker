@@ -1,1 +1,33 @@
-<div>Reports</div>
+<div ng-controller="reportsController">
+
+    <div class="row">
+        <div class="col-md-8">
+            <div class="reports box">
+                <h3>Weekly Report </h3>
+                <div class="week-header">
+                    <span>For the week starting {{ weekStart }}, and ending {{ weekEnd }}</span>
+                </div>
+                <div class="week-data">
+                    <span>Total jogs: {{ jogCount }}</span>
+                </div>
+                <div class="week-data">
+                    <span>Total distance: {{ distanceKm }} km</span>
+                </div>
+                <div class="week-data">
+                    <span>Total duration: {{ duration }}</span>
+                </div>
+                <div class="week-data">
+                    <span>Average speed: {{ averageKmh }} km/h</span>
+                </div>
+
+                <div class="buttons">
+                    <button type="button" class="btn btn-default" ng-click="previousWeek()">Prev. Week</button>
+                    <button type="button" class="btn btn-default" ng-click="nextWeek()">Next Week</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+

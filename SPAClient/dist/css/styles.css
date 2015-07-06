@@ -49,6 +49,197 @@
   border: 1px solid red;
 }
 
+.box .error-box {
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -ms-border-radius: 4px;
+  border-radius: 4px;
+  border: 1px solid #ddd;
+  background-color: #ffeaea;
+}
+.box .error-box h3 {
+  font-size: 14pt;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  font-weight: bold;
+  padding-left: 20px;
+}
+
+.box {
+  border: 1px solid #bbb;
+  background-color: #fff;
+  padding: 10px;
+  margin: 5px;
+  color: #444;
+}
+.box h1 {
+  font-size: 20pt;
+  margin-top: 2px;
+  margin-bottom: 20px;
+}
+.box h3 {
+  font-size: 15pt;
+  margin-top: 2px;
+  margin-bottom: 20px;
+  color: #888;
+}
+.box h4 {
+  font-size: 13pt;
+  margin-top: 2px;
+  margin-bottom: 20px;
+  color: #888;
+}
+.box label {
+  width: 100px;
+}
+.box label.horiz-label {
+  width: 100%;
+}
+
+.form-control.ng-dirty.ng-invalid {
+  border: 1px solid red;
+}
+
+.no-data {
+  color: #555;
+  font-size: 16px;
+  padding-top: 30px;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+.jogs-list .pagination {
+  padding-left: 10px;
+}
+
+.jogs-list h3 {
+  float: left;
+  width: 20%;
+}
+
+.jog-entry {
+  clear: both;
+  margin: 8px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -ms-border-radius: 4px;
+  border-radius: 4px;
+  -webkit-box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 0.3);
+  -moz-box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 0.3);
+  box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 0.3);
+  padding: 10px;
+  border: 1px solid #bbb;
+  background-color: #f5f5f5;
+  height: 110px;
+}
+.jog-entry.selected {
+  background-color: #F7F2E0;
+}
+.jog-entry:hover {
+  background-color: #F7F2E0;
+  cursor: pointer;
+}
+.jog-entry .date {
+  display: block;
+  font-size: 10pt;
+  color: #999;
+  clear: both;
+  padding-top: 10px;
+}
+.jog-entry .email {
+  display: block;
+  font-size: 10pt;
+  color: #999;
+}
+.jog-entry .jog-field {
+  float: left;
+  font-size: 20px;
+  width: 30%;
+}
+.jog-entry .jog-field span {
+  display: block;
+  font-size: 14px;
+}
+.jog-entry .jog-field.average {
+  float: right;
+}
+
+.jog-filter {
+  float: right;
+  width: 80%;
+  padding-right: 10px;
+}
+.jog-filter span {
+  float: right;
+  margin-left: 10px;
+  margin-top: 8px;
+  color: #888;
+}
+.jog-filter input {
+  float: right;
+  width: 100px;
+  margin-left: 10px;
+}
+
+.jog-edit .form-control {
+  margin-bottom: 10px;
+}
+.jog-edit .error-box {
+  margin-top: 10px;
+  padding: 5px;
+}
+
+.box .error-box {
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -ms-border-radius: 4px;
+  border-radius: 4px;
+  border: 1px solid #ddd;
+  background-color: #ffeaea;
+}
+.box .error-box h3 {
+  font-size: 14pt;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  font-weight: bold;
+  padding-left: 20px;
+}
+
+.box {
+  border: 1px solid #bbb;
+  background-color: #fff;
+  padding: 10px;
+  margin: 5px;
+  color: #444;
+}
+.box h1 {
+  font-size: 20pt;
+  margin-top: 2px;
+  margin-bottom: 20px;
+}
+.box h3 {
+  font-size: 15pt;
+  margin-top: 2px;
+  margin-bottom: 20px;
+  color: #888;
+}
+.box h4 {
+  font-size: 13pt;
+  margin-top: 2px;
+  margin-bottom: 20px;
+  color: #888;
+}
+.box label {
+  width: 100px;
+}
+.box label.horiz-label {
+  width: 100%;
+}
+
+.form-control.ng-dirty.ng-invalid {
+  border: 1px solid red;
+}
+
 .account-actions.box .btn {
   width: 180px;
   margin-bottom: 8px;
@@ -139,6 +330,65 @@
   border: 1px solid red;
 }
 
+.reports .no-data {
+  color: #555;
+  font-size: 16px;
+  padding-top: 30px;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+.box .error-box {
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -ms-border-radius: 4px;
+  border-radius: 4px;
+  border: 1px solid #ddd;
+  background-color: #ffeaea;
+}
+.box .error-box h3 {
+  font-size: 14pt;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  font-weight: bold;
+  padding-left: 20px;
+}
+
+.box {
+  border: 1px solid #bbb;
+  background-color: #fff;
+  padding: 10px;
+  margin: 5px;
+  color: #444;
+}
+.box h1 {
+  font-size: 20pt;
+  margin-top: 2px;
+  margin-bottom: 20px;
+}
+.box h3 {
+  font-size: 15pt;
+  margin-top: 2px;
+  margin-bottom: 20px;
+  color: #888;
+}
+.box h4 {
+  font-size: 13pt;
+  margin-top: 2px;
+  margin-bottom: 20px;
+  color: #888;
+}
+.box label {
+  width: 100px;
+}
+.box label.horiz-label {
+  width: 100%;
+}
+
+.form-control.ng-dirty.ng-invalid {
+  border: 1px solid red;
+}
+
 body.jog-tracker-body {
   background-color: #eee;
 }
@@ -154,6 +404,10 @@ body.jog-tracker-body {
 .navbar span.glyphicon {
   font-size: 8pt;
   margin-right: 6px;
+}
+
+p.text {
+  font-size: 12pt;
 }
 
 /*! normalize.css v3.0.2 | MIT License | git.io/normalize */
@@ -605,201 +859,6 @@ th {
   border: 1px solid red;
 }
 
-.box .error-box {
-  -webkit-border-radius: 4px;
-  -moz-border-radius: 4px;
-  -ms-border-radius: 4px;
-  border-radius: 4px;
-  border: 1px solid #ddd;
-  background-color: #ffeaea;
-}
-.box .error-box h3 {
-  font-size: 14pt;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  font-weight: bold;
-  padding-left: 20px;
-}
-
-.box {
-  border: 1px solid #bbb;
-  background-color: #fff;
-  padding: 10px;
-  margin: 5px;
-  color: #444;
-}
-.box h1 {
-  font-size: 20pt;
-  margin-top: 2px;
-  margin-bottom: 20px;
-}
-.box h3 {
-  font-size: 15pt;
-  margin-top: 2px;
-  margin-bottom: 20px;
-  color: #888;
-}
-.box h4 {
-  font-size: 13pt;
-  margin-top: 2px;
-  margin-bottom: 20px;
-  color: #888;
-}
-.box label {
-  width: 100px;
-}
-.box label.horiz-label {
-  width: 100%;
-}
-
-.form-control.ng-dirty.ng-invalid {
-  border: 1px solid red;
-}
-
-.no-data {
-  color: #555;
-  font-size: 16px;
-  padding-top: 30px;
-  margin-top: 30px;
-  margin-bottom: 30px;
-}
-
-.jogs-list .pagination {
-  padding-left: 10px;
-}
-
-.jogs-list h3 {
-  float: left;
-  width: 20%;
-}
-
-.jog-entry {
-  clear: both;
-  margin: 8px;
-  -webkit-border-radius: 4px;
-  -moz-border-radius: 4px;
-  -ms-border-radius: 4px;
-  border-radius: 4px;
-  -webkit-box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 0.3);
-  -moz-box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 0.3);
-  box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 0.3);
-  padding: 10px;
-  border: 1px solid #bbb;
-  background-color: #f5f5f5;
-  height: 110px;
-}
-.jog-entry.selected {
-  background-color: #F7F2E0;
-}
-.jog-entry:hover {
-  background-color: #F7F2E0;
-  cursor: pointer;
-}
-.jog-entry .date {
-  display: block;
-  font-size: 10pt;
-  color: #999;
-  clear: both;
-  padding-top: 10px;
-}
-.jog-entry .email {
-  display: block;
-  font-size: 10pt;
-  color: #999;
-}
-.jog-entry .jog-field {
-  float: left;
-  font-size: 20px;
-  width: 30%;
-}
-.jog-entry .jog-field span {
-  display: block;
-  font-size: 14px;
-}
-.jog-entry .jog-field.average {
-  float: right;
-}
-
-.jog-filter {
-  float: right;
-  width: 80%;
-  padding-right: 10px;
-}
-.jog-filter span {
-  float: right;
-  margin-left: 10px;
-  margin-top: 8px;
-  color: #888;
-}
-.jog-filter input {
-  float: right;
-  width: 100px;
-  margin-left: 10px;
-}
-
-.jog-edit .form-control {
-  margin-bottom: 10px;
-}
-.jog-edit .error-box {
-  margin-top: 10px;
-  padding: 5px;
-}
-
-p.text {
-  font-size: 12pt;
-}
-
-.box .error-box {
-  -webkit-border-radius: 4px;
-  -moz-border-radius: 4px;
-  -ms-border-radius: 4px;
-  border-radius: 4px;
-  border: 1px solid #ddd;
-  background-color: #ffeaea;
-}
-.box .error-box h3 {
-  font-size: 14pt;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  font-weight: bold;
-  padding-left: 20px;
-}
-
-.box {
-  border: 1px solid #bbb;
-  background-color: #fff;
-  padding: 10px;
-  margin: 5px;
-  color: #444;
-}
-.box h1 {
-  font-size: 20pt;
-  margin-top: 2px;
-  margin-bottom: 20px;
-}
-.box h3 {
-  font-size: 15pt;
-  margin-top: 2px;
-  margin-bottom: 20px;
-  color: #888;
-}
-.box h4 {
-  font-size: 13pt;
-  margin-top: 2px;
-  margin-bottom: 20px;
-  color: #888;
-}
-.box label {
-  width: 100px;
-}
-.box label.horiz-label {
-  width: 100%;
-}
-
-.form-control.ng-dirty.ng-invalid {
-  border: 1px solid red;
-}
-
 .top-menu {
   background-color: #222222;
   height: 40px;
@@ -811,6 +870,9 @@ p.text {
 }
 .top-menu .user-info {
   float: right;
+}
+.top-menu .user-info a {
+  color: #ddd;
 }
 .top-menu .user-info a .avatar {
   -webkit-border-radius: 50%;
