@@ -4,7 +4,8 @@
         <!-- List -->
         <div class="col-md-8">
             <div class="jogs-list box">
-                <h3>My Jogs</h3>
+                <h3 ng-hide="isAdmin">My Jogs</h3>
+                <h3 ng-show="isAdmin">All Jogs</h3>
 
                 <div class="jog-filter">
                     <input class="form-control"
