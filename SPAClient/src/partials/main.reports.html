@@ -5,7 +5,7 @@
             <div class="reports box">
                 <h3>Weekly Report </h3>
                 <div class="week-header">
-                    <span>For the week starting {{ weekStart }}, and ending {{ weekEnd }}</span>
+                    <span>For the week starting {{ weekStart | date : 'yyyy/MM/dd' }}, and ending {{ weekEnd | date }}</span>
                 </div>
                 <div class="week-data">
                     <span>Total jogs: {{ jogCount }}</span>
