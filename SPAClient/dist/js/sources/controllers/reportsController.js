@@ -48,10 +48,10 @@
             }
 
             $scope.distanceKm = totalDistance;
-            $scope.duration = totalDuration;
+            $scope.duration = totalDuration.hours().pad(2) + ':' + totalDuration.minutes().pad(2) + ':' + totalDuration.seconds().pad(2);
 
             if (totalDuration.asHours() > 0) {
-                $scope.averageKmh = totalDistance / totalDuration;
+                $scope.averageKmh = totalDistance / totalDuration.asHours();
             }
             else {
                 $scope.averageKmh = 0;
