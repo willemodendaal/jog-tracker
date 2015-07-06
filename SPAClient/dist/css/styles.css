@@ -139,6 +139,125 @@
   border: 1px solid red;
 }
 
+.box .error-box {
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -ms-border-radius: 4px;
+  border-radius: 4px;
+  border: 1px solid #ddd;
+  background-color: #ffeaea;
+}
+.box .error-box h3 {
+  font-size: 14pt;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  font-weight: bold;
+  padding-left: 20px;
+}
+
+.box {
+  border: 1px solid #bbb;
+  background-color: #fff;
+  padding: 10px;
+  margin: 5px;
+  color: #444;
+}
+.box h1 {
+  font-size: 20pt;
+  margin-top: 2px;
+  margin-bottom: 20px;
+}
+.box h3 {
+  font-size: 15pt;
+  margin-top: 2px;
+  margin-bottom: 20px;
+  color: #888;
+}
+.box h4 {
+  font-size: 13pt;
+  margin-top: 2px;
+  margin-bottom: 20px;
+  color: #888;
+}
+.box label {
+  width: 100px;
+}
+.box label.horiz-label {
+  width: 100%;
+}
+
+.form-control.ng-dirty.ng-invalid {
+  border: 1px solid red;
+}
+
+body.jog-tracker-body {
+  background-color: #eee;
+}
+
+.big-jogtracker-text {
+  font-size: 40pt;
+  font-weight: bold;
+  font-style: italic;
+  color: #bbb;
+  text-align: center;
+}
+
+.navbar span.glyphicon {
+  font-size: 8pt;
+  margin-right: 6px;
+}
+
+.box .error-box {
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -ms-border-radius: 4px;
+  border-radius: 4px;
+  border: 1px solid #ddd;
+  background-color: #ffeaea;
+}
+.box .error-box h3 {
+  font-size: 14pt;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  font-weight: bold;
+  padding-left: 20px;
+}
+
+.box {
+  border: 1px solid #bbb;
+  background-color: #fff;
+  padding: 10px;
+  margin: 5px;
+  color: #444;
+}
+.box h1 {
+  font-size: 20pt;
+  margin-top: 2px;
+  margin-bottom: 20px;
+}
+.box h3 {
+  font-size: 15pt;
+  margin-top: 2px;
+  margin-bottom: 20px;
+  color: #888;
+}
+.box h4 {
+  font-size: 13pt;
+  margin-top: 2px;
+  margin-bottom: 20px;
+  color: #888;
+}
+.box label {
+  width: 100px;
+}
+.box label.horiz-label {
+  width: 100%;
+}
+
+.form-control.ng-dirty.ng-invalid {
+  border: 1px solid red;
+}
+
 .no-data {
   color: #555;
   font-size: 16px;
@@ -279,72 +398,32 @@
   border: 1px solid red;
 }
 
-.box .error-box {
-  -webkit-border-radius: 4px;
-  -moz-border-radius: 4px;
-  -ms-border-radius: 4px;
-  border-radius: 4px;
-  border: 1px solid #ddd;
-  background-color: #ffeaea;
+.reports .no-data {
+  color: #555;
+  font-size: 16px;
+  padding-top: 30px;
+  margin-top: 30px;
+  margin-bottom: 30px;
 }
-.box .error-box h3 {
+
+.week-entry {
   font-size: 14pt;
+}
+.week-entry .full-summary {
   margin-top: 10px;
-  margin-bottom: 10px;
-  font-weight: bold;
-  padding-left: 20px;
-}
-
-.box {
-  border: 1px solid #bbb;
-  background-color: #fff;
-  padding: 10px;
-  margin: 5px;
-  color: #444;
-}
-.box h1 {
-  font-size: 20pt;
-  margin-top: 2px;
   margin-bottom: 20px;
 }
-.box h3 {
-  font-size: 15pt;
-  margin-top: 2px;
-  margin-bottom: 20px;
-  color: #888;
+.week-entry .week-header {
+  color: #777;
 }
-.box h4 {
-  font-size: 13pt;
-  margin-top: 2px;
-  margin-bottom: 20px;
-  color: #888;
+.week-entry .week-header span.date {
+  color: #333;
 }
-.box label {
-  width: 100px;
-}
-.box label.horiz-label {
-  width: 100%;
-}
-
-.form-control.ng-dirty.ng-invalid {
-  border: 1px solid red;
-}
-
-body.jog-tracker-body {
-  background-color: #eee;
-}
-
-.big-jogtracker-text {
-  font-size: 40pt;
-  font-weight: bold;
-  font-style: italic;
-  color: #bbb;
-  text-align: center;
-}
-
-.navbar span.glyphicon {
-  font-size: 8pt;
-  margin-right: 6px;
+.week-entry .week-data .week-label {
+  display: inline-block;
+  width: 150px;
+  color: #777;
+  text-align: left;
 }
 
 /*! normalize.css v3.0.2 | MIT License | git.io/normalize */
@@ -743,85 +822,6 @@ table {
 td,
 th {
   padding: 0;
-}
-
-.box .error-box {
-  -webkit-border-radius: 4px;
-  -moz-border-radius: 4px;
-  -ms-border-radius: 4px;
-  border-radius: 4px;
-  border: 1px solid #ddd;
-  background-color: #ffeaea;
-}
-.box .error-box h3 {
-  font-size: 14pt;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  font-weight: bold;
-  padding-left: 20px;
-}
-
-.box {
-  border: 1px solid #bbb;
-  background-color: #fff;
-  padding: 10px;
-  margin: 5px;
-  color: #444;
-}
-.box h1 {
-  font-size: 20pt;
-  margin-top: 2px;
-  margin-bottom: 20px;
-}
-.box h3 {
-  font-size: 15pt;
-  margin-top: 2px;
-  margin-bottom: 20px;
-  color: #888;
-}
-.box h4 {
-  font-size: 13pt;
-  margin-top: 2px;
-  margin-bottom: 20px;
-  color: #888;
-}
-.box label {
-  width: 100px;
-}
-.box label.horiz-label {
-  width: 100%;
-}
-
-.form-control.ng-dirty.ng-invalid {
-  border: 1px solid red;
-}
-
-.reports .no-data {
-  color: #555;
-  font-size: 16px;
-  padding-top: 30px;
-  margin-top: 30px;
-  margin-bottom: 30px;
-}
-
-.week-entry {
-  font-size: 14pt;
-}
-.week-entry .full-summary {
-  margin-top: 10px;
-  margin-bottom: 20px;
-}
-.week-entry .week-header {
-  color: #777;
-}
-.week-entry .week-header span.date {
-  color: #333;
-}
-.week-entry .week-data .week-label {
-  display: inline-block;
-  width: 150px;
-  color: #777;
-  text-align: left;
 }
 
 .box .error-box {

@@ -14,7 +14,7 @@
 
         $scope.jogs = [];
         $scope.pageNumber = 1;
-        $scope.pageSize = 10;
+        $scope.pageSize = 4;
         $scope.totalItems = 0;
         $scope.dtPickers = {
             from: { opened: false, date: moment().subtract(1, 'months').format($scope.dtFormat)},
@@ -63,11 +63,11 @@
             var toDate = $scope.dtPickers.to.date;
 
             if (!fromDate) {
-                fromDate = moment().subtract(1, 'months');
+                fromDate = moment().startOf('day').subtract(1, 'months');
             }
 
             if (!toDate) {
-                toDate = moment();
+                toDate = moment().endOf('day');
             }
 
             jogDataFactory.getList(fromDate, toDate, $scope.pageNumber - 1, $scope.pageSize)

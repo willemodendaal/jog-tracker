@@ -63,11 +63,11 @@
             var toDate = $scope.dtPickers.to.date;
 
             if (!fromDate) {
-                fromDate = moment().subtract(1, 'months');
+                fromDate = moment().startOf('day').subtract(1, 'months');
             }
 
             if (!toDate) {
-                toDate = moment();
+                toDate = moment().endOf('day');
             }
 
             jogDataFactory.getList(fromDate, toDate, $scope.pageNumber - 1, $scope.pageSize)

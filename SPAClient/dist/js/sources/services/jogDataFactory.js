@@ -123,8 +123,11 @@
          *   Create    *
          *             */
         var create = function(dateTime, distance, duration) {
+
+            var dateString = moment(dateTime).format('DD MMMM YYYY');
+
             var payLoad = {
-                dateTime: dateTime,
+                dateTime: dateString,
                 distanceKm: distance,
                 duration: duration
             };

@@ -10,13 +10,17 @@
         //Return collection of strings of errors to show on front-end.
         //  (get errors from server response)
         var getValidationErrors = function(httpError) {
-            if (!httpError.data || !httpError.data.ModelState) {
+            if (!httpError.data) {
 
                 if (httpError.error_description) { //returned by Owin/OAuth
                     return [httpError.error_description];
                 }
 
                 return ['Request contained invalid data.'];
+            }
+
+            if (!httpError.data.ModelState && httpError.data.Message) {
+                return [httpError.data.Message];
             }
 
             var messages = [];
