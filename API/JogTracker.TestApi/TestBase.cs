@@ -18,6 +18,8 @@ namespace JogTracker.TestApi
     {
         private string _adminEmail = "willem.odendaal@gmail.com";
         private string _adminPassword = "runUpYonderHills!";
+        protected string DateTimeFormat = "yyyy-MM-ddThh:mm:ss.fffZ";
+
 
         protected string GetUniqueId()
         {

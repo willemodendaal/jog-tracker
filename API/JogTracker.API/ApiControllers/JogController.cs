@@ -44,6 +44,22 @@ namespace JogTracker.Api.ApiControllers
             return Ok(new PagingResults(filter.PageIndex.Value, filter.PageSize.Value, allJogs.TotalResults, jsonResult));
         }
 
+        [Route("all")]
+        [Authorize(Roles="administrator")] //Only admin can see all jogs.
+        [HttpGet]
+        [Validate]
+        public async Task<IHttpActionResult> GetAllJogs([FromUri] JogFilterBindingModel filter)
+        {
+            PagedModel<JogEntry> allJogs =
+                (await
+                    _repo.GetAllAsync(
+                        GetCurrentUserId(),
+                        UserIsAdmin()));
+
+            ICollection<JogJsonResult> jsonResult = new Mapper<JogEntry, JogJsonResult>().Map(allJogs.Items);
+            return Ok(new PagingResults(0, allJogs.TotalResults, allJogs.TotalResults, jsonResult));
+        }
+
         [Route("{jogId}")]
         [HttpGet]
         [Validate]

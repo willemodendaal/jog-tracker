@@ -29,6 +29,7 @@ namespace JogTracker.Data.Repositories
             bool isAdmin);
 
         Task DeleteAsync(string jogId, string userId, bool isAdmin);
+        Task<PagedModel<JogEntry>> GetAllAsync(string userId, bool userIsAdmin);
     }
 
     public class JogEntryRepository : IJogEntryRepository
@@ -39,6 +40,16 @@ namespace JogTracker.Data.Repositories
         {
             _dbContext = dbContext;
         }
+
+        public async Task<PagedModel<JogEntry>> GetAllAsync(string userId, bool userIsAdmin)
+        {
+            var result = await (_dbContext.JogEntries
+                .OrderByDescending(j => j.DateTime)
+                ).ToListAsync();
+
+            return new PagedModel<JogEntry>(0, result.Count, result.Count, result);
+        }
+
 
         public async Task<PagedModel<JogEntry>> FindAsync(
             int pageIndex, 

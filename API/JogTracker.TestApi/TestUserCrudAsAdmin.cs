@@ -1,4 +1,5 @@
-﻿using System.Net;
+﻿using System;
+using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web;
@@ -174,7 +175,69 @@ namespace JogTracker.TestApi
         [TestMethod]
         public async Task TestAdminCanSeeOthersJogs()
         {
-            Assert.Fail();
+            using (var client = new HttpClient())
+            {
+                //Make sure we a admin
+                await base.LoginAsAdmin(client);
+
+                //Register plain user
+                string id = GetUniqueId();
+                string plainUserEmail = "plain" + id + "@email.com";
+                string pwd = "B@nanas!B@nanas!123";
+                string firstName = "fn_" + id;
+                string lastName = "ln_" + id;
+                HttpResponseMessage registerResponse = RegisterAsAdmin(plainUserEmail, pwd, firstName, lastName, client, false, false);
+                Assert.AreEqual(HttpStatusCode.OK, registerResponse.StatusCode, "Registering plain user failed.");
+
+                //Login as plain user
+                var loginResult = await Login(plainUserEmail, pwd, client);
+                Assert.AreEqual(HttpStatusCode.OK, loginResult, "Login as plain user failed.");
+
+                //Create the jog
+                dynamic jogJson =await CreateJogEntry(DateTime.Now, new TimeSpan(1, 1, 1), 12f, client);
+                string jogId = jogJson.id.Value;
+
+                //Login as admin again, and try to find the jog.
+                await LoginAsAdmin(client);
+                dynamic allJogs = await GetAllJogs(client);
+                bool found = FindSpecificJog(allJogs, jogId);
+
+                Assert.IsTrue(found, "Admin unable to find jog that other user created.");
+
+            }
+        }
+
+        private bool FindSpecificJog(dynamic allJogs, string jogId)
+        {
+            foreach (dynamic jog in allJogs)
+            {
+                if (jog.id == jogId)
+                    return true;
+            }
+
+            return false;
+        }
+
+        private async Task<dynamic> GetAllJogs(HttpClient client)
+        {
+            var page1 = await client.GetAsync(Uris.GetAllJogs);
+            var allJson = GetJson(page1).Items;
+
+            return allJson;
+        }
+
+        private async Task<dynamic> CreateJogEntry(DateTime dateTime, TimeSpan duration, float distance, HttpClient client)
+        {
+            var response = await client.PostAsJsonAsync(Uris.CreateJogEntry,
+                new
+                {
+                    DateTime = dateTime,
+                    Duration = duration,
+                    DistanceKM = distance
+                });
+            var json = GetJson(response);
+            Assert.IsTrue(response.IsSuccessStatusCode);
+            return json;
         }
 
 
