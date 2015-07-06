@@ -57,16 +57,16 @@
   margin-bottom: 30px;
 }
 
-.jogs-list .pagination {
+.users-list .pagination {
   padding-left: 10px;
 }
 
-.jogs-list h3 {
+.users-list h3 {
   float: left;
-  width: 20%;
+  width: 100%;
 }
 
-.jog-entry {
+.user-entry {
   clear: both;
   margin: 8px;
   -webkit-border-radius: 4px;
@@ -80,55 +80,56 @@
   border: 1px solid #bbb;
   background-color: #f5f5f5;
   height: 100px;
+  position: relative;
 }
-.jog-entry.selected {
+.user-entry.selected {
   background-color: #F7F2E0;
 }
-.jog-entry:hover {
+.user-entry:hover {
   background-color: #F7F2E0;
   cursor: pointer;
 }
-.jog-entry .date {
-  display: block;
-  font-size: 14px;
-  color: #999;
-  clear: both;
-  padding-top: 10px;
+.user-entry .user-image {
+  position: absolute;
+  top: 10px;
+  left: 10px;
 }
-.jog-entry .jog-field {
-  float: left;
-  font-size: 20px;
-  width: 30%;
+.user-entry .user-image img {
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  border-radius: 50%;
 }
-.jog-entry .jog-field span {
-  display: block;
-  font-size: 14px;
+.user-entry .user-email {
+  position: absolute;
+  overflow: hidden;
+  font-size: 18px;
+  top: 10px;
+  left: 60px;
 }
-.jog-entry .jog-field.average {
-  float: right;
+.user-entry .user-fn {
+  position: absolute;
+  top: 40px;
+  left: 60px;
+  overflow: hidden;
+}
+.user-entry .user-fn span {
+  color: #aaa;
+}
+.user-entry .user-ln {
+  position: absolute;
+  top: 70px;
+  left: 60px;
+  overflow: hidden;
+}
+.user-entry .user-ln span {
+  color: #aaa;
 }
 
-.jog-filter {
-  float: right;
-  width: 80%;
-  padding-right: 10px;
-}
-.jog-filter span {
-  float: right;
-  margin-left: 10px;
-  margin-top: 8px;
-  color: #888;
-}
-.jog-filter input {
-  float: right;
-  width: 100px;
-  margin-left: 10px;
-}
-
-.jog-edit .form-control {
+.user-edit .form-control {
   margin-bottom: 10px;
 }
-.jog-edit .error-box {
+.user-edit .error-box {
   margin-top: 10px;
   padding: 5px;
 }

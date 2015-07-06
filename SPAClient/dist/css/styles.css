@@ -27,7 +27,13 @@
   margin-bottom: 20px;
 }
 .box h3 {
-  font-size: 16pt;
+  font-size: 15pt;
+  margin-top: 2px;
+  margin-bottom: 20px;
+  color: #888;
+}
+.box h4 {
+  font-size: 13pt;
   margin-top: 2px;
   margin-bottom: 20px;
   color: #888;
@@ -156,7 +162,103 @@
   margin-bottom: 20px;
 }
 .box h3 {
+  font-size: 15pt;
+  margin-top: 2px;
+  margin-bottom: 20px;
+  color: #888;
+}
+.box h4 {
+  font-size: 13pt;
+  margin-top: 2px;
+  margin-bottom: 20px;
+  color: #888;
+}
+.box label {
+  width: 100px;
+}
+.box label.horiz-label {
+  width: 100%;
+}
+
+.form-control.ng-dirty.ng-invalid {
+  border: 1px solid red;
+}
+
+.account-actions.box .btn {
+  width: 180px;
+  margin-bottom: 8px;
+}
+
+.my-details .my-image, .edit-my-details .my-image {
+  float: left;
+  margin-right: 20px;
+  margin-left: 10px;
+  height: 150px;
+}
+.my-details .my-image img, .edit-my-details .my-image img {
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  border-radius: 50%;
+}
+.my-details .my-email, .edit-my-details .my-email {
+  overflow: hidden;
   font-size: 16pt;
+  margin-bottom: 8px;
+}
+.my-details .editable-field, .edit-my-details .editable-field {
+  font-size: 14pt;
+  font-weight: normal;
+}
+.my-details .editable-field span.label, .edit-my-details .editable-field span.label {
+  color: #aaa;
+  width: 120px;
+}
+.my-details .editable-field input, .edit-my-details .editable-field input {
+  width: 200px;
+  display: inline;
+  margin-bottom: 8px;
+}
+.my-details .buttons, .edit-my-details .buttons {
+  margin-top: 20px;
+}
+
+.box .error-box {
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -ms-border-radius: 4px;
+  border-radius: 4px;
+  border: 1px solid #ddd;
+  background-color: #ffeaea;
+}
+.box .error-box h3 {
+  font-size: 14pt;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  font-weight: bold;
+  padding-left: 20px;
+}
+
+.box {
+  border: 1px solid #bbb;
+  background-color: #fff;
+  padding: 10px;
+  margin: 5px;
+  color: #444;
+}
+.box h1 {
+  font-size: 20pt;
+  margin-top: 2px;
+  margin-bottom: 20px;
+}
+.box h3 {
+  font-size: 15pt;
+  margin-top: 2px;
+  margin-bottom: 20px;
+  color: #888;
+}
+.box h4 {
+  font-size: 13pt;
   margin-top: 2px;
   margin-bottom: 20px;
   color: #888;
@@ -201,7 +303,13 @@
   margin-bottom: 20px;
 }
 .box h3 {
-  font-size: 16pt;
+  font-size: 15pt;
+  margin-top: 2px;
+  margin-bottom: 20px;
+  color: #888;
+}
+.box h4 {
+  font-size: 13pt;
   margin-top: 2px;
   margin-bottom: 20px;
   color: #888;
@@ -227,6 +335,11 @@ body.jog-tracker-body {
   font-style: italic;
   color: #bbb;
   text-align: center;
+}
+
+.navbar span.glyphicon {
+  font-size: 8pt;
+  margin-right: 6px;
 }
 
 /*! normalize.css v3.0.2 | MIT License | git.io/normalize */
@@ -627,6 +740,10 @@ th {
   padding: 0;
 }
 
+p.text {
+  font-size: 12pt;
+}
+
 .box .error-box {
   -webkit-border-radius: 4px;
   -moz-border-radius: 4px;
@@ -656,7 +773,13 @@ th {
   margin-bottom: 20px;
 }
 .box h3 {
-  font-size: 16pt;
+  font-size: 15pt;
+  margin-top: 2px;
+  margin-bottom: 20px;
+  color: #888;
+}
+.box h4 {
+  font-size: 13pt;
   margin-top: 2px;
   margin-bottom: 20px;
   color: #888;
@@ -684,10 +807,146 @@ th {
 .top-menu .user-info {
   float: right;
 }
-.top-menu .user-info .avatar {
+.top-menu .user-info a .avatar {
   -webkit-border-radius: 50%;
   -moz-border-radius: 50%;
   -ms-border-radius: 50%;
   border-radius: 50%;
   /* for a circular avatar */
+}
+
+.box .error-box {
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -ms-border-radius: 4px;
+  border-radius: 4px;
+  border: 1px solid #ddd;
+  background-color: #ffeaea;
+}
+.box .error-box h3 {
+  font-size: 14pt;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  font-weight: bold;
+  padding-left: 20px;
+}
+
+.box {
+  border: 1px solid #bbb;
+  background-color: #fff;
+  padding: 10px;
+  margin: 5px;
+  color: #444;
+}
+.box h1 {
+  font-size: 20pt;
+  margin-top: 2px;
+  margin-bottom: 20px;
+}
+.box h3 {
+  font-size: 15pt;
+  margin-top: 2px;
+  margin-bottom: 20px;
+  color: #888;
+}
+.box h4 {
+  font-size: 13pt;
+  margin-top: 2px;
+  margin-bottom: 20px;
+  color: #888;
+}
+.box label {
+  width: 100px;
+}
+.box label.horiz-label {
+  width: 100%;
+}
+
+.form-control.ng-dirty.ng-invalid {
+  border: 1px solid red;
+}
+
+.no-data {
+  color: #555;
+  font-size: 16px;
+  padding-top: 30px;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+.users-list .pagination {
+  padding-left: 10px;
+}
+
+.users-list h3 {
+  float: left;
+  width: 100%;
+}
+
+.user-entry {
+  clear: both;
+  margin: 8px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -ms-border-radius: 4px;
+  border-radius: 4px;
+  -webkit-box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 0.3);
+  -moz-box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 0.3);
+  box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 0.3);
+  padding: 10px;
+  border: 1px solid #bbb;
+  background-color: #f5f5f5;
+  height: 100px;
+  position: relative;
+}
+.user-entry.selected {
+  background-color: #F7F2E0;
+}
+.user-entry:hover {
+  background-color: #F7F2E0;
+  cursor: pointer;
+}
+.user-entry .user-image {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+}
+.user-entry .user-image img {
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  border-radius: 50%;
+}
+.user-entry .user-email {
+  position: absolute;
+  overflow: hidden;
+  font-size: 18px;
+  top: 10px;
+  left: 60px;
+}
+.user-entry .user-fn {
+  position: absolute;
+  top: 40px;
+  left: 60px;
+  overflow: hidden;
+}
+.user-entry .user-fn span {
+  color: #aaa;
+}
+.user-entry .user-ln {
+  position: absolute;
+  top: 70px;
+  left: 60px;
+  overflow: hidden;
+}
+.user-entry .user-ln span {
+  color: #aaa;
+}
+
+.user-edit .form-control {
+  margin-bottom: 10px;
+}
+.user-edit .error-box {
+  margin-top: 10px;
+  padding: 5px;
 }

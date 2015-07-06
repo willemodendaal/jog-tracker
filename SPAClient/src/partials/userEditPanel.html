@@ -1,0 +1,59 @@
+<div ng-controller="userEditController" class="box user-edit">
+
+    <div ng-hide="panelOpen">
+        <h3>Actions</h3>
+        <a href="javascript:void(0);" ng-click="startAddNew()" class="btn btn-default">
+            <span class="glyphicon glyphicon-plus"></span> New User
+        </a>
+    </div>
+    <div ng-show="panelOpen">
+        <form name="editUser" ng-submit="save(editUser.$valid)" novalidate>
+
+            <h3>{{ title }}</h3>
+
+            <label class="horiz-label" for="email">Email</label>
+            <input type="email"
+                   id="email"
+                   ng-readonly="editMode"
+                   name="email"
+                   class="form-control"
+                   ng-model="email"
+                   ng-required="true"
+                />
+
+            <label class="horiz-label" for="firstName">First Name</label>
+            <input type="text"
+                   id="firstName"
+                   name="firstName"
+                   class="form-control"
+                   ng-model="firstName"
+                   ng-required="true"
+                />
+
+            <label class="horiz-label" for="lastName">Last Name</label>
+            <input type="text"
+                   id="lastName"
+                   name="lastName"
+                   class="form-control"
+                   ng-model="lastName"
+                   ng-required="true"
+                />
+
+            <div ng-hide="editMode">
+                <label class="horiz-label" for="password">Password</label>
+                <input type="password"
+                       id="password"
+                       name="password"
+                       class="form-control"
+                       ng-model="password"
+                       ng-required="true"
+                    />
+            </div>
+
+            <input type="submit" class="btn btn-primary" ng-disabled="editUser.$invalid" value="{{ buttonText }}">
+            <button type="button" class="btn btn-default" ng-click="closePanel()">Cancel</button>
+            <error-panel></error-panel>
+        </form>
+
+    </div>
+</div>

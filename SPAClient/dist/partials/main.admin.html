@@ -1,1 +1,56 @@
-<div>Admin</div>
+<div ng-controller="usersController">
+
+    <div class="row">
+        <!-- List -->
+        <div class="col-md-8">
+            <div class="users-list box">
+                <h3>Registered Users</h3>
+
+                <div ng-if="noData()" class="no-data">
+                    Loading users...
+                </div>
+
+                <!-- Individual User -->
+                <div class="user-entry"
+                     ng-repeat="u in users"
+                     ng-click="selectUser(u)"
+                     ng-class="{ selected : u.selected }">
+
+                    <div class="user-image">
+                        <img class="avatar" ng-src="{{ getUserImage(u.email, 40) }}">
+                    </div>
+                    <div class="user-email">
+                        {{ u.email }}
+                    </div>
+                    <div class="user-fn">
+                        <span>First Name:</span> {{ u.firstName }}
+                    </div>
+                    <div class="user-ln">
+                        <span>Last Name:</span> {{ u.lastName }}
+                    </div>
+                </div>
+
+                <div ng-hide="noData()">
+                    <pagination
+                        ng-model="pageNumber"
+                        direction-links="false"
+                        boundary-links="true"
+                        total-items="totalItems"
+                        ng-change="pageChanged()"
+                        items-per-page="pageSize"
+                        max-size="10"
+                        ></pagination>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Add and Edit. -->
+        <div class="col-md-4">
+            <user-edit-panel />
+        </div>
+
+    </div>
+
+
+</div>

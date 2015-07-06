@@ -16,17 +16,26 @@
 
         $scope.userFirstName = 'User';
         $scope.userImage = '';
+        $scope.isAdmin = false;
+        $scope.gravatar = {};
 
-        var _getUserImage = function(email) {
+        $scope.getUserImage = function(email, size) {
+            if ($scope.gravatar[email + size]) {
+                return $scope.gravatar[email + size];
+            }
+
             var hash = md5.createHash(email || '');
-            return 'http://www.gravatar.com/avatar/' + hash + '?s=20&d=mm';
+            $scope.gravatar[email + size] = 'http://www.gravatar.com/avatar/' + hash + '?s=' + size + '&d=identicon';
+            return $scope.gravatar[email + size];
         };
 
         var _fetchUserInfo = function() {
             accountFactory.getUserInfo()
                 .then(function(userInfo) {
                     $scope.userFirstName = userInfo.data.firstName;
-                    $scope.userImage = _getUserImage(userInfo.data.email);
+                    $scope.userLastName = userInfo.data.lastName;
+                    $scope.userImage = $scope.getUserImage(userInfo.data.email, 20);
+                    $scope.isAdmin = userInfo.data.isAdmin;
                 })
                 .catch(function(err) {
                     notificationUtils.showErrorToast(err, 'Error fetching info');

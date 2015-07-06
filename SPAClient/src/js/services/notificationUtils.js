@@ -3,10 +3,9 @@
     angular.module('jogTracker')
         .factory('notificationUtils', notificationUtils);
 
-    notificationUtils.$inject = ['$log', 'toastr'];
+    notificationUtils.$inject = ['toastr'];
 
-    function notificationUtils($log, toastr) {
-        $log.info('notificationUtils loaded.');
+    function notificationUtils(toastr) {
 
         var showErrorToast = function(err, title) {
             //Show error in a toast.

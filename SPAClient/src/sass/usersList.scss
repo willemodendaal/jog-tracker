@@ -1,0 +1,91 @@
+@import 'jogTrackerShared';
+
+$userBorder: 1px solid #bbb;
+$selectedUserBackgroundColor: #F7F2E0;
+$userBackgroundColor: #f5f5f5;
+$userHoverColor: #F7F2E0;
+
+.no-data {
+    color: #555;
+    font-size: 16px;
+    padding-top: 30px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.users-list .pagination {
+    padding-left: 10px;
+}
+
+.users-list h3 {
+    float: left;
+    width: 100%;
+}
+
+.user-entry {
+    clear: both;
+    margin: 8px;
+    @include border-radius(4px);
+    @include shadow();
+    padding: 10px;
+    border: $userBorder;
+    background-color: $userBackgroundColor;
+    height: 100px;
+    position: relative;
+
+    &.selected {
+        background-color: $selectedUserBackgroundColor;
+    }
+
+    &:hover {
+        background-color: $userHoverColor;
+        cursor: pointer;
+    }
+
+    .user-image {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+    }
+
+    .user-image img {
+        @include border-radius(50%);
+    }
+
+    .user-email {
+        position: absolute;
+        overflow: hidden;
+        font-size: 18px;
+
+        top: 10px;
+        left:60px;
+    }
+    .user-fn {
+        position: absolute;
+        top: 40px;
+        left:60px;
+        overflow: hidden;
+
+        span { color: #aaa; }
+
+    }
+    .user-ln {
+        position: absolute;
+        top: 70px;
+        left:60px;
+        overflow: hidden;
+
+        span { color: #aaa; }
+    }
+}
+
+.user-edit {
+    .form-control {
+        margin-bottom: 10px;
+    }
+
+    .error-box {
+        margin-top: 10px;
+        padding: 5px;
+    }
+}

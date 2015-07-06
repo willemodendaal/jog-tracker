@@ -77,6 +77,30 @@
             return $http.post(apiUrls.registerAsAdmin, payload).success(_successLog);
         };
 
+        /*                      *
+         *   Request Reset Pwd  *
+         *                      */
+        var requestResetPwd = function(email) {
+            var payload = {
+                email: email
+            };
+
+            return $http.post(apiUrls.requestResetPwd, payload).success(_successLog);
+        };
+
+        /*              *
+         *   Reset Pwd  *
+         *              */
+        var resetPwd = function(userId, newPassword, token) {
+            var payload = {
+                userId: userId,
+                newPassword: newPassword,
+                token: token
+            };
+
+            return $http.post(apiUrls.resetPwd, payload).success(_successLog);
+        };
+
         /*                                *
          *   Get logged in user info      *
          *                                */
@@ -85,12 +109,26 @@
             return $http.get(apiUrls.userInfo);
         };
 
+        /*             *
+         *   Update    *
+         *             */
+        var update = function(firstName, lastName) {
+            var payLoad = {
+                firstName: firstName,
+                lastName: lastName
+            };
+
+            return $http.put(apiUrls.updateAccount, payLoad);
+        };
 
         return {
             register : register,
             registerAsAdmin: registerAsAdmin,
             login : login,
-            getUserInfo: getUserInfo
+            getUserInfo: getUserInfo,
+            update: update,
+            requestResetPwd: requestResetPwd,
+            resetPwd: resetPwd
         };
     }
 }());

@@ -1,0 +1,42 @@
+@import 'jogTrackerShared';
+$textLeft: 80px;
+$top: 5px;
+
+.account-actions.box {
+    .btn {
+        width: 180px;
+        margin-bottom: 8px;
+    }
+}
+
+.my-details, .edit-my-details {
+
+    .my-image {
+        float: left;
+        margin-right: 20px;
+        margin-left: 10px;
+        height: 150px;
+    }
+
+    .my-image img {
+        @include border-radius(50%);
+    }
+
+    .my-email {
+        overflow: hidden;
+        font-size: 16pt;
+        margin-bottom: 8px;
+    }
+    .editable-field {
+        font-size: 14pt;
+        font-weight: normal;
+
+        span.label { color: #aaa; width: 120px; }
+        input { width: 200px;  display: inline; margin-bottom: 8px; }
+
+    }
+
+    .buttons {
+        margin-top: 20px;
+    }
+}

@@ -22,6 +22,14 @@ angular.module('jogTracker', [
                 url: "/register",
                 templateUrl: "partials/register.html"
             })
+            .state('resetpassword', {
+                url: "/resetpassword",
+                templateUrl: "partials/resetpassword.html"
+            })
+            .state('choosepassword', {
+                url: "/choosepassword?{uid}&{token}",
+                templateUrl: "partials/choosepassword.html"
+            })
             .state('main', {
                 url: "/home",
                 templateUrl: "partials/main.html"
@@ -44,7 +52,8 @@ angular.module('jogTracker', [
             });
     });
 
-//Extra global functions
+//Extra global functions.
+// Pad zeros onto a number.
 Number.prototype.pad = function(size) {
     var s = String(this);
     while (s.length < (size || 2)) {s = "0" + s;}

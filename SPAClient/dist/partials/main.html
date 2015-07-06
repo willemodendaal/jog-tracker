@@ -2,18 +2,36 @@
     <div class="row top-menu">
         <div class="site-title">JogTracker</div>
         <div class="user-info">
-            <img class="avatar" ng-src="{{ userImage }}">
-            <span>{{ userFirstName }}</span>
+            <a ui-sref="main.account">
+                <img class="avatar" ng-src="{{ userImage }}">
+                <span>{{ userFirstName }}</span>
+            </a>
         </div>
     </div>
     <div class="row">
         <div class="col-md-2">
             <div class="navbar">
                 <ul class="nav">
-                    <li><a ui-sref="main.jogs">My Jogs</a></li>
-                    <li><a ui-sref="main.reports">Reports</a></li>
-                    <li><a ui-sref="main.admin">Admin</a></li>
-                    <li><a ui-sref="main.account">Account</a></li>
+                    <li>
+                        <a ui-sref="main.jogs">
+                            <span class="glyphicon glyphicon-road"></span> My Jogs
+                        </a>
+                    </li>
+                    <li>
+                        <a ui-sref="main.reports">
+                            <span class="glyphicon glyphicon-list-alt"></span> Reports
+                        </a>
+                    </li>
+                    <li ng-show="isAdmin">
+                        <a ui-sref="main.admin">
+                            <span class="glyphicon glyphicon-wrench"></span> Admin
+                        </a>
+                    </li>
+                    <li>
+                        <a ui-sref="main.account">
+                            <span class="glyphicon glyphicon-user"></span> Account
+                        </a>
+                    </li>
                 </ul>
             </div>
         </div>
