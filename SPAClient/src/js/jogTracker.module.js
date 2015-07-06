@@ -11,7 +11,7 @@ angular.module('jogTracker', [
     .config(['$stateProvider','$urlRouterProvider', function($stateProvider, $urlRouterProvider){
 
         //By default, go home.
-        $urlRouterProvider.otherwise("/home");
+        $urlRouterProvider.otherwise("/home/jogs");
 
         $stateProvider
             .state('login', {
