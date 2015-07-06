@@ -12,7 +12,7 @@ using JogTracker.Services.Responses;
 
 namespace JogTracker.Api.ApiControllers
 {
-    [Authorize(Roles = "administrator")]
+    [Authorize(Roles = "administrator, userManager")]
     [RoutePrefix("api/v1/user")]
     public class UserController : ApiController
     {

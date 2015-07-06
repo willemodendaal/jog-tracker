@@ -21,7 +21,7 @@ namespace JogTracker.Services
         /// <summary>
         /// Register, or return user-friendly error string.
         /// </summary>
-        Task<RegistrationResult> RegisterAsync(string email, string password, string firstName, string lastName, bool admin);
+        Task<RegistrationResult> RegisterAsync(string email, string password, string firstName, string lastName, bool admin, bool userManager);
 
         Task RequestResetPasswordAsync(string email);
 
@@ -63,7 +63,7 @@ namespace JogTracker.Services
         /// <summary>
         /// Register, or return errors.
         /// </summary>
-        public async Task<RegistrationResult> RegisterAsync(string email, string password, string firstName, string lastName, bool admin)
+        public async Task<RegistrationResult> RegisterAsync(string email, string password, string firstName, string lastName, bool admin, bool userManager)
         {
             var user = new JogTrackerUser()
             {
@@ -77,7 +77,7 @@ namespace JogTracker.Services
 
             if (identityResult.Succeeded == false)
             {
-                string errorMessage = (string.Concat("Seed failed. ", String.Join(";", identityResult.Errors)));
+                string errorMessage = (string.Concat("User creation failed. ", String.Join(";", identityResult.Errors)));
                 return RegistrationResult.Failure(errorMessage, user);
             }
 
@@ -86,6 +86,11 @@ namespace JogTracker.Services
             if (admin)
             {
                 await _userManager.AddToRoleAsync(user.Id, GlobalConfig.AdminRole);
+            }
+
+            if (userManager)
+            {
+                await _userManager.AddToRoleAsync(user.Id, GlobalConfig.UserManager);
             }
 
             return RegistrationResult.Success(user);

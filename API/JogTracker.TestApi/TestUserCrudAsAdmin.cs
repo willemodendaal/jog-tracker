@@ -171,6 +171,13 @@ namespace JogTracker.TestApi
             }
         }
 
+        [TestMethod]
+        public async Task TestAdminCanSeeOthersJogs()
+        {
+            Assert.Fail();
+        }
+
+
         
     }
 }

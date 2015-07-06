@@ -85,7 +85,7 @@ namespace JogTracker.TestApi
         }
 
         protected HttpResponseMessage RegisterAsAdmin(string email, string password, string firstName, string lastName,
-            HttpClient client, bool administrator = false)
+            HttpClient client, bool administrator = false, bool userManager = false)
         {
             //Register
             HttpResponseMessage response = client.PostAsJsonAsync(Uris.RegisterAsAdmin,
@@ -95,7 +95,8 @@ namespace JogTracker.TestApi
                     Password = password,
                     FirstName = firstName,
                     LastName = lastName,
-                    Admin = administrator
+                    Admin = administrator,
+                    UserManager = userManager
                 }).Result;
 
             return response;
