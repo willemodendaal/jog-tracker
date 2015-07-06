@@ -49,25 +49,30 @@
   border: 1px solid red;
 }
 
-.top-menu {
-  background-color: #222222;
-  height: 40px;
-  color: #ddd;
-  padding: 10px;
+.reports .no-data {
+  color: #555;
+  font-size: 16px;
+  padding-top: 30px;
+  margin-top: 30px;
+  margin-bottom: 30px;
 }
-.top-menu .site-title {
-  float: left;
+
+.week-entry {
+  font-size: 14pt;
 }
-.top-menu .user-info {
-  float: right;
+.week-entry .full-summary {
+  margin-top: 10px;
+  margin-bottom: 20px;
 }
-.top-menu .user-info a {
-  color: #ddd;
+.week-entry .week-header {
+  color: #777;
 }
-.top-menu .user-info a .avatar {
-  -webkit-border-radius: 50%;
-  -moz-border-radius: 50%;
-  -ms-border-radius: 50%;
-  border-radius: 50%;
-  /* for a circular avatar */
+.week-entry .week-header span.date {
+  color: #333;
+}
+.week-entry .week-data .week-label {
+  display: inline-block;
+  width: 150px;
+  color: #777;
+  text-align: left;
 }

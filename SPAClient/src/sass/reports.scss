@@ -1,0 +1,37 @@
+@import 'jogTrackerShared';
+
+.reports .no-data {
+    color: #555;
+    font-size: 16px;
+    padding-top: 30px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.week-entry {
+    font-size: 14pt;
+
+    .full-summary {
+        margin-top: 10px;
+        margin-bottom: 20px;
+    }
+
+    .week-header {
+        color: #777;
+
+        span.date {
+            color: #333;
+        }
+    }
+
+    .week-data {
+
+        .week-label {
+            display: inline-block;
+            width: 150px;
+            color: #777;
+            text-align: left;
+        }
+    }
+}
+

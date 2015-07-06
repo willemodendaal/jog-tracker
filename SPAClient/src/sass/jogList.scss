@@ -30,7 +30,7 @@ $jogHoverColor: #F7F2E0;
     padding: 10px;
     border: $jogBorder;
     background-color: $jogBackgroundColor;
-    height: 100px;
+    height: 110px;
 
     &.selected {
         background-color: $selectedJogBackgroundColor;
@@ -43,10 +43,16 @@ $jogHoverColor: #F7F2E0;
 
     .date {
         display: block;
-        font-size: 14px;
+        font-size: 10pt;
         color: #999;
         clear:both;
         padding-top: 10px;
+    }
+
+    .email {
+        display: block;
+        font-size: 10pt;
+        color: #999;
     }
 
     .jog-field {

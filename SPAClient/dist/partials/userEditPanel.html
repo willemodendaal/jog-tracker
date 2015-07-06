@@ -48,6 +48,18 @@
                        ng-model="password"
                        ng-required="true"
                     />
+
+                <label class="horiz-label" for="userManager">
+                    <input type="checkbox"
+                           id="userManager"
+                           name="userManager"
+                           class="checkbox"
+                           ng-model="userManager"
+                        />
+                    &nbsp;User manager?</label>
+
+
+
             </div>
 
             <input type="submit" class="btn btn-primary" ng-disabled="editUser.$invalid" value="{{ buttonText }}">

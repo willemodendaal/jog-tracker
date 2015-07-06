@@ -19,12 +19,12 @@
                     </li>
                     <li>
                         <a ui-sref="main.reports">
-                            <span class="glyphicon glyphicon-list-alt"></span> Reports
+                            <span class="glyphicon glyphicon-list-alt"></span> Weekly Report
                         </a>
                     </li>
-                    <li ng-show="isAdmin">
+                    <li ng-show="isAdmin || isUserManager">
                         <a ui-sref="main.admin">
-                            <span class="glyphicon glyphicon-wrench"></span> Admin
+                            <span class="glyphicon glyphicon-wrench"></span> User Admin
                         </a>
                     </li>
                     <li>

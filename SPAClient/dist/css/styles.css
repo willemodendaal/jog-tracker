@@ -49,88 +49,43 @@
   border: 1px solid red;
 }
 
-.no-data {
-  color: #555;
-  font-size: 16px;
-  padding-top: 30px;
-  margin-top: 30px;
-  margin-bottom: 30px;
+.account-actions.box .btn {
+  width: 180px;
+  margin-bottom: 8px;
 }
 
-.jogs-list .pagination {
-  padding-left: 10px;
-}
-
-.jogs-list h3 {
+.my-details .my-image, .edit-my-details .my-image {
   float: left;
-  width: 20%;
-}
-
-.jog-entry {
-  clear: both;
-  margin: 8px;
-  -webkit-border-radius: 4px;
-  -moz-border-radius: 4px;
-  -ms-border-radius: 4px;
-  border-radius: 4px;
-  -webkit-box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 0.3);
-  -moz-box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 0.3);
-  box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 0.3);
-  padding: 10px;
-  border: 1px solid #bbb;
-  background-color: #f5f5f5;
-  height: 100px;
-}
-.jog-entry.selected {
-  background-color: #F7F2E0;
-}
-.jog-entry:hover {
-  background-color: #F7F2E0;
-  cursor: pointer;
-}
-.jog-entry .date {
-  display: block;
-  font-size: 14px;
-  color: #999;
-  clear: both;
-  padding-top: 10px;
-}
-.jog-entry .jog-field {
-  float: left;
-  font-size: 20px;
-  width: 30%;
-}
-.jog-entry .jog-field span {
-  display: block;
-  font-size: 14px;
-}
-.jog-entry .jog-field.average {
-  float: right;
-}
-
-.jog-filter {
-  float: right;
-  width: 80%;
-  padding-right: 10px;
-}
-.jog-filter span {
-  float: right;
+  margin-right: 20px;
   margin-left: 10px;
-  margin-top: 8px;
-  color: #888;
+  height: 150px;
 }
-.jog-filter input {
-  float: right;
-  width: 100px;
-  margin-left: 10px;
+.my-details .my-image img, .edit-my-details .my-image img {
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  border-radius: 50%;
 }
-
-.jog-edit .form-control {
-  margin-bottom: 10px;
+.my-details .my-email, .edit-my-details .my-email {
+  overflow: hidden;
+  font-size: 16pt;
+  margin-bottom: 8px;
 }
-.jog-edit .error-box {
-  margin-top: 10px;
-  padding: 5px;
+.my-details .editable-field, .edit-my-details .editable-field {
+  font-size: 14pt;
+  font-weight: normal;
+}
+.my-details .editable-field span.label, .edit-my-details .editable-field span.label {
+  color: #aaa;
+  width: 120px;
+}
+.my-details .editable-field input, .edit-my-details .editable-field input {
+  width: 200px;
+  display: inline;
+  margin-bottom: 8px;
+}
+.my-details .buttons, .edit-my-details .buttons {
+  margin-top: 20px;
 }
 
 .box .error-box {
@@ -184,43 +139,93 @@
   border: 1px solid red;
 }
 
-.account-actions.box .btn {
-  width: 180px;
-  margin-bottom: 8px;
+.no-data {
+  color: #555;
+  font-size: 16px;
+  padding-top: 30px;
+  margin-top: 30px;
+  margin-bottom: 30px;
 }
 
-.my-details .my-image, .edit-my-details .my-image {
+.jogs-list .pagination {
+  padding-left: 10px;
+}
+
+.jogs-list h3 {
   float: left;
-  margin-right: 20px;
+  width: 20%;
+}
+
+.jog-entry {
+  clear: both;
+  margin: 8px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -ms-border-radius: 4px;
+  border-radius: 4px;
+  -webkit-box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 0.3);
+  -moz-box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 0.3);
+  box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 0.3);
+  padding: 10px;
+  border: 1px solid #bbb;
+  background-color: #f5f5f5;
+  height: 110px;
+}
+.jog-entry.selected {
+  background-color: #F7F2E0;
+}
+.jog-entry:hover {
+  background-color: #F7F2E0;
+  cursor: pointer;
+}
+.jog-entry .date {
+  display: block;
+  font-size: 10pt;
+  color: #999;
+  clear: both;
+  padding-top: 10px;
+}
+.jog-entry .email {
+  display: block;
+  font-size: 10pt;
+  color: #999;
+}
+.jog-entry .jog-field {
+  float: left;
+  font-size: 20px;
+  width: 30%;
+}
+.jog-entry .jog-field span {
+  display: block;
+  font-size: 14px;
+}
+.jog-entry .jog-field.average {
+  float: right;
+}
+
+.jog-filter {
+  float: right;
+  width: 80%;
+  padding-right: 10px;
+}
+.jog-filter span {
+  float: right;
   margin-left: 10px;
-  height: 150px;
+  margin-top: 8px;
+  color: #888;
 }
-.my-details .my-image img, .edit-my-details .my-image img {
-  -webkit-border-radius: 50%;
-  -moz-border-radius: 50%;
-  -ms-border-radius: 50%;
-  border-radius: 50%;
+.jog-filter input {
+  float: right;
+  width: 100px;
+  margin-left: 10px;
 }
-.my-details .my-email, .edit-my-details .my-email {
-  overflow: hidden;
-  font-size: 16pt;
-  margin-bottom: 8px;
+
+.jog-edit .form-control {
+  margin-bottom: 10px;
 }
-.my-details .editable-field, .edit-my-details .editable-field {
-  font-size: 14pt;
-  font-weight: normal;
-}
-.my-details .editable-field span.label, .edit-my-details .editable-field span.label {
-  color: #aaa;
-  width: 120px;
-}
-.my-details .editable-field input, .edit-my-details .editable-field input {
-  width: 200px;
-  display: inline;
-  margin-bottom: 8px;
-}
-.my-details .buttons, .edit-my-details .buttons {
-  margin-top: 20px;
+.jog-edit .error-box {
+  margin-top: 10px;
+  padding: 5px;
 }
 
 .box .error-box {
@@ -740,8 +745,83 @@ th {
   padding: 0;
 }
 
-p.text {
-  font-size: 12pt;
+.box .error-box {
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -ms-border-radius: 4px;
+  border-radius: 4px;
+  border: 1px solid #ddd;
+  background-color: #ffeaea;
+}
+.box .error-box h3 {
+  font-size: 14pt;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  font-weight: bold;
+  padding-left: 20px;
+}
+
+.box {
+  border: 1px solid #bbb;
+  background-color: #fff;
+  padding: 10px;
+  margin: 5px;
+  color: #444;
+}
+.box h1 {
+  font-size: 20pt;
+  margin-top: 2px;
+  margin-bottom: 20px;
+}
+.box h3 {
+  font-size: 15pt;
+  margin-top: 2px;
+  margin-bottom: 20px;
+  color: #888;
+}
+.box h4 {
+  font-size: 13pt;
+  margin-top: 2px;
+  margin-bottom: 20px;
+  color: #888;
+}
+.box label {
+  width: 100px;
+}
+.box label.horiz-label {
+  width: 100%;
+}
+
+.form-control.ng-dirty.ng-invalid {
+  border: 1px solid red;
+}
+
+.reports .no-data {
+  color: #555;
+  font-size: 16px;
+  padding-top: 30px;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+.week-entry {
+  font-size: 14pt;
+}
+.week-entry .full-summary {
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+.week-entry .week-header {
+  color: #777;
+}
+.week-entry .week-header span.date {
+  color: #333;
+}
+.week-entry .week-data .week-label {
+  display: inline-block;
+  width: 150px;
+  color: #777;
+  text-align: left;
 }
 
 .box .error-box {
@@ -807,12 +887,19 @@ p.text {
 .top-menu .user-info {
   float: right;
 }
+.top-menu .user-info a {
+  color: #ddd;
+}
 .top-menu .user-info a .avatar {
   -webkit-border-radius: 50%;
   -moz-border-radius: 50%;
   -ms-border-radius: 50%;
   border-radius: 50%;
   /* for a circular avatar */
+}
+
+p.text {
+  font-size: 12pt;
 }
 
 .box .error-box {
@@ -949,4 +1036,7 @@ p.text {
 .user-edit .error-box {
   margin-top: 10px;
   padding: 5px;
+}
+.user-edit .checkbox {
+  float: left;
 }

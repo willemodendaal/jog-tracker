@@ -8,7 +8,7 @@ angular.module('jogTracker', [
     'angular-md5' //Needed to hash user email for gravatar
     ])
 
-    .config(function($stateProvider, $urlRouterProvider){
+    .config(['$stateProvider','$urlRouterProvider', function($stateProvider, $urlRouterProvider){
 
         //By default, go home.
         $urlRouterProvider.otherwise("/home");
@@ -50,7 +50,7 @@ angular.module('jogTracker', [
                 url: "/account",
                 templateUrl: "partials/main.account.html"
             });
-    });
+    }]);
 
 //Extra global functions.
 // Pad zeros onto a number.

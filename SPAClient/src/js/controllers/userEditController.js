@@ -32,6 +32,7 @@
             $scope.firstName = '';
             $scope.lastName = '';
             $scope.password = '';
+            $scope.userManager = false;
         };
 
         var _editUser = function (user) {
@@ -45,6 +46,7 @@
             $scope.firstName = user.firstName;
             $scope.lastName = user.lastName;
             $scope.password = 'NotUsed'; //We don't do anything with password in 'edit' mode.
+            $scope.userManager = user.isUserManager;
         };
 
         var _setDisabled = function (disabled) {
@@ -69,7 +71,7 @@
         };
 
         function _createNewUser() {
-            accountFactory.registerAsAdmin($scope.email, $scope.firstName, $scope.lastName, $scope.password, false)
+            accountFactory.registerAsAdmin($scope.email, $scope.firstName, $scope.lastName, $scope.password, false, $scope.userManager)
                 .then(function () {
                     notificationUtils.showSuccess('User created.', 'Success');
                     $scope.$emit('refresh'); //Indicate that a refresh is required.

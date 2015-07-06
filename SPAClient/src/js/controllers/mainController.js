@@ -36,6 +36,7 @@
                     $scope.userLastName = userInfo.data.lastName;
                     $scope.userImage = $scope.getUserImage(userInfo.data.email, 20);
                     $scope.isAdmin = userInfo.data.isAdmin;
+                    $scope.isUserManager = userInfo.data.isUserManager;
                 })
                 .catch(function(err) {
                     notificationUtils.showErrorToast(err, 'Error fetching info');

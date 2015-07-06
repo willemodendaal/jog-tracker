@@ -64,8 +64,40 @@
                 .error(function (err) {
                     deferred.reject(err);
                 });
-            ;
 
+
+            return deferred.promise;
+        };
+
+
+        /*                      *
+         *   getListForWeek     *
+         *                      */
+        var getListForWeek = function(weekDate) {
+            var deferred = $q.defer();
+
+            var dateToSendToService;
+            if (weekDate.format) {
+                //already a moment date.
+                dateToSendToService = weekDate.format(dateFormat);
+            }
+            else {
+                dateToSendToService = moment(weekDate).format(dateFormat);
+            }
+
+            var payLoad = {
+                week: dateToSendToService
+            };
+
+            $http.get(apiUrls.jogsForWeek(), {
+                params: payLoad
+            })
+                .success(function (data) {
+                    deferred.resolve(data);
+                })
+                .error(function (err) {
+                    deferred.reject(err);
+                });
             return deferred.promise;
         };
 
@@ -115,6 +147,7 @@
 
         return {
             getList : getList,
+            getListForWeek: getListForWeek,
             get : get,
             del: del,
             create: create,
