@@ -32,7 +32,7 @@ gulp.task('localscripts', function () {
         }))
         .pipe(sourcemaps.init())
             .pipe(concat('app.min.js'))
-            //.pipe(uglify())
+            .pipe(uglify())
         .pipe(sourcemaps.write('./', {includeContent: false, sourceRoot: '/js/sources'}))
         .pipe(gulp.dest('./dist/js/'));
 });
@@ -54,7 +54,7 @@ gulp.task('vendorcss', function() {
 
 gulp.task('vendorscripts', function() {
     var vendorScripts = [
-        './bower_components/angular/angular.js',
+        './bower_components/angular/angular.min.js',
         './bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js',
         './bower_components/angular-ui-router/release/angular-ui-router.min.js',
         './bower_components/moment/min/moment.min.js',
@@ -71,7 +71,6 @@ gulp.task('vendorscripts', function() {
         }))
         .pipe(sourcemaps.init({loadMaps: true}))
             .pipe(concat('vendor.js'))
-            //.pipe(uglify())
         .pipe(sourcemaps.write('./', {includeContent: false, sourceRoot: '/js/sources'}))
         .pipe(gulp.dest('./dist/js/'));
 });
@@ -82,8 +81,6 @@ gulp.task('vendorfonts', function() {
 });
 
 gulp.task('scripts', ['vendorscripts', 'localscripts', 'copysources']);
-
-
 
 gulp.task('copystatic', function() {
     var staticSources = [
