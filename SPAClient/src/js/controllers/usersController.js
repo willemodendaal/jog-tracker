@@ -14,7 +14,7 @@
 
         $scope.users = [];
         $scope.pageNumber = 1;
-        $scope.pageSize = 3;
+        $scope.pageSize = 4;
         $scope.totalItems = 0;
 
         $scope.noData = function() {

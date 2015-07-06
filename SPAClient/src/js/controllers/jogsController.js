@@ -14,7 +14,7 @@
 
         $scope.jogs = [];
         $scope.pageNumber = 1;
-        $scope.pageSize = 10;
+        $scope.pageSize = 4;
         $scope.totalItems = 0;
         $scope.dtPickers = {
             from: { opened: false, date: moment().subtract(1, 'months').format($scope.dtFormat)},
