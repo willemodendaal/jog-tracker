@@ -9,5 +9,29 @@
 }
 
 .week-entry {
+    font-size: 14pt;
+
+    .full-summary {
+        margin-top: 10px;
+        margin-bottom: 20px;
+    }
+
+    .week-header {
+        color: #777;
+
+        span.date {
+            color: #333;
+        }
+    }
+
+    .week-data {
+
+        .week-label {
+            display: inline-block;
+            width: 150px;
+            color: #777;
+            text-align: left;
+        }
+    }
 }
 

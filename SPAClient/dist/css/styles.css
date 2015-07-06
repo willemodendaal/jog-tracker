@@ -49,6 +49,45 @@
   border: 1px solid red;
 }
 
+.account-actions.box .btn {
+  width: 180px;
+  margin-bottom: 8px;
+}
+
+.my-details .my-image, .edit-my-details .my-image {
+  float: left;
+  margin-right: 20px;
+  margin-left: 10px;
+  height: 150px;
+}
+.my-details .my-image img, .edit-my-details .my-image img {
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  border-radius: 50%;
+}
+.my-details .my-email, .edit-my-details .my-email {
+  overflow: hidden;
+  font-size: 16pt;
+  margin-bottom: 8px;
+}
+.my-details .editable-field, .edit-my-details .editable-field {
+  font-size: 14pt;
+  font-weight: normal;
+}
+.my-details .editable-field span.label, .edit-my-details .editable-field span.label {
+  color: #aaa;
+  width: 120px;
+}
+.my-details .editable-field input, .edit-my-details .editable-field input {
+  width: 200px;
+  display: inline;
+  margin-bottom: 8px;
+}
+.my-details .buttons, .edit-my-details .buttons {
+  margin-top: 20px;
+}
+
 .box .error-box {
   -webkit-border-radius: 4px;
   -moz-border-radius: 4px;
@@ -240,104 +279,6 @@
   border: 1px solid red;
 }
 
-.account-actions.box .btn {
-  width: 180px;
-  margin-bottom: 8px;
-}
-
-.my-details .my-image, .edit-my-details .my-image {
-  float: left;
-  margin-right: 20px;
-  margin-left: 10px;
-  height: 150px;
-}
-.my-details .my-image img, .edit-my-details .my-image img {
-  -webkit-border-radius: 50%;
-  -moz-border-radius: 50%;
-  -ms-border-radius: 50%;
-  border-radius: 50%;
-}
-.my-details .my-email, .edit-my-details .my-email {
-  overflow: hidden;
-  font-size: 16pt;
-  margin-bottom: 8px;
-}
-.my-details .editable-field, .edit-my-details .editable-field {
-  font-size: 14pt;
-  font-weight: normal;
-}
-.my-details .editable-field span.label, .edit-my-details .editable-field span.label {
-  color: #aaa;
-  width: 120px;
-}
-.my-details .editable-field input, .edit-my-details .editable-field input {
-  width: 200px;
-  display: inline;
-  margin-bottom: 8px;
-}
-.my-details .buttons, .edit-my-details .buttons {
-  margin-top: 20px;
-}
-
-.box .error-box {
-  -webkit-border-radius: 4px;
-  -moz-border-radius: 4px;
-  -ms-border-radius: 4px;
-  border-radius: 4px;
-  border: 1px solid #ddd;
-  background-color: #ffeaea;
-}
-.box .error-box h3 {
-  font-size: 14pt;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  font-weight: bold;
-  padding-left: 20px;
-}
-
-.box {
-  border: 1px solid #bbb;
-  background-color: #fff;
-  padding: 10px;
-  margin: 5px;
-  color: #444;
-}
-.box h1 {
-  font-size: 20pt;
-  margin-top: 2px;
-  margin-bottom: 20px;
-}
-.box h3 {
-  font-size: 15pt;
-  margin-top: 2px;
-  margin-bottom: 20px;
-  color: #888;
-}
-.box h4 {
-  font-size: 13pt;
-  margin-top: 2px;
-  margin-bottom: 20px;
-  color: #888;
-}
-.box label {
-  width: 100px;
-}
-.box label.horiz-label {
-  width: 100%;
-}
-
-.form-control.ng-dirty.ng-invalid {
-  border: 1px solid red;
-}
-
-.reports .no-data {
-  color: #555;
-  font-size: 16px;
-  padding-top: 30px;
-  margin-top: 30px;
-  margin-bottom: 30px;
-}
-
 .box .error-box {
   -webkit-border-radius: 4px;
   -moz-border-radius: 4px;
@@ -404,10 +345,6 @@ body.jog-tracker-body {
 .navbar span.glyphicon {
   font-size: 8pt;
   margin-right: 6px;
-}
-
-p.text {
-  font-size: 12pt;
 }
 
 /*! normalize.css v3.0.2 | MIT License | git.io/normalize */
@@ -859,6 +796,85 @@ th {
   border: 1px solid red;
 }
 
+.reports .no-data {
+  color: #555;
+  font-size: 16px;
+  padding-top: 30px;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+.week-entry {
+  font-size: 14pt;
+}
+.week-entry .full-summary {
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+.week-entry .week-header {
+  color: #777;
+}
+.week-entry .week-header span.date {
+  color: #333;
+}
+.week-entry .week-data .week-label {
+  display: inline-block;
+  width: 150px;
+  color: #777;
+  text-align: left;
+}
+
+.box .error-box {
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -ms-border-radius: 4px;
+  border-radius: 4px;
+  border: 1px solid #ddd;
+  background-color: #ffeaea;
+}
+.box .error-box h3 {
+  font-size: 14pt;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  font-weight: bold;
+  padding-left: 20px;
+}
+
+.box {
+  border: 1px solid #bbb;
+  background-color: #fff;
+  padding: 10px;
+  margin: 5px;
+  color: #444;
+}
+.box h1 {
+  font-size: 20pt;
+  margin-top: 2px;
+  margin-bottom: 20px;
+}
+.box h3 {
+  font-size: 15pt;
+  margin-top: 2px;
+  margin-bottom: 20px;
+  color: #888;
+}
+.box h4 {
+  font-size: 13pt;
+  margin-top: 2px;
+  margin-bottom: 20px;
+  color: #888;
+}
+.box label {
+  width: 100px;
+}
+.box label.horiz-label {
+  width: 100%;
+}
+
+.form-control.ng-dirty.ng-invalid {
+  border: 1px solid red;
+}
+
 .top-menu {
   background-color: #222222;
   height: 40px;
@@ -880,6 +896,10 @@ th {
   -ms-border-radius: 50%;
   border-radius: 50%;
   /* for a circular avatar */
+}
+
+p.text {
+  font-size: 12pt;
 }
 
 .box .error-box {

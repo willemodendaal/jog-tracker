@@ -25,7 +25,7 @@
             var current = moment($scope.currentDate).subtract(7, 'days');
             $scope.currentDate = current;
             $scope.weekStart = moment(current).startOf('week').add(1,'days').format(momentDateFormat);
-            $scope.weekEnd = moment(current).add(1,'week').add(1,'days').format(momentDateFormat);
+            $scope.weekEnd = moment(current).endOf('week').add(1,'days').format(momentDateFormat);
             _reloadData();
         };
 
@@ -33,7 +33,7 @@
             var current = moment($scope.currentDate).add(7, 'days');
             $scope.currentDate = current;
             $scope.weekStart = moment(current).startOf('week').add(1,'days').format(momentDateFormat);
-            $scope.weekEnd = moment(current).add(1,'week').add(1,'days').format(momentDateFormat);
+            $scope.weekEnd = moment(current).endOf('week').add(1,'days').format(momentDateFormat);
             _reloadData();
         };
 
@@ -56,9 +56,11 @@
             else {
                 $scope.averageKmh = 0;
             }
+
         }
 
         var _reloadData = function() {
+            $scope.jogCount = 'Loading...';
             jogDataFactory.getListForWeek($scope.currentDate)
                 .then(function(data)
                 {

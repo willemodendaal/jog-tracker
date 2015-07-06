@@ -2,22 +2,26 @@
 
     <div class="row">
         <div class="col-md-8">
-            <div class="reports box">
+            <div class="week-entry box">
                 <h3>Weekly Report </h3>
                 <div class="week-header">
-                    <span>For the week starting {{ weekStart | date : 'yyyy/MM/dd' }}, and ending {{ weekEnd | date }}</span>
+                    <span>For the week <span class="date">{{ weekStart | date : 'yyyy/MM/dd' }}</span>
+                        to <span class="date">{{ weekEnd | date }}</span> </span>
                 </div>
-                <div class="week-data">
-                    <span>Total jogs: {{ jogCount }}</span>
-                </div>
-                <div class="week-data">
-                    <span>Total distance: {{ distanceKm }} km</span>
-                </div>
-                <div class="week-data">
-                    <span>Total duration: {{ duration }}</span>
-                </div>
-                <div class="week-data">
-                    <span>Average speed: {{ averageKmh  | number : 1}} km/h</span>
+
+                <div class="full-summary">
+                    <div class="week-data">
+                        <span class="week-label">Total jogs:</span><span> {{ jogCount }}</span>
+                    </div>
+                    <div class="week-data">
+                        <span class="week-label">Total distance:</span><span> {{ distanceKm }} km</span>
+                    </div>
+                    <div class="week-data">
+                        <span class="week-label">Total duration:</span><span> {{ duration }}</span>
+                    </div>
+                    <div class="week-data">
+                        <span class="week-label">Average speed:</span><span> {{ averageKmh  | number : 1}} km/h</span>
+                    </div>
                 </div>
 
                 <div class="buttons">
