@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Linq.Expressions;
@@ -15,6 +16,11 @@ namespace JogTracker.Data.Repositories
             DateTime startDateTime, 
             DateTime endDateTime,
             string userId, 
+            bool isAdmin);
+
+        Task<ICollection<JogEntry>> FindForWeekAsync(
+            DateTime week,
+            string userId,
             bool isAdmin);
 
         Task<JogEntry> CreateNewAsync(DateTime dateTime, float distanceKm, TimeSpan duration, string userId, string userEmail);
@@ -50,6 +56,21 @@ namespace JogTracker.Data.Repositories
             return new PagedModel<JogEntry>(0, result.Count, result.Count, result);
         }
 
+        public async Task<ICollection<JogEntry>> FindForWeekAsync(
+           DateTime week,
+           string userId,
+           bool isAdmin)
+        {
+            DateTime weekStart = GetStartOfWeek(week);
+            DateTime weekEnd = weekStart.AddDays(7); //To previous night.
+
+            var result = await (_dbContext.JogEntries
+                .OrderByDescending(j => j.DateTime)
+                .Where(MatchJogEntries(weekStart, weekEnd, userId, isAdmin))
+                ).ToListAsync();
+
+            return result;
+        }
 
         public async Task<PagedModel<JogEntry>> FindAsync(
             int pageIndex, 
@@ -138,6 +159,17 @@ namespace JogTracker.Data.Repositories
             bool isAdmin)
         {
             return j => (j.UserId == userId || isAdmin) && j.DateTime >= startDateTime && j.DateTime < endDateTime;
+        }
+
+        private DateTime GetStartOfWeek(DateTime dt)
+        {
+            int diff = dt.DayOfWeek - DayOfWeek.Sunday;
+            if (diff < 0)
+            {
+                diff += 7;
+            }
+
+            return dt.AddDays(-1 * diff).Date;
         }
     }
 }
