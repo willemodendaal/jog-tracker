@@ -20,7 +20,7 @@ namespace JogTracker.TestApi
 
         [TestInitialize]
         public void Init()
-        {
+        {   
             string id = GetUniqueId();
             _email = "user1" + id + "@email.com";
             _password = "B@nanas!B@nanas!123";
