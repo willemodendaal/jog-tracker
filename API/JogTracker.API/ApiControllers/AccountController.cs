@@ -40,6 +40,7 @@ namespace JogTracker.Api.ApiControllers
             }
             var jsonUser = new UserJsonResult().Map(currentUser);
             jsonUser.isAdmin = base.UserIsAdmin();
+            jsonUser.isUserManager = base.UserIsUserManager();
 
             return Ok(jsonUser);
         }

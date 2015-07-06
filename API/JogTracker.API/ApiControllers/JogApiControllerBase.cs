@@ -20,5 +20,10 @@ namespace JogTracker.Api.ApiControllers
         {
             return RequestContext.Principal.IsInRole(GlobalConfig.AdminRole);
         }
+
+        protected bool UserIsUserManager()
+        {
+            return RequestContext.Principal.IsInRole(GlobalConfig.UserManager);
+        }
     }
 }
