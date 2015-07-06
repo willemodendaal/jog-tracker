@@ -22,7 +22,7 @@
                             <span class="glyphicon glyphicon-list-alt"></span> Reports
                         </a>
                     </li>
-                    <li ng-show="isAdmin">
+                    <li ng-show="isAdmin || isUserManager">
                         <a ui-sref="main.admin">
                             <span class="glyphicon glyphicon-wrench"></span> Admin
                         </a>

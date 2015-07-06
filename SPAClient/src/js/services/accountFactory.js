@@ -65,13 +65,14 @@
          *   RegisterAsAdmin  *
          *                    */
         //Protected by role-based security on the server.
-        var registerAsAdmin = function(email, firstName, lastName, password, makeAdmin) {
+        var registerAsAdmin = function(email, firstName, lastName, password, makeAdmin, makeUserManager) {
             var payload = {
                 email: email,
                 firstName: firstName,
                 lastName: lastName,
                 password: password,
-                admin: makeAdmin
+                admin: makeAdmin,
+                userManager: makeUserManager
             };
 
             return $http.post(apiUrls.registerAsAdmin, payload).success(_successLog);
