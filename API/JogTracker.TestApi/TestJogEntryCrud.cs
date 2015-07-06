@@ -28,7 +28,7 @@ namespace JogTracker.TestApi
             _lastName = "ln_" + id;
 
             //Date from/to query strings
-            _queryFrom = DateTime.Now.AddMonths(-2).ToString(base.DateTimeFormat);
+            _queryFrom = DateTime.Now.AddMonths(-5).ToString(base.DateTimeFormat);
             _queryTo = DateTime.Now.ToString(base.DateTimeFormat);
 
             //Register and login.

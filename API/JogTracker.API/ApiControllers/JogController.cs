@@ -56,7 +56,7 @@ namespace JogTracker.Api.ApiControllers
                         GetCurrentUserId(),
                         UserIsAdmin()));
 
-            ICollection<JogJsonResult> jsonResult = new Mapper<JogEntry, JogJsonResult>().Map(allJogs.Items);
+            ICollection<AdminJogJsonResult> jsonResult = new Mapper<JogEntry, AdminJogJsonResult>().Map(allJogs.Items);
             return Ok(new PagingResults(0, allJogs.TotalResults, allJogs.TotalResults, jsonResult));
         }
 
@@ -99,7 +99,7 @@ namespace JogTracker.Api.ApiControllers
         public async Task<IHttpActionResult> CreateNew(JogBindingModel jog)
         {
             JogEntry newJogEntry =
-                await _repo.CreateNewAsync(jog.DateTime, jog.DistanceKM, jog.Duration, GetCurrentUserId());
+                await _repo.CreateNewAsync(jog.DateTime, jog.DistanceKM, jog.Duration, GetCurrentUserId(), GetCurrentUserEmail());
 
             JogJsonResult jsonJog = new Mapper<JogEntry, JogJsonResult>().Map(newJogEntry);
 

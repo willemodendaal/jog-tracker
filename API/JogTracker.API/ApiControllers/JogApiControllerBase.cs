@@ -11,6 +11,11 @@ namespace JogTracker.Api.ApiControllers
             return RequestContext.Principal.Identity.GetUserId();
         }
 
+        protected string GetCurrentUserEmail()
+        {
+            return RequestContext.Principal.Identity.GetUserName(); //Username is email.
+        }
+
         protected bool UserIsAdmin()
         {
             return RequestContext.Principal.IsInRole(GlobalConfig.AdminRole);

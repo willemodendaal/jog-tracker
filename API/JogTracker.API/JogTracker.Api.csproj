@@ -203,6 +203,7 @@
     <Compile Include="Filters\HandleErrorFilter.cs" />
     <Compile Include="Models\AccountUpdateBindingModel.cs" />
     <Compile Include="Models\BindingModelBase.cs" />
+    <Compile Include="Models\JsonResults\AdminJogJsonResult.cs" />
     <Compile Include="Models\JsonResults\IPagingResults.cs" />
     <Compile Include="Models\JsonResults\JogJsonResult.cs" />
     <Compile Include="Models\JsonResults\JsonResultBase.cs" />

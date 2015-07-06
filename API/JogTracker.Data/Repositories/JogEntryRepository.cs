@@ -17,7 +17,7 @@ namespace JogTracker.Data.Repositories
             string userId, 
             bool isAdmin);
 
-        Task<JogEntry> CreateNewAsync(DateTime dateTime, float distanceKm, TimeSpan duration, string userId);
+        Task<JogEntry> CreateNewAsync(DateTime dateTime, float distanceKm, TimeSpan duration, string userId, string userEmail);
         Task<JogEntry> GetAsync(string jogId, string userId, bool isAdmin);
 
         Task<JogEntry> UpdateAsync(
@@ -94,14 +94,15 @@ namespace JogTracker.Data.Repositories
             await _dbContext.SaveChangesAsync();
         }
 
-        public async Task<JogEntry> CreateNewAsync(DateTime dateTime, float distanceKm, TimeSpan duration, string userId)
+        public async Task<JogEntry> CreateNewAsync(DateTime dateTime, float distanceKm, TimeSpan duration, string userId, string userEmail)
         {
             var newJog = new JogEntry()
             {
                 DistanceKM = distanceKm,
                 DateTime = dateTime,
                 Duration = duration,
-                UserId = userId
+                UserId = userId,
+                UserEmail = userEmail
             };
 
             _dbContext.JogEntries.Add(newJog);
