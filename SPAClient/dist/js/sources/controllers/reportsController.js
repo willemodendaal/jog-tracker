@@ -18,22 +18,22 @@
         $scope.duration = 0;
         $scope.averageKmh = 0;
         $scope.currentDate = moment();
-        $scope.weekStart = $scope.currentDate.startOf('week').add(1,'days').format(momentDateFormat);
-        $scope.weekEnd = $scope.currentDate.endOf('week').add(1,'days').format(momentDateFormat);
+        $scope.weekStart = moment($scope.currentDate).startOf('week').add(1, 'days').format(momentDateFormat);
+        $scope.weekEnd = moment($scope.currentDate).endOf('week').add(1, 'days').format(momentDateFormat);
 
-        $scope.previousWeek = function() {
+        $scope.previousWeek = function () {
             var current = moment($scope.currentDate).subtract(7, 'days');
             $scope.currentDate = current;
-            $scope.weekStart = moment(current).startOf('week').add(1,'days').format(momentDateFormat);
-            $scope.weekEnd = moment(current).endOf('week').add(1,'days').format(momentDateFormat);
+            $scope.weekStart = moment(current).startOf('week').add(1, 'days').format(momentDateFormat);
+            $scope.weekEnd = moment(current).endOf('week').add(1, 'days').format(momentDateFormat);
             _reloadData();
         };
 
-        $scope.nextWeek = function() {
+        $scope.nextWeek = function () {
             var current = moment($scope.currentDate).add(7, 'days');
             $scope.currentDate = current;
-            $scope.weekStart = moment(current).startOf('week').add(1,'days').format(momentDateFormat);
-            $scope.weekEnd = moment(current).endOf('week').add(1,'days').format(momentDateFormat);
+            $scope.weekStart = moment(current).startOf('week').add(1, 'days').format(momentDateFormat);
+            $scope.weekEnd = moment(current).endOf('week').add(1, 'days').format(momentDateFormat);
             _reloadData();
         };
 
@@ -42,7 +42,7 @@
             var totalDistance = 0;
             var totalDuration = moment.duration(0);
 
-            for(var i = 0; i < data.length; i++) {
+            for (var i = 0; i < data.length; i++) {
                 totalDistance += Number(data[i].distanceKm);
                 totalDuration.add(data[i].duration);
             }
@@ -59,14 +59,13 @@
 
         }
 
-        var _reloadData = function() {
+        var _reloadData = function () {
             $scope.jogCount = 'Loading...';
             jogDataFactory.getListForWeek($scope.currentDate)
-                .then(function(data)
-                {
+                .then(function (data) {
                     _calculateAggregate(data);
                 })
-                .catch(function(err) {
+                .catch(function (err) {
                     notificationUtils.showErrorToast(err, 'Error listing jogs');
                 });
         };
